@@ -261,7 +261,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                 region: ossConfigObj.region,
                 bucket: ossConfigObj.bucket,
             });
-            const uploadManager = new UploadManager(client, this.state.room!, this.progress);
+            const uploadManager = new UploadManager(client, this.state.room!);
             await Promise.all([
                 uploadManager.uploadImageFiles(imageFiles, event.clientX, event.clientY),
             ]);
