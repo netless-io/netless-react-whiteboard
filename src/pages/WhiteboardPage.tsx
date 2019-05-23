@@ -27,7 +27,7 @@ import MenuHotKey from "../components/menu/MenuHotKey";
 import MenuBox from "../components/menu/MenuBox";
 import MenuAnnexBox from "../components/menu/MenuAnnexBox";
 import {userInfDataStore, UserInfType} from "../models/UserInfDataStore";
-import {rtcAppId, netlessToken, ossConfigObj} from "../appTokenConfig";
+import {netlessToken, ossConfigObj} from "../appTokenConfig";
 import {UserCursor} from "../components/whiteboard/UserCursor";
 import MenuPPTDoc from "../components/menu/MenuPPTDoc";
 import UploadBtn from "../tools/UploadBtn";
@@ -42,7 +42,7 @@ export enum MenuInnerType {
 
 export type WhiteboardPageProps = RouteComponentProps<{
     uuid: string;
-    number: string;
+    userId?: string;
 }>;
 
 export type WhiteboardPageState = {
@@ -56,6 +56,7 @@ export type WhiteboardPageState = {
     ossPercent: number;
     converterPercent: number;
     room?: Room;
+    userId: string;
     roomState?: RoomState;
     pptConverter?: PptConverter;
     isMenuLeft?: boolean;
@@ -79,19 +80,26 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
             roomToken: null,
             ossPercent: 0,
             converterPercent: 0,
+            userId: "",
         };
     }
 
     private startJoinRoom = async (): Promise<void> => {
         const uuid = this.props.match.params.uuid;
-        const number = this.props.match.params.number;
-        const roomToken = await whiteboardPageStore.joinRoom(uuid);
-        if (userInfDataStore.getUserInf(UserInfType.uuid, `${number}`) === `Netless uuid ${number}`) {
-            const userUuid = uuidv4();
-            userInfDataStore.updateUserInf(userUuid, userUuid, number);
+        let userId: string;
+        if (this.props.match.params.userId) {
+            userId = this.props.match.params.userId;
+        } else {
+            userId = `${Math.floor(Math.random() * 100000)}`;
         }
-        const userUuid = userInfDataStore.getUserInf(UserInfType.uuid, `${number}`);
-        const name = userInfDataStore.getUserInf(UserInfType.name, `${number}`);
+        this.setState({userId: userId});
+        const roomToken = await whiteboardPageStore.joinRoom(uuid);
+        if (userInfDataStore.getUserInf(UserInfType.uuid, `${userId}`) === `Netless uuid ${userId}`) {
+            const userUuid = uuidv4();
+            userInfDataStore.updateUserInf(userUuid, userUuid, userId);
+        }
+        const userUuid = userInfDataStore.getUserInf(UserInfType.uuid, `${userId}`);
+        const name = userInfDataStore.getUserInf(UserInfType.name, `${userId}`);
         const cursor = new UserCursor();
         if (roomToken && uuid) {
             const whiteWebSdk = new WhiteWebSdk();
@@ -101,7 +109,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                     uuid: uuid,
                     roomToken: roomToken,
                     cursorAdapter: cursor,
-                    userPayload: {id: number, userId: userUuid, nickName: name, avatar: userUuid}},
+                    userPayload: {id: userId, userId: userUuid, nickName: name, avatar: userUuid}},
                 {
                     onPhaseChanged: phase => {
                         if (!this.didLeavePage) {
@@ -136,8 +144,15 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
         }
     }
 
+
+    private onWindowResize = (): void => {
+        if (this.state.room) {
+            this.state.room.refreshViewSize();
+        }
+    }
     public componentWillMount(): void {
         document.body.style.overflow = "hidden";
+        window.addEventListener("resize", this.onWindowResize);
     }
 
     public async componentDidMount(): Promise<void> {
@@ -146,6 +161,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
 
     public componentWillUnmount(): void {
         this.didLeavePage = true;
+        window.removeEventListener("resize", this.onWindowResize);
     }
     private renderMenuInner = (): React.ReactNode => {
         switch (this.state.menuInnerState) {
@@ -292,7 +308,6 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
         }
     }
     public render(): React.ReactNode {
-        const number = this.props.match.params.number;
 
         if (this.state.connectedFail) {
             errorPageStore.pageErrorState = PageErrorType.PageRoomNotConnected;
@@ -334,10 +349,10 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                             <div className="whiteboard-out-box">
                                 {this.renderClipView()}
                                 <WhiteboardTopLeft room={this.state.room}/>
-                                <WhiteboardTopRight uuid={this.props.match.params.uuid} room={this.state.room} number={number}/>
-                                <WhiteboardBottomLeft uuid={this.props.match.params.uuid} room={this.state.room} number={number}/>
+                                <WhiteboardTopRight uuid={this.props.match.params.uuid} room={this.state.room} number={this.state.userId}/>
+                                <WhiteboardBottomLeft uuid={this.props.match.params.uuid} room={this.state.room} number={this.state.userId}/>
                                 <WhiteboardBottomRight
-                                    number={number}
+                                    number={this.state.userId}
                                     roomState={this.state.roomState!}
                                     handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}
                                     handleHotKeyMenuState={this.handleHotKeyMenuState}
