@@ -16,6 +16,7 @@ const basic = {
         filename: "javascript/index-[hash].js",
         path: __dirname + "/build",
         publicPath: "/",
+        pathinfo: false
     },
 
     resolve: {
@@ -34,7 +35,12 @@ const basic = {
             }, {
                 test: /\.tsx?$/,
                 use: [
-                    'ts-loader',
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            transpileOnly: true,
+                        },
+                    },
                     {
                         loader: 'ui-component-loader',
                         options: {
@@ -79,7 +85,12 @@ const basic = {
             path: __dirname + "/build",
             inject: "body",
         }),
-    ]
+    ],
+    optimization: {
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
+    }
 };
 
 const development = {
