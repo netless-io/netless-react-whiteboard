@@ -42,7 +42,7 @@ export enum MenuInnerType {
 
 export type WhiteboardPageProps = RouteComponentProps<{
     uuid: string;
-    userId?: string;
+    userId: string;
 }>;
 
 export type WhiteboardPageState = {
@@ -86,12 +86,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
 
     private startJoinRoom = async (): Promise<void> => {
         const uuid = this.props.match.params.uuid;
-        let userId: string;
-        if (this.props.match.params.userId) {
-            userId = this.props.match.params.userId;
-        } else {
-            userId = `${Math.floor(Math.random() * 100000)}`;
-        }
+        const userId = this.props.match.params.userId;
         this.setState({userId: userId});
         const roomToken = await whiteboardPageStore.joinRoom(uuid);
         if (userInfDataStore.getUserInf(UserInfType.uuid, `${userId}`) === `Netless uuid ${userId}`) {
@@ -282,14 +277,13 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                 uploadManager.uploadImageFiles(imageFiles, event.clientX, event.clientY),
             ]);
         } catch (error) {
-            applianceStore.state!.setMemberState({
+            this.state.room!.setMemberState({
                 currentApplianceName: "selector",
             });
-            alert("upload file error" + error);
         }
     }
     private setMemberState = (modifyState: Partial<MemberState>) => {
-        applianceStore.state!.setMemberState(modifyState);
+        this.state.room!.setMemberState(modifyState);
     }
 
     private progress = (phase: PPTProgressPhase, percent: number): void => {
@@ -313,10 +307,6 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
             errorPageStore.pageErrorState = PageErrorType.PageRoomNotConnected;
             return <PageError/>;
 
-        } else if (!applianceStore.state) {
-            return <div className="white-board-loading">
-                <img src={loading}/>
-            </div>;
         } else if (this.state.phase === RoomPhase.Connecting ||
             this.state.phase === RoomPhase.Disconnecting) {
             return <div className="white-board-loading">
@@ -369,7 +359,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                                                 whiteboardRef={this.state.whiteboardLayerDownRef}
                                             />,
                                         ]}
-                                        memberState={applianceStore.state.memberState as any}/>
+                                        memberState={this.state.room.state.memberState}/>
                                 </div>
                                 <div onClick={this.handlePPtBoxMenuState}
                                      className={(this.state.menuInnerState === MenuInnerType.PPTBox && this.state.isMenuVisible) ? "slide-box-active" : "slide-box"}>
