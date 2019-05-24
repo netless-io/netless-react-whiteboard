@@ -1,4 +1,4 @@
-# netless-agora-react-whiteboard
+# netless-react-whiteboard
 
 ## 一、前言
 
