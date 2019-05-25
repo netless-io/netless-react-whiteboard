@@ -23,6 +23,8 @@ const basic = {
         extensions: [".ts", ".tsx", ".js", ".svg"],
     },
 
+    devtool: 'source-map',
+
     module: {
         rules: [
             {

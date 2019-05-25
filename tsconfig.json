@@ -10,6 +10,7 @@
       "dom"
     ],
     "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
     "declaration": true,
     "experimentalDecorators": true,
     "jsx": "react",
