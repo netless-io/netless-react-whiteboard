@@ -9,7 +9,7 @@
   "proxy": "http://localhost:3009/",
   "scripts": {
     "start": "react-app-rewired start --scripts-version react-scripts-ts",
-    "build": "rimraf build && react-app-rewired build --scripts-version react-scripts-ts --max_old_space_size=4096"
+    "build": "rimraf build && react-app-rewired --max_old_space_size=4096 build --scripts-version react-scripts-ts"
   },
   "dependencies": {
     "@netless/fetch-middleware": "^1.0.0",
