@@ -9,7 +9,17 @@ import * as uuidv4 from "uuid/v4";
 import {RouteComponentProps} from "react-router";
 import TweenOne from "rc-tween-one";
 import Dropzone from "react-dropzone";
-import {WhiteWebSdk, RoomWhiteboard, Room, RoomState, RoomPhase, PptConverter, MemberState} from "white-react-sdk";
+import {
+    WhiteWebSdk,
+    RoomWhiteboard,
+    Room,
+    RoomState,
+    RoomPhase,
+    PptConverter,
+    MemberState,
+    RoomMember,
+    ViewMode,
+} from "white-react-sdk";
 import "white-web-sdk/style/index.css";
 import "./WhiteboardPage.less";
 import {whiteboardPageStore} from "../models/WhiteboardPageStore";
@@ -316,6 +326,10 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
             return <div className="white-board-loading">
                 <img src={loading}/>
             </div>;
+        } else if (!this.state.roomState) {
+            return <div className="white-board-loading">
+                <img src={loading}/>
+            </div>;
         } else {
             return (
                 <div id="outer-container">
@@ -339,15 +353,17 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                             <div className="whiteboard-out-box">
                                 {this.renderClipView()}
                                 <WhiteboardTopLeft room={this.state.room}/>
-                                <WhiteboardTopRight uuid={this.props.match.params.uuid} room={this.state.room} number={this.state.userId}/>
+                                <WhiteboardTopRight
+                                    roomState={this.state.roomState}
+                                    uuid={this.props.match.params.uuid} room={this.state.room} number={this.state.userId}/>
                                 <WhiteboardBottomLeft uuid={this.props.match.params.uuid} room={this.state.room} number={this.state.userId}/>
                                 <WhiteboardBottomRight
                                     number={this.state.userId}
-                                    roomState={this.state.roomState!}
+                                    roomState={this.state.roomState}
                                     handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}
                                     handleHotKeyMenuState={this.handleHotKeyMenuState}
                                     room={this.state.room}/>
-                                <div className="whiteboard-tool-box">
+                                <div className={this.state.roomState.broadcastState.mode === ViewMode.Follower ? "whiteboard-tool-box-disable" : "whiteboard-tool-box"}>
                                     <ToolBox
                                         setMemberState={this.setMemberState}
                                         customerComponent={[
