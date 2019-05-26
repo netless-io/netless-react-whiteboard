@@ -584,7 +584,7 @@ antd@^3.10.4, antd@^3.17.0:
     rc-dropdown "~2.4.1"
     rc-editor-mention "^1.1.7"
     rc-form "^2.4.0"
-    rc-input-number "~4.4.0"
+    rc-input-userId "~4.4.0"
     rc-menu "~7.4.12"
     rc-notification "~3.3.0"
     rc-pagination "~1.18.0"
@@ -4063,7 +4063,7 @@ fill-range@^2.1.0:
   resolved "https://registry.npmjs.org/fill-range/-/fill-range-2.2.4.tgz#eb1e773abb056dcd8df2bfdf6af59b8b3a936565"
   integrity sha512-cnrcCbj01+j2gTG921VZPnHbjmdAf8oQV/iGeV2kZxGSyfYjjTyY79ErsK1WJWMpw6DaApEX72binqJE+/d+5Q==
   dependencies:
-    is-number "^2.1.0"
+    is-userId "^2.1.0"
     isobject "^2.0.0"
     randomatic "^3.0.0"
     repeat-element "^1.1.2"
@@ -4075,7 +4075,7 @@ fill-range@^4.0.0:
   integrity sha1-1USBHUKPmOsGpj3EAtJAPDKMOPc=
   dependencies:
     extend-shallow "^2.0.1"
-    is-number "^3.0.0"
+    is-userId "^3.0.0"
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
@@ -4676,7 +4676,7 @@ has-values@^1.0.0:
   resolved "https://registry.npmjs.org/has-values/-/has-values-1.0.0.tgz#95b0b63fec2146619a6fe57fe75628d5a39efe4f"
   integrity sha1-lbC2P+whRmGab+V/51Yo1aOe/k8=
   dependencies:
-    is-number "^3.0.0"
+    is-userId "^3.0.0"
     kind-of "^4.0.0"
 
 has@^1.0.1, has@^1.0.3:
@@ -5286,14 +5286,14 @@ is-finite@^1.0.0:
   resolved "https://registry.npmjs.org/is-finite/-/is-finite-1.0.2.tgz#cc6677695602be550ef11e8b4aa6305342b6d0aa"
   integrity sha1-zGZ3aVYCvlUO8R6LSqYwU0K20Ko=
   dependencies:
-    number-is-nan "^1.0.0"
+    userId-is-nan "^1.0.0"
 
 is-fullwidth-code-point@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-1.0.0.tgz#ef9e31386f031a7f0d643af82fde50c457ef00cb"
   integrity sha1-754xOG8DGn8NZDr4L95QxFfvAMs=
   dependencies:
-    number-is-nan "^1.0.0"
+    userId-is-nan "^1.0.0"
 
 is-fullwidth-code-point@^2.0.0:
   version "2.0.0"
@@ -5346,21 +5346,21 @@ is-npm@^1.0.0:
 
 is-number@^2.1.0:
   version "2.1.0"
-  resolved "https://registry.npmjs.org/is-number/-/is-number-2.1.0.tgz#01fcbbb393463a548f2f466cce16dece49db908f"
+  resolved "https://registry.npmjs.org/is-userId/-/is-userId-2.1.0.tgz#01fcbbb393463a548f2f466cce16dece49db908f"
   integrity sha1-Afy7s5NGOlSPL0ZszhbezknbkI8=
   dependencies:
     kind-of "^3.0.2"
 
 is-number@^3.0.0:
   version "3.0.0"
-  resolved "https://registry.npmjs.org/is-number/-/is-number-3.0.0.tgz#24fd6201a4782cf50561c810276afc7d12d71195"
+  resolved "https://registry.npmjs.org/is-userId/-/is-userId-3.0.0.tgz#24fd6201a4782cf50561c810276afc7d12d71195"
   integrity sha1-JP1iAaR4LPUFYcgQJ2r8fRLXEZU=
   dependencies:
     kind-of "^3.0.2"
 
 is-number@^4.0.0:
   version "4.0.0"
-  resolved "https://registry.npmjs.org/is-number/-/is-number-4.0.0.tgz#0026e37f5454d73e356dfe6564699867c6a7f0ff"
+  resolved "https://registry.npmjs.org/is-userId/-/is-userId-4.0.0.tgz#0026e37f5454d73e356dfe6564699867c6a7f0ff"
   integrity sha512-rSklcAIlf1OmFdyAqbnWTLVelsQ58uvZ66S/ZyawjWqIviTWCjg2PzVGw8WUA+nNuPTqb4wgA+NszrJ+08LlgQ==
 
 is-obj@^1.0.0:
@@ -7316,7 +7316,7 @@ npm-lifecycle@^2.0.3, npm-lifecycle@^2.1.0:
     node-gyp "^4.0.0"
     resolve-from "^4.0.0"
     slide "^1.1.6"
-    uid-number "0.0.6"
+    uid-userId "0.0.6"
     umask "^1.1.0"
     which "^1.3.1"
 
@@ -7487,7 +7487,7 @@ npm@^6.4.1:
     tar "^4.4.8"
     text-table "~0.2.0"
     tiny-relative-date "^1.3.0"
-    uid-number "0.0.6"
+    uid-userId "0.0.6"
     umask "~1.1.0"
     unique-filename "^1.1.1"
     unpipe "~1.0.0"
@@ -7523,7 +7523,7 @@ num2fraction@^1.2.2:
 
 number-is-nan@^1.0.0:
   version "1.0.1"
-  resolved "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
+  resolved "https://registry.npmjs.org/userId-is-nan/-/userId-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
 nwsapi@^2.0.7:
@@ -8685,7 +8685,7 @@ randomatic@^3.0.0:
   resolved "https://registry.npmjs.org/randomatic/-/randomatic-3.1.1.tgz#b776efc59375984e36c537b2f51a1f0aff0da1ed"
   integrity sha512-TuDE5KxZ0J461RVjrJZCJc+J+zCkTb1MbH9AQUq68sMhOMcy9jLcb3BrZKgp9q9Ncltdg4QVqWrH02W2EFFVYw==
   dependencies:
-    is-number "^4.0.0"
+    is-userId "^4.0.0"
     kind-of "^6.0.0"
     math-random "^1.0.1"
 
@@ -8884,7 +8884,7 @@ rc-hammerjs@~0.6.0:
 
 rc-input-number@~4.4.0:
   version "4.4.4"
-  resolved "https://registry.npmjs.org/rc-input-number/-/rc-input-number-4.4.4.tgz#4b0aa3d2513686317dd85c678a94873b6d1e6c5b"
+  resolved "https://registry.npmjs.org/rc-input-userId/-/rc-input-userId-4.4.4.tgz#4b0aa3d2513686317dd85c678a94873b6d1e6c5b"
   integrity sha512-bPH3God6gEBm8Vbq4BEAcCt4dRD3fcGgarCoNYbstM0VL6rO3VKXp0Jpkip0FfSlWxxs8xu6uWrpljXL87/GkQ==
   dependencies:
     babel-runtime "6.x"
@@ -10982,7 +10982,7 @@ to-regex-range@^2.1.0:
   resolved "https://registry.npmjs.org/to-regex-range/-/to-regex-range-2.1.1.tgz#7c80c17b9dfebe599e27367e0d4dd5590141db38"
   integrity sha1-fIDBe53+vlmeJzZ+DU3VWQFB2zg=
   dependencies:
-    is-number "^3.0.0"
+    is-userId "^3.0.0"
     repeat-string "^1.6.1"
 
 to-regex@^3.0.1, to-regex@^3.0.2:
@@ -11259,7 +11259,7 @@ uglifyjs-webpack-plugin@^1.1.8:
 
 uid-number@0.0.6:
   version "0.0.6"
-  resolved "https://registry.npmjs.org/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
+  resolved "https://registry.npmjs.org/uid-userId/-/uid-userId-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
   integrity sha1-DqEOgDXo61uOREnwbaHHMGY7qoE=
 
 umask@^1.1.0, umask@~1.1.0:
