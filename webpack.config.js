@@ -5,6 +5,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const basic = {
 
@@ -16,7 +17,6 @@ const basic = {
         filename: "javascript/index-[hash].js",
         path: __dirname + "/build",
         publicPath: "/",
-        pathinfo: false
     },
 
     resolve: {
@@ -37,15 +37,12 @@ const basic = {
             }, {
                 test: /\.tsx?$/,
                 use: [
-                    {
-                        loader: 'ts-loader',
-                        options: {
-                            transpileOnly: true,
-                        },
-                    },
+                    'ts-loader',
                     {
                         loader: 'ui-component-loader',
                         options: {
+                            onlyCompileBundledFiles: true,
+                            transpileOnly: true,
                             'lib': 'antd',
                             'libDir': 'es',
                             'style': false,
@@ -87,25 +84,14 @@ const basic = {
             path: __dirname + "/build",
             inject: "body",
         }),
-    ],
-    optimization: {
-        removeAvailableModules: false,
-        removeEmptyChunks: false,
-        splitChunks: false,
-    }
+        new ForkTsCheckerWebpackPlugin({ memoryLimit : 10000, workers: 2 })
+    ]
 };
 
 const development = {
     devServer: {
         port: 3000,
         historyApiFallback: true,
-        // proxy: {
-        //   "/api": {
-        //     pathRewrite: {'^/api': '/'},
-        //     target: "http://bad006a941144606a2cf5b693c5dddea-cn-hangzhou.alicloudapi.com/",
-        //     changeOrigin: true
-        //   },
-        // },
     },
 };
 
