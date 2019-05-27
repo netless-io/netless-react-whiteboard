@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Icon} from "antd";
-import {WhiteWebSdk, PlayerWhiteboard, PlayerPhase, Player} from "white-react-sdk";
+import {WhiteWebSdk, PlayerWhiteboard, PlayerPhase, Player, RoomMember, CursorAdapter} from "white-react-sdk";
+import * as loading from "../assets/image/loading.svg";
 import "./PlayerPage.less";
 import {RouteComponentProps} from "react-router";
 import SeekSlider from "@netless/react-seek-slider";
@@ -37,8 +38,10 @@ export type PlayerPageStates = {
 
 export default class PlayerPage extends React.Component<PlayerPageProps, PlayerPageStates> {
     private scheduleTime: number = 0;
+    private readonly cursor: any;
     public constructor(props: PlayerPageProps) {
         super(props);
+        this.cursor = new UserCursor();
         this.state = {
             currentTime: 0,
             phase: PlayerPhase.Pause,
@@ -62,17 +65,17 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
         const uuid = this.props.match.params.uuid;
         const whiteWebSdk = new WhiteWebSdk();
         const roomToken = await this.getRoomToken(uuid);
-        const cursor = new UserCursor();
         if (uuid && roomToken) {
-            const player = await whiteWebSdk.replayRoom({room: uuid, roomToken: roomToken, cursorAdapter: cursor}, {
+            const player = await whiteWebSdk.replayRoom({room: uuid, roomToken: roomToken, cursorAdapter: this.cursor}, {
                 onPhaseChanged: phase => {
                     this.setState({phase: phase});
                 },
                 onLoadFirstFrame: () => {
                     this.setState({isFirstScreenReady: true});
+                    this.cursor.setColorAndAppliance(player.state.roomMembers);
                 },
                 onPlayerStateChanged: modifyState => {
-                  console.log(modifyState);
+                    this.cursor.setColorAndAppliance(modifyState.roomMembers);
                 },
                 onStoppedWithError: error => {
                   message.error("Playback error");
@@ -90,6 +93,19 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
                 this.setState({isHandClap: false});
             });
         }
+    }
+    private onWindowResize = (): void => {
+        if (this.state.player) {
+            this.state.player.refreshViewSize();
+        }
+    }
+    public componentWillMount(): void {
+        window.addEventListener("resize", this.onWindowResize);
+    }
+
+
+    public componentWillUnmount(): void {
+        window.removeEventListener("resize", this.onWindowResize);
     }
 
     private enterFullScreen = (): void => {
@@ -212,57 +228,67 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
     }
 
     public render(): React.ReactNode {
-        return (
-            <div className="player-out-box">
-                <div
-                    style={{display: "flex"}}
-                    className="player-nav-box">
-                    <div className="player-nav-left-box">
-                        <div className="player-nav-left">
-                            <div
-                                onClick={() => push(this.props.history, `/`)}
-                                className="player-nav-icon-box-left">
-                                <img src={home}/>
-                            </div>
-                            <div
-                                onClick={() => push(this.props.history, `/whiteboard/${this.props.match.params.uuid}/${this.props.match.params.userId}/`)}
-                                className="player-nav-icon-box-right">
-                                <img src={board}/>
+        if (!this.state.player) {
+            return <div className="white-board-loading">
+                <img src={loading}/>
+            </div>;
+        } else if (this.state.phase === PlayerPhase.WaitingFirstFrame) {
+            return <div className="white-board-loading">
+                <img src={loading}/>
+            </div>;
+        } else {
+            return (
+                <div className="player-out-box">
+                    <div
+                        style={{display: "flex"}}
+                        className="player-nav-box">
+                        <div className="player-nav-left-box">
+                            <div className="player-nav-left">
+                                <div
+                                    onClick={() => push(this.props.history, `/`)}
+                                    className="player-nav-icon-box-left">
+                                    <img src={home}/>
+                                </div>
+                                <div
+                                    onClick={() => push(this.props.history, `/whiteboard/${this.props.match.params.uuid}/${this.props.match.params.userId}/`)}
+                                    className="player-nav-icon-box-right">
+                                    <img src={board}/>
+                                </div>
                             </div>
                         </div>
+                        <div className="player-nav-right">
+                            <Identicon
+                                size={36}
+                                string={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${parseInt(this.props.match.params.userId)}`)}/>
+                        </div>
                     </div>
-                    <div className="player-nav-right">
-                        <Identicon
-                            size={36}
-                            string={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${parseInt(this.props.match.params.userId)}`)}/>
-                    </div>
+                    {this.renderScheduleView()}
+                    {this.state.isHandClap && <div className="whiteboard-box-gift-box">
+                        <TweenOne
+                            animation={[
+                                {
+                                    scale: 1,
+                                    duration: 360,
+                                    ease: "easeInOutQuart",
+                                },
+                                {
+                                    opacity: 0,
+                                    scale: 2,
+                                    ease: "easeInOutQuart",
+                                    duration: 400,
+                                },
+                            ]}
+                            style={{
+                                transform: "scale(0)",
+                                borderTopLeftRadius: 4,
+                            }}className="whiteboard-box-gift-inner-box"
+                        >
+                            <img src={like}/>
+                        </TweenOne>
+                    </div>}
+                    <PlayerWhiteboard className="player-box" player={this.state.player}/>
                 </div>
-                {this.renderScheduleView()}
-                {this.state.isHandClap && <div className="whiteboard-box-gift-box">
-                    <TweenOne
-                        animation={[
-                            {
-                                scale: 1,
-                                duration: 360,
-                                ease: "easeInOutQuart",
-                            },
-                            {
-                                opacity: 0,
-                                scale: 2,
-                                ease: "easeInOutQuart",
-                                duration: 400,
-                            },
-                        ]}
-                        style={{
-                            transform: "scale(0)",
-                            borderTopLeftRadius: 4,
-                        }}className="whiteboard-box-gift-inner-box"
-                    >
-                        <img src={like}/>
-                    </TweenOne>
-                </div>}
-                {this.state.player && <PlayerWhiteboard className="player-box" player={this.state.player}/>}
-            </div>
-        );
+            );
+        }
     }
 }
