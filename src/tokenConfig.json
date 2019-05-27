@@ -4,7 +4,6 @@
     "accessKeyId": "LTAIwHZFXsXh9yaG",
     "accessKeySecret": "9FE19EMIG3pWzVElJn1iolz66XxPkO",
     "region": "oss-cn-hangzhou",
-    "bucket": "netless-agora-whiteboard",
     "folder": "ppt",
     "prefix": "https://netless-agora-whiteboard.oss-cn-hangzhou.aliyuncs.com/"
   }

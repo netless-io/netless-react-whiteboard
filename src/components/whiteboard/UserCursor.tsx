@@ -105,7 +105,6 @@ export class UserCursor implements CursorAdapter {
         if (roomMembers && roomMembers.length > 0) {
             for (const roomMember of roomMembers) {
                 const cursor = this.cursors[roomMember.memberId];
-                console.log(cursor);
                 if (cursor) {
                     cursor.setReactNode((
                         <CursorComponent roomMember={roomMember} />
