@@ -31,7 +31,7 @@ import * as arrow from "../assets/image/arrow.svg";
 import MenuHotKey from "../components/menu/MenuHotKey";
 import MenuBox from "../components/menu/MenuBox";
 import MenuAnnexBox from "../components/menu/MenuAnnexBox";
-import {netlessToken, ossConfigObj} from "../appTokenConfig";
+import {netlessToken, ossConfigObj} from "../appToken";
 import {UserCursor} from "../components/whiteboard/UserCursor";
 import MenuPPTDoc from "../components/menu/MenuPPTDoc";
 import UploadBtn from "../tools/UploadBtn";
@@ -60,8 +60,8 @@ export type WhiteboardPageState = {
     roomToken: string | null;
     ossPercent: number;
     converterPercent: number;
-    room?: Room;
     userId: string;
+    room?: Room;
     roomState?: RoomState;
     pptConverter?: PptConverter;
     isMenuLeft?: boolean;
@@ -72,6 +72,7 @@ export type WhiteboardPageState = {
 
 class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPageState> {
     private didLeavePage: boolean = false;
+    private readonly cursor: UserCursor;
     public constructor(props: WhiteboardPageProps) {
         super(props);
         this.state = {
@@ -86,6 +87,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
             converterPercent: 0,
             userId: "",
         };
+       this.cursor = new UserCursor();
     }
 
     private getRoomToken = async (uuid: string): Promise<string | null> => {
@@ -108,7 +110,6 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
         }
         const userUuid = netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${userId}`);
         const name = netlessWhiteboardApi.user.getUserInf(UserInfType.name, `${userId}`);
-        const cursor = new UserCursor(this.state.roomState);
         if (roomToken && uuid) {
             const whiteWebSdk = new WhiteWebSdk();
             const pptConverter = whiteWebSdk.pptConverter(netlessToken.sdkToken);
@@ -116,7 +117,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
             const room = await whiteWebSdk.joinRoom({
                     uuid: uuid,
                     roomToken: roomToken,
-                    cursorAdapter: cursor,
+                    cursorAdapter: this.cursor,
                     userPayload: {id: userId, userId: userUuid, nickName: name, avatar: userUuid}},
                 {
                     onPhaseChanged: phase => {
@@ -132,6 +133,9 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                         console.error("kicked with reason: " + reason);
                     },
                     onRoomStateChanged: modifyState => {
+                        if (modifyState.roomMembers) {
+                            this.cursor.setColorAndAppliance(modifyState.roomMembers);
+                        }
                         this.setState({
                             roomState: {...this.state.roomState, ...modifyState} as RoomState,
                         });
@@ -161,6 +165,9 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
 
     public async componentDidMount(): Promise<void> {
         await this.startJoinRoom();
+        if (this.state.room) {
+            this.cursor.setColorAndAppliance(this.state.room.state.roomMembers);
+        }
     }
 
     public componentWillUnmount(): void {

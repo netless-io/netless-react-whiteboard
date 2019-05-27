@@ -18,7 +18,7 @@
 
     该 demo 使用的是 netless 自研的互动白板，阿里云的云存储作为基础选型。
 
-2. 填写 `appTokenConfig.ts` 文件  
+2. 填写 `appToken.ts` 文件  
 
     ``` typescript
     export const netlessToken = "xxx";
