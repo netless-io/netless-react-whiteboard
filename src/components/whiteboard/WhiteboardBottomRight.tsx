@@ -27,7 +27,7 @@ export type hotkeyTooltipState = {
 
 export type WhiteboardBottomRightProps = {
     room: Room;
-    number: string;
+    userId: string;
     roomState: RoomState;
     handleHotKeyMenuState: () => void;
     handleAnnexBoxMenuState: () => void;
@@ -47,7 +47,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
         this.renderAnnexBox = this.renderAnnexBox.bind(this);
     }
 
-    public async componentDidMount(): Promise<void> {
+    public componentDidMount(): void {
         const {room} = this.props;
         room.addMagixEventListener("message",  event => {
             this.setState({messages: [...this.state.messages, event.payload]});
@@ -146,7 +146,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
                     <Badge overflowCount={99} offset={[-3, 6]} count={this.state.isVisible ? 0 : (this.state.messages.length - this.state.seenMessagesLength)}>
                         <Popover
                             overlayClassName="whiteboard-chat"
-                            content={<WhiteboardChat messages={this.state.messages} room={this.props.room} number={this.props.number}/>}
+                            content={<WhiteboardChat messages={this.state.messages} room={this.props.room} userId={this.props.userId}/>}
                             trigger="click"
                             onVisibleChange={(visible: boolean) => {
                                 if (visible) {

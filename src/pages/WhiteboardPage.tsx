@@ -165,7 +165,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
 
     public async componentDidMount(): Promise<void> {
         await this.startJoinRoom();
-        if (this.state.room) {
+        if (this.state.room && this.state.room.state.roomMembers) {
             this.cursor.setColorAndAppliance(this.state.room.state.roomMembers);
         }
     }
@@ -367,7 +367,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                                     room={this.state.room}
                                     userId={this.state.userId}/>
                                 <WhiteboardBottomRight
-                                    number={this.state.userId}
+                                    userId={this.state.userId}
                                     roomState={this.state.roomState}
                                     handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}
                                     handleHotKeyMenuState={this.handleHotKeyMenuState}

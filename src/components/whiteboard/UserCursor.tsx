@@ -102,14 +102,12 @@ export class UserCursor implements CursorAdapter {
 
     public setColorAndAppliance(roomMembers: ReadonlyArray<RoomMember>): void {
         this.roomMembers = roomMembers;
-        if (roomMembers && roomMembers.length > 0) {
-            for (const roomMember of roomMembers) {
-                const cursor = this.cursors[roomMember.memberId];
-                if (cursor) {
-                    cursor.setReactNode((
-                        <CursorComponent roomMember={roomMember} />
-                    ));
-                }
+        for (const roomMember of roomMembers) {
+            const cursor = this.cursors[roomMember.memberId];
+            if (cursor) {
+                cursor.setReactNode((
+                    <CursorComponent roomMember={roomMember} />
+                ));
             }
         }
     }
