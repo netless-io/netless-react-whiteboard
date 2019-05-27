@@ -1,12 +1,11 @@
 import * as React from "react";
-import {Icon} from "antd";
-import {WhiteWebSdk, PlayerWhiteboard, PlayerPhase, Player, RoomMember, CursorAdapter} from "white-react-sdk";
+import {Badge, Icon, Popover} from "antd";
+import {WhiteWebSdk, PlayerWhiteboard, PlayerPhase, Player, Room} from "white-react-sdk";
 import * as loading from "../assets/image/loading.svg";
+import * as chat from "../assets/image/chat.svg";
 import "./PlayerPage.less";
 import {RouteComponentProps} from "react-router";
 import SeekSlider from "@netless/react-seek-slider";
-import * as player_full_screen from "../assets/image/player_full_screen.svg";
-import * as exit_full_screen from "../assets/image/exit_full_screen.svg";
 import * as player_stop from "../assets/image/player_stop.svg";
 import * as player_begin from "../assets/image/player_begin.svg";
 import {displayWatch} from "../tools/WatchDisplayer";
@@ -19,12 +18,14 @@ import * as like from "../assets/image/like.svg";
 import {message} from "antd";
 import {UserCursor} from "../components/whiteboard/UserCursor";
 import {netlessWhiteboardApi, UserInfType} from "../apiMiddleware";
+import WhiteboardChat from "../components/whiteboard/WhiteboardChat";
+import {MessageType} from "../components/whiteboard/WhiteboardBottomRight";
 const timeout = (ms: any) => new Promise(res => setTimeout(res, ms));
 
 export type PlayerPageProps = RouteComponentProps<{
     uuid: string;
     userId: string;
-}>;
+}> & {room: Room};
 
 export type PlayerPageStates = {
     player: Player | null;
@@ -34,6 +35,9 @@ export type PlayerPageStates = {
     isFirstScreenReady: boolean;
     isHandClap: boolean;
     isPlayerSeeking: boolean;
+    isVisible: boolean;
+    messages: MessageType[];
+    seenMessagesLength: number;
 };
 
 export default class PlayerPage extends React.Component<PlayerPageProps, PlayerPageStates> {
@@ -50,6 +54,9 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
             isHandClap: false,
             player: null,
             isPlayerSeeking: false,
+            isVisible: false,
+            messages: [],
+            seenMessagesLength: 0,
         };
     }
     private getRoomToken = async (uuid: string): Promise<string | null> => {
@@ -72,10 +79,14 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
                 },
                 onLoadFirstFrame: () => {
                     this.setState({isFirstScreenReady: true});
-                    this.cursor.setColorAndAppliance(player.state.roomMembers);
+                    if (player.state.roomMembers) {
+                        this.cursor.setColorAndAppliance(player.state.roomMembers);
+                    }
                 },
                 onPlayerStateChanged: modifyState => {
-                    this.cursor.setColorAndAppliance(modifyState.roomMembers);
+                    if (modifyState.roomMembers) {
+                        this.cursor.setColorAndAppliance(modifyState.roomMembers);
+                    }
                 },
                 onStoppedWithError: error => {
                   message.error("Playback error");
@@ -92,6 +103,9 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
                 await timeout(800);
                 this.setState({isHandClap: false});
             });
+            player.addMagixEventListener("message",  event => {
+                this.setState({messages: [...this.state.messages, event.payload]});
+            });
         }
     }
     private onWindowResize = (): void => {
@@ -106,25 +120,6 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
 
     public componentWillUnmount(): void {
         window.removeEventListener("resize", this.onWindowResize);
-    }
-
-    private enterFullScreen = (): void => {
-        this.setState({isFullScreen: true});
-        const docElm = document.documentElement;
-        if (docElm.requestFullscreen) {
-            docElm.requestFullscreen();
-        } else if (docElm.webkitRequestFullScreen) {
-            docElm.webkitRequestFullScreen();
-        }
-    }
-
-    private exitFullScreen = (): void => {
-        this.setState({isFullScreen: false});
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen();
-        }
     }
 
     private operationButton = (phase: PlayerPhase): React.ReactNode => {
@@ -175,8 +170,6 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
             }
         }
     }
-
-
     private renderScheduleView(): React.ReactNode {
         if (this.state.player) {
             return (
@@ -206,20 +199,26 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
                     <div className="player-mid-box-time">
                         {displayWatch(Math.floor(this.state.player.scheduleTime / 1000))} / {displayWatch(Math.floor(this.state.player.timeDuration / 1000))}
                     </div>
-                    <div className="player-right-box">
-                        <div
-                            onClick={() => {
-                                if (this.state.isFullScreen) {
-                                    this.exitFullScreen();
+                    <Badge overflowCount={99} offset={[-3, 6]} count={this.state.isVisible ? 0 : (this.state.messages.length - this.state.seenMessagesLength)}>
+                        <Popover
+                            overlayClassName="whiteboard-chat"
+                            content={<WhiteboardChat messages={this.state.messages} room={this.props.room} userId={this.props.match.params.userId}/>}
+                            trigger="click"
+                            onVisibleChange={(visible: boolean) => {
+                                if (visible) {
+                                    this.setState({isVisible: true});
                                 } else {
-                                    this.enterFullScreen();
+                                    this.setState({isVisible: false, seenMessagesLength: this.state.messages.length});
                                 }
                             }}
-                            className="player-right-box-inner">
-                            {this.state.isFullScreen ? <img src={exit_full_screen}/> :
-                                <img src={player_full_screen}/>}
-                        </div>
-                    </div>
+                            placement="topLeft">
+                            <div className="player-right-box">
+                                <div className="player-right-box-inner">
+                                    <img style={{width: 17}} src={chat}/>
+                                </div>
+                            </div>
+                        </Popover>
+                    </Badge>
                 </div>
             );
         } else {
