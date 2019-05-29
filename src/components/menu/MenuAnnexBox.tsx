@@ -143,18 +143,8 @@ class MenuAnnexBox extends React.Component<MenuAnnexBoxProps, MenuAnnexBoxState>
 class PageImage extends React.Component<{ scene: Scene }> {
 
     public render(): React.ReactNode {
-        const {preview, ppt, didPreviewLoadFailed} = this.props.scene;
-        if (didPreviewLoadFailed && ppt) {
-            return this.renderPPT(ppt.src);
-        } else if (preview && !ppt) {
-            return <img src={preview}/>;
-
-        } else if (preview && ppt) {
-            return [
-                this.renderPPT(ppt.src),
-                <img key="preview" src={preview}/>,
-            ];
-        } else if (ppt && !preview) {
+        const {ppt} = this.props.scene;
+        if (ppt) {
             return this.renderPPT(ppt.src);
         } else {
             return null;

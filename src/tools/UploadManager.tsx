@@ -179,6 +179,8 @@ export class UploadManager {
   }
   private async handleUploadTask(task: TaskType, onProgress?: PPTProgressListener): Promise<void> {
     const fileUrl: string = await this.addFile(`${task.uuid}${task.imageFile.file.name}`, task.imageFile.file, onProgress);
+    console.log("image -->>");
+    console.log(fileUrl);
     this.room.completeImageUpload(task.uuid, fileUrl);
   }
 
