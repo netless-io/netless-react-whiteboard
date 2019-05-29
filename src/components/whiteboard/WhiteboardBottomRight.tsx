@@ -59,7 +59,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
         room.setSceneIndex(newActiveIndex);
     }
     private renderAnnexBox(): React.ReactNode {
-        const {roomState} = this.props;
+        const {roomState, room} = this.props;
         const activeIndex = roomState.sceneState.index;
         const scenes = roomState.sceneState.scenes;
         return (
@@ -67,12 +67,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
                 {scenes.length > 1 ?
                     <div className="whiteboard-annex-box">
                         <div
-                            onClick={() => {
-                                if (activeIndex !== 0) {
-                                    const newActiveIndex = activeIndex - 1;
-                                    this.setScenePath(newActiveIndex);
-                                }
-                            }}
+                            onClick={() => room.pptPreviousStep()}
                             className="whiteboard-annex-arrow-left">
                             <img src={left_arrow}/>
                         </div>
@@ -99,12 +94,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
                             </div>
                         </Tooltip>
                         <div
-                            onClick={() => {
-                                if (activeIndex !== scenes.length - 1) {
-                                    const newActiveIndex = activeIndex + 1;
-                                    this.setScenePath(newActiveIndex);
-                                }
-                            }}
+                            onClick={() => room.pptNextStep()}
                             className="whiteboard-annex-arrow-right">
                             <img src={right_arrow}/>
                         </div>
