@@ -60,9 +60,12 @@ class MenuAnnexBox extends React.Component<MenuAnnexBoxProps, MenuAnnexBoxState>
     public render(): React.ReactNode {
         const {roomState} = this.props;
         const scenes = roomState.sceneState.scenes;
+        const sceneDir = roomState.sceneState.scenePath.split("/");
+        sceneDir.pop();
         const activeIndex = roomState.sceneState.index;
         const renderPages = scenes.map((scene: Scene, index: number): React.ReactNode => {
             const isActive = index === activeIndex;
+
             return (
                     <div
                         key={`${scene.name}${index}`}
@@ -78,7 +81,7 @@ class MenuAnnexBox extends React.Component<MenuAnnexBoxProps, MenuAnnexBoxState>
                             this.setScenePath(index);
                         }} className="page-mid-box">
                             <div className="page-box">
-                                <PageImage scene={scene}/>
+                                <PageImage scene={scene} room={this.props.room} path={sceneDir.concat(scene.name).join("/")}/>
                             </div>
                         </div>
                         <div className="page-box-inner-index-delete-box">
@@ -140,27 +143,23 @@ class MenuAnnexBox extends React.Component<MenuAnnexBoxProps, MenuAnnexBoxState>
     }
 }
 
-class PageImage extends React.Component<{ scene: Scene }> {
+class PageImage extends React.Component<{ scene: Scene, path: string, room: Room }> {
 
-    public render(): React.ReactNode {
-        const {ppt} = this.props.scene;
-        if (ppt) {
-            return this.renderPPT(ppt.src);
-        } else {
-            return null;
+    private ref?: HTMLDivElement | null;
+
+    public constructor(props: any) {
+        super(props);
+    }
+
+    private setupDivRef = (ref: HTMLDivElement | null) => {
+        if (ref) {
+            this.ref = ref;
+            this.props.room.scenePreview(this.props.path, ref, 192, 112.5);
         }
     }
 
-    private renderPPT(pptSrc: string): React.ReactNode {
-        return (
-            <svg key="" width={192} height={112.5}>
-                <image
-                    width="100%"
-                    height="100%"
-                    xlinkHref={pptSrc + "?x-oss-process=style/ppt_preview"}
-                />
-            </svg>
-        );
+    public render(): React.ReactNode {
+        return <div className="pptImage" ref={this.setupDivRef}/>;
     }
 }
 
