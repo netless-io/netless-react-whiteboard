@@ -14,6 +14,7 @@ export type MenuAnnexBoxProps = {
     room: Room;
     roomState: RoomState;
     handleAnnexBoxMenuState: () => void;
+    isMenuOpen: boolean;
 };
 
 class MenuAnnexBox extends React.Component<MenuAnnexBoxProps, MenuAnnexBoxState> {
@@ -81,7 +82,7 @@ class MenuAnnexBox extends React.Component<MenuAnnexBoxProps, MenuAnnexBoxState>
                             this.setScenePath(index);
                         }} className="page-mid-box">
                             <div className="page-box">
-                                <PageImage scene={scene} room={this.props.room} path={sceneDir.concat(scene.name).join("/")}/>
+                                <PageImage isActive={isActive} isMenuOpen={this.props.isMenuOpen} scene={scene} room={this.props.room} path={sceneDir.concat(scene.name).join("/")}/>
                             </div>
                         </div>
                         <div className="page-box-inner-index-delete-box">
@@ -143,14 +144,22 @@ class MenuAnnexBox extends React.Component<MenuAnnexBoxProps, MenuAnnexBoxState>
     }
 }
 
-class PageImage extends React.Component<{ scene: Scene, path: string, room: Room }> {
+export type PageImageProps = { scene: Scene, path: string, room: Room, isMenuOpen: boolean, isActive: boolean};
+
+class PageImage extends React.Component<PageImageProps, {}> {
 
     private ref?: HTMLDivElement | null;
+    private clock: any;
 
     public constructor(props: any) {
         super(props);
     }
-
+    public componentWillReceiveProps(nextProps: PageImageProps): void {
+        const ref = this.ref;
+        if (nextProps.isMenuOpen !== this.props.isMenuOpen && nextProps.isMenuOpen && ref) {
+            this.props.room.scenePreview(this.props.path, ref, 192, 112.5);
+        }
+    }
     private setupDivRef = (ref: HTMLDivElement | null) => {
         if (ref) {
             this.ref = ref;
@@ -159,7 +168,7 @@ class PageImage extends React.Component<{ scene: Scene, path: string, room: Room
     }
 
     public render(): React.ReactNode {
-        return <div className="pptImage" ref={this.setupDivRef}/>;
+        return <div className="ppt-image" ref={this.setupDivRef}/>;
     }
 }
 
