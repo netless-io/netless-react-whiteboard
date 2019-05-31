@@ -61,6 +61,7 @@ export type WhiteboardPageState = {
     ossPercent: number;
     converterPercent: number;
     userId: string;
+    isMenuOpen: boolean;
     room?: Room;
     roomState?: RoomState;
     pptConverter?: PptConverter;
@@ -86,6 +87,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
             ossPercent: 0,
             converterPercent: 0,
             userId: "",
+            isMenuOpen: false,
         };
        this.cursor = new UserCursor();
     }
@@ -180,6 +182,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                 return <MenuHotKey handleHotKeyMenuState={this.handleHotKeyMenuState}/>;
             case MenuInnerType.AnnexBox:
                 return <MenuAnnexBox
+                    isMenuOpen={this.state.isMenuOpen}
                     room={this.state.room!}
                     roomState={this.state.roomState!}
                     handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}/>;
@@ -317,6 +320,10 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
             }
         }
     }
+
+    private setMenuState = (state: boolean) => {
+        this.setState({isMenuOpen: state});
+    }
     public render(): React.ReactNode {
 
         if (this.state.connectedFail) {
@@ -339,6 +346,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
             return (
                 <div id="outer-container">
                     <MenuBox
+                        setMenuState={this.setMenuState}
                         resetMenu={this.resetMenu}
                         pageWrapId={"page-wrap" }
                         outerContainerId={ "outer-container" }
