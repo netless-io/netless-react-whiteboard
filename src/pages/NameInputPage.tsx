@@ -14,7 +14,7 @@ export type PageNameInputStates = {
     name: string;
 };
 
-class PageNameInput extends React.Component<PageNameInputProps, PageNameInputStates> {
+class NameInputPage extends React.Component<PageNameInputProps, PageNameInputStates> {
     public constructor(props: PageNameInputProps) {
         super(props);
         this.state = {
@@ -54,4 +54,4 @@ class PageNameInput extends React.Component<PageNameInputProps, PageNameInputSta
     }
 }
 
-export default withRouter(PageNameInput);
+export default withRouter(NameInputPage);
