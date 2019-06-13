@@ -5,6 +5,7 @@ import WhiteboardCreatorPage from "./WhiteboardCreatorPage";
 import WhiteboardPage from "./WhiteboardPage";
 import PlayerPage from "./PlayerPage";
 import NameInputPage from "./NameInputPage";
+import PageError from "./PageError";
 
 import {AppRouter, HistoryType} from "@netless/i18n-react-router";
 import {language} from "../locale";
@@ -22,13 +23,15 @@ export class AppRoutes extends React.Component<{}, {}> {
 
     public render(): React.ReactNode {
         return (
-            <AppRouter historyType={HistoryType.HashRouter} language={language} routes={[
-                {path: "/", component: HomePage},
-                {path: "/replay/:uuid/:userId/", component: PlayerPage},
-                {path: "/name/", component: NameInputPage},
-                {path: "/whiteboard/:uuid?/", component: WhiteboardCreatorPage},
-                {path: "/whiteboard/:uuid/:userId/", component: WhiteboardPage},
-            ]}/>
+            <AppRouter historyType={HistoryType.HashRouter} language={language}
+                       noFoundRoute={PageError}
+                       routes={[
+                           {path: "/", component: HomePage},
+                           {path: "/replay/:uuid/:userId/", component: PlayerPage},
+                           {path: "/name/", component: NameInputPage},
+                           {path: "/whiteboard/:uuid?/", component: WhiteboardCreatorPage},
+                           {path: "/whiteboard/:uuid/:userId/", component: WhiteboardPage},
+                       ]}/>
         );
     }
 }

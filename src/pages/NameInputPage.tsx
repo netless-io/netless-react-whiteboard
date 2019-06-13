@@ -6,7 +6,6 @@ import "./PageNameInput.less";
 import NetlessBlack from "../assets/image/netless_black.svg";
 
 import {Input, Button} from "antd";
-import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
 import {Link} from "@netless/i18n-react-router";
 import {netlessWhiteboardApi} from "../apiMiddleware";
@@ -65,4 +64,4 @@ class NameInputPage extends React.Component<PageNameInputProps, PageNameInputSta
     }
 }
 
-export default withRouter(NameInputPage);
+export default NameInputPage;

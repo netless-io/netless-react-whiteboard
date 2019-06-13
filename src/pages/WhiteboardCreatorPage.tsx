@@ -1,20 +1,20 @@
 import * as React from "react";
+
 import {Redirect} from "@netless/i18n-react-router";
-import {InjectedIntlProps, injectIntl} from "react-intl";
+import {RouteComponentProps} from "react-router";
 import PageError from "./PageError";
 import {netlessWhiteboardApi, RoomType} from "../apiMiddleware";
 import {message} from "antd";
-import {RouteComponentProps} from "react-router";
 
-export type WhiteboardCreatorPageState = {
-    uuid?: string;
-    userId?: string;
-    foundError: boolean;
-};
-export type WhiteboardCreatorPageProps = InjectedIntlProps & RouteComponentProps<{
-    uuid?: string;
+export type WhiteboardCreatorPageProps = RouteComponentProps<{
+    readonly uuid?: string;
 }>;
 
+export type WhiteboardCreatorPageState = {
+    readonly uuid?: string;
+    readonly userId?: string;
+    readonly foundError: boolean;
+};
 
 class WhiteboardCreatorPage extends React.Component<WhiteboardCreatorPageProps, WhiteboardCreatorPageState> {
 
@@ -33,16 +33,20 @@ class WhiteboardCreatorPage extends React.Component<WhiteboardCreatorPageProps, 
             return null;
         }
     }
+
     public async componentWillMount(): Promise<void> {
         try {
             let uuid: string | null;
+
             if (this.props.match.params.uuid) {
                 uuid = this.props.match.params.uuid;
             } else {
                 uuid = await this.createRoomAndGetUuid("test1", 0, RoomType.historied);
             }
             const userId = `${Math.floor(Math.random() * 100000)}`;
+
             this.setState({userId: userId});
+
             if (uuid) {
                 this.setState({uuid: uuid});
             } else {
@@ -64,4 +68,4 @@ class WhiteboardCreatorPage extends React.Component<WhiteboardCreatorPageProps, 
     }
 }
 
-export default injectIntl(WhiteboardCreatorPage);
+export default WhiteboardCreatorPage;
