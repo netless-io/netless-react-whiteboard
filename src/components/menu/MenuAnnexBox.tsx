@@ -149,7 +149,6 @@ export type PageImageProps = { scene: Scene, path: string, room: Room, isMenuOpe
 class PageImage extends React.Component<PageImageProps, {}> {
 
     private ref?: HTMLDivElement | null;
-    private clock: any;
 
     public constructor(props: any) {
         super(props);
