@@ -1,13 +1,17 @@
 import * as React from "react";
-import {CursorAdapter, CursorDescription, Cursor, RoomMember, Color} from "white-react-sdk";
-import Identicon from "react-identicons";
+
 import "./UserCursor.less";
-import * as selector from "../../assets/image/selector.svg";
-import * as pencil from "../../assets/image/pencil.svg";
-import * as text from "../../assets/image/text.svg";
-import * as eraser from "../../assets/image/eraser.svg";
-import * as ellipse from "../../assets/image/ellipse.svg";
-import * as rectangle from "../../assets/image/rectangle.svg";
+
+import SelectorIcon from "../assets/image/selector.svg";
+import PencilIcon from "../assets/image/pencil.svg";
+import TextIcon from "../assets/image/text.svg";
+import EraserIcon from "../assets/image/eraser.svg";
+import EllipseIcon from "../assets/image/ellipse.svg";
+import RectangleIcon from "../assets/image/rectangle.svg";
+
+import Identicon from "react-identicons";
+
+import {CursorAdapter, CursorDescription, Cursor, RoomMember} from "white-react-sdk";
 
 export type CursorComponentProps = {
     roomMember: RoomMember;
@@ -24,32 +28,32 @@ class CursorComponent extends React.Component<CursorComponentProps, {}> {
     }
     private static readonly descriptions: {readonly [applianceName: string]: ApplianceDescription} = Object.freeze({
         selector: Object.freeze({
-            iconUrl: selector,
+            iconUrl: SelectorIcon,
             hasColor: false,
             hasStroke: false,
         }),
         pencil: Object.freeze({
-            iconUrl: pencil,
+            iconUrl: PencilIcon,
             hasColor: true,
             hasStroke: true,
         }),
         text: Object.freeze({
-            iconUrl: text,
+            iconUrl: TextIcon,
             hasColor: true,
             hasStroke: false,
         }),
         eraser: Object.freeze({
-            iconUrl: eraser,
+            iconUrl: EraserIcon,
             hasColor: false,
             hasStroke: false,
         }),
         ellipse: Object.freeze({
-            iconUrl: ellipse,
+            iconUrl: EllipseIcon,
             hasColor: true,
             hasStroke: true,
         }),
         rectangle: Object.freeze({
-            iconUrl: rectangle,
+            iconUrl: RectangleIcon,
             hasColor: true,
             hasStroke: true,
         }),
