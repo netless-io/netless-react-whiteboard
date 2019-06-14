@@ -12,13 +12,6 @@
     "build": "rimraf build && NODE_ENV=production react-app-rewired --max-old-space-size=4096 build --scripts-version react-scripts-ts"
   },
   "dependencies": {
-    "@netless/fetch-middleware": "^1.0.0",
-    "@netless/i18n-react-router": "^1.0.5",
-    "@netless/oss-upload-manager": "^1.0.6",
-    "@netless/react-loading-bar": "^1.0.0",
-    "@netless/react-scale-controller": "^1.0.0",
-    "@netless/react-seek-slider": "^1.0.4",
-    "@netless/react-tool-box": "^1.0.3",
     "ali-oss": "^6.1.1",
     "antd": "^3.10.4",
     "is-touch-device": "^1.0.1",
@@ -35,6 +28,13 @@
     "white-react-sdk": "^2.0.0-beta.14"
   },
   "devDependencies": {
+    "@netless/fetch-middleware": "^1.0.0",
+    "@netless/i18n-react-router": "^1.0.5",
+    "@netless/oss-upload-manager": "^1.0.6",
+    "@netless/react-loading-bar": "^1.0.0",
+    "@netless/react-scale-controller": "^1.0.0",
+    "@netless/react-seek-slider": "^1.0.4",
+    "@netless/react-tool-box": "^1.0.3",
     "@livechat/ui-kit": "^0.4.0-1",
     "@types/ali-oss": "^6.0.3",
     "@types/is-touch-device": "^1.0.0",
