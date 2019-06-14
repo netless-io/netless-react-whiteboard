@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a985f206-205e-4f3a-aa83-65c9fc6fb35f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/taozeyu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/netless-react-whiteboard.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/room/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/room/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/website/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_and_push_image_edge.sh" beforeDir="false" afterPath="$PROJECT_DIR$/website/build_and_push_image_edge.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-overrides.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/config-overrides.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/website/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/website/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/public/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppToken.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/AppToken.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apiMiddleware/RoomOperator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/apiMiddleware/RoomOperator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apiMiddleware/UserOperator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/apiMiddleware/UserOperator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apiMiddleware/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/apiMiddleware/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apiMiddleware/netlessWhiteboardApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/apiMiddleware/netlessWhiteboardApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/add.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/add.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/add_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/add_icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/annex_box.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/annex_box.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/arrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/arrow.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/board.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/board.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/board_black.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/board_black.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/chat.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/chat.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/close.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/close.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/disconnected.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/disconnected.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/doc_to_image.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/doc_to_image.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/doc_to_web.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/doc_to_web.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/down_cursor.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/down_cursor.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/drop_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/drop_icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/ellipse.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/ellipse.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/eraser.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/eraser.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/exit_full_screen.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/exit_full_screen.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/home.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/home.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/hotkey/arrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/hotkey/arrow.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/hotkey/ellipse.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/hotkey/ellipse.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/hotkey/eraser.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/hotkey/eraser.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/hotkey/hand.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/hotkey/hand.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/hotkey/magic_pen.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/hotkey/magic_pen.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/hotkey/pencil.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/hotkey/pencil.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/hotkey/rectangle.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/hotkey/rectangle.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/hotkey/selector.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/hotkey/selector.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/hotkey/text.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/hotkey/text.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/image.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/image.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/left_arrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/left_arrow.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/like.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/like.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/like_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/like_icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/loading.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/loading.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/menu.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/menu.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/more_horizontal.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/more_horizontal.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/mute_gray.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/mute_gray.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/mute_white.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/mute_white.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/name_bg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/name_bg.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/netless_bg.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/netless_bg.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/netless_black.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/netless_black.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/page404.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/page404.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/page_image.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/page_image.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/pencil.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/pencil.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/player.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/player.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/player_begin.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/player_begin.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/player_full_screen.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/player_full_screen.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/player_stop.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/player_stop.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/rectangle.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/rectangle.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/right_arrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/right_arrow.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/room_not_find.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/room_not_find.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/rtc_media.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/rtc_media.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/selector.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/selector.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/set.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/set.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/text.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/text.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/up_cursor.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/up_cursor.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/user_head.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/user_head.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/video.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/video.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/video_active.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/video_active.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/video_gray.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/video_gray.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/video_white.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/video_white.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/voice.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/voice.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/web_app.png" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/web_app.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/whiteboard_keyboard.svg" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/assets/image/whiteboard_keyboard.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/MenuAnnexBox.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/menu/MenuAnnexBox.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/MenuAnnexBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/menu/MenuAnnexBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/MenuBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/menu/MenuBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/MenuHotKey.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/menu/MenuHotKey.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/MenuHotKey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/menu/MenuHotKey.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/MenuPPTDoc.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/menu/MenuPPTDoc.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/MenuPPTDoc.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/menu/MenuPPTDoc.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu/PPTDatas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/menu/PPTDatas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/player/PlayerProgressBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/player/PlayerProgressBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/UserCursor.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/UserCursor.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/UserCursor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/UserCursor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardBottomLeft.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardBottomLeft.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardBottomLeft.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardBottomLeft.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardBottomRight.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardBottomRight.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardBottomRight.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardBottomRight.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardChat.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardChat.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardChat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardPerspectiveSet.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardPerspectiveSet.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardPerspectiveSet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardPerspectiveSet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardTopLeft.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardTopLeft.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardTopLeft.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardTopLeft.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardTopRight.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardTopRight.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/whiteboard/WhiteboardTopRight.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardTopRight.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/custom.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/custom.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/declare/react-clipboard.js.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/declare/react-clipboard.js.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/declare/react-identicons.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/declare/react-identicons.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/declare/svg.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/declare/svg.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locale/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/locale/en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locale/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/locale/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locale/zh-CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/locale/zh-CN.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/AppRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/AppRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/HomePage.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/HomePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LandingFooter.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/LandingFooter.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LandingFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/LandingFooter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/NameInputPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/NameInputPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/PageError.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/PageError.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/PageError.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/PageError.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/PageNameInput.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/PageNameInput.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/PlayerPage.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/PlayerPage.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/PlayerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/PlayerPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/WhiteboardCreatorPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/WhiteboardCreatorPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/WhiteboardPage.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/WhiteboardPage.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/WhiteboardPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/WhiteboardPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tokenConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/tokenConfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tools/ToolBoxUpload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/tools/ToolBoxUpload.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tools/UploadBtn.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/tools/UploadBtn.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tools/UploadBtn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/tools/UploadBtn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tools/UploadManager.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/tools/UploadManager.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tools/WatchDisplayer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/tools/WatchDisplayer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/whiteUIKit/WhiteUIButton.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/whiteUIKit/WhiteUIButton.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/whiteUIKit/WhiteUIButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/whiteUIKit/WhiteUIButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/whiteUIKit/WhiteUIInput.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/whiteUIKit/WhiteUIInput.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/whiteUIKit/WhiteUIInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/whiteUIKit/WhiteUIInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/theme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/theme.less" beforeDir="false" afterPath="$PROJECT_DIR$/website/theme.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/token.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.prod.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/tsconfig.prod.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.test.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/tsconfig.test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/tslint.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/webpack.config.js" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/room/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/room/.gitignore">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="package.json" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>MenuAnnexBox from</find>
+      <find>MenuAnnexBox</find>
+      <find>isMenuOpen</find>
+      <find>room</find>
+      <find>sceneDir</find>
+      <find>arrowControllerHotKey</find>
+      <find>hoverCellIndex</find>
+      <find>isFocus</find>
+      <find>PageImage</find>
+      <find>function sle</find>
+      <find>isVisible</find>
+      <find>isMenuVisible:</find>
+      <find>resetMenu</find>
+      <find>styles</find>
+      <find>MenuHotKeyDoc</find>
+      <find>toolsInnerType</find>
+      <find>active =</find>
+      <find>active</find>
+      <find>js-yam</find>
+      <find>&quot;js-yaml&quot;:</find>
+      <find>avatar</find>
+      <find>sleep</find>
+      <find>appRo</find>
+      <find>appToken</find>
+      <find>userId</find>
+      <find>query-</find>
+      <find>isOwn=</find>
+      <find>.send</find>
+      <find>id: user.</find>
+      <find>private</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>AppToken</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/pages/Homepage.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/HomePage.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/PageError.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/AppRoutes.tsx" />
+        <option value="$PROJECT_DIR$/src/index.tsx" />
+        <option value="$PROJECT_DIR$/src/components/player/PlayerScheduleBar.ts" />
+        <option value="$PROJECT_DIR$/src/components/player/PlayerScheduleBar.tsx" />
+        <option value="$PROJECT_DIR$/src/components/player/PlayerProgressBar.tsx" />
+        <option value="$PROJECT_DIR$/src/components/menu/MenuAnnexBox.tsx" />
+        <option value="$PROJECT_DIR$/src/components/menu/LeftMenuBox.tsx" />
+        <option value="$PROJECT_DIR$/src/components/menu/MenuBox.tsx" />
+        <option value="$PROJECT_DIR$/src/components/menu/MenuHotKey.tsx" />
+        <option value="$PROJECT_DIR$/src/tools/ToolBoxUpload.tsx" />
+        <option value="$PROJECT_DIR$/src/components/menu/MenuPPTDoc.tsx" />
+        <option value="$PROJECT_DIR$/src/tools/UploadBtn.tsx" />
+        <option value="$PROJECT_DIR$/src/tools/UploadManager.tsx" />
+        <option value="$PROJECT_DIR$/src/whiteUIKit/WhiteUIButton.tsx" />
+        <option value="$PROJECT_DIR$/src/whiteUIKit/WhiteUIInput.tsx" />
+        <option value="$PROJECT_DIR$/src/apiMiddleware/netlessWhiteboardApi.ts" />
+        <option value="$PROJECT_DIR$/src/apiMiddleware/UserOperator.ts" />
+        <option value="$PROJECT_DIR$/src/components/whiteboard/WhiteboardTopRight.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/PlayerPage.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/WhiteboardPage.tsx" />
+        <option value="$PROJECT_DIR$/src/apiMiddleware/RoomOperator.ts" />
+        <option value="$PROJECT_DIR$/src/pages/NameInputPage.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/WhiteboardCreatorPage.tsx" />
+        <option value="$PROJECT_DIR$/src/components/whiteboard/WhiteboardChat.tsx" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/website/package.json" />
+        <option value="$PROJECT_DIR$/room/package.json" />
+        <option value="$PROJECT_DIR$/package.json" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBowerSettings">
+    <exe-path />
+    <config-path />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="798" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="netless-react-whiteboard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="netless-react-whiteboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="netless-react-whiteboard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="netless-react-whiteboard" type="462c0819:PsiDirectoryNode" />
+              <item name="room" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="netless-react-whiteboard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="netless-react-whiteboard" type="462c0819:PsiDirectoryNode" />
+              <item name="website" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/room" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/website" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <package-manager value="yarn" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a985f206-205e-4f3a-aa83-65c9fc6fb35f" name="Default Changelist" comment="" />
+      <created>1559034705940</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1559034705940</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="798" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329927" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31532848" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32846716" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329927" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31532848" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32846716" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/history/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/react-router/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="70" column="2" selection-start-line="70" selection-start-column="2" selection-end-line="70" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/react-intl/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/pages/PageError.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="13" column="15" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/white-web-sdk/types/white-web-sdk/WhiteWebSdk.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1040">
+          <caret line="55" column="39" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/player/PlayerProgressBar.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="124" column="50" lean-forward="true" selection-start-line="124" selection-start-column="50" selection-end-line="124" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@netless/i18n-react-router/dist/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/rc-tween-one/typings/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/white-web-sdk/types/white-web-sdk/displayer/Room.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/menu/LeftMenuBox.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="31" selection-start-column="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/menu/MenuAnnexBox.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2720">
+          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/menu/PPTDatas.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/menu/MenuPPTDoc.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1127">
+          <caret line="70" column="56" selection-start-line="70" selection-start-column="56" selection-end-line="70" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/menu/MenuPPTDoc.less">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/menu/MenuHotKey.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3555">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/tools/ToolBoxUpload.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/tools/UploadBtn.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="153" column="82" selection-start-line="153" selection-start-column="82" selection-end-line="153" selection-end-column="82" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/tools/UploadManager.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/tools/WatchDisplayer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/whiteUIKit/WhiteUIInput.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/carrot.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/build_and_push_image_edge.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/token.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="42" lean-forward="true" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/tokenConfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/whiteUIKit/WhiteUIButton.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1040">
+          <caret line="52" column="22" lean-forward="true" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/AppToken.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="31" lean-forward="true" selection-start-column="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/apiMiddleware/netlessWhiteboardApi.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="14958" column="4" selection-start-line="14958" selection-start-column="4" selection-end-line="14958" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/apiMiddleware/UserOperator.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/pages/PlayerPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="198" column="10" lean-forward="true" selection-start-line="198" selection-start-column="10" selection-end-line="199" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/menu/MenuBox.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="8" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/apiMiddleware/RoomOperator.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardTopRight.less">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardTopRight.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="128" column="20" lean-forward="true" selection-start-line="128" selection-start-column="20" selection-end-line="128" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/pages/WhiteboardCreatorPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="48" column="9" lean-forward="true" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/pages/NameInputPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-195">
+          <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/pages/AppRoutes.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="31" column="91" lean-forward="true" selection-start-line="31" selection-start-column="91" selection-end-line="31" selection-end-column="91" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardChat.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1751">
+          <caret line="152" column="44" lean-forward="true" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/pages/WhiteboardPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="811">
+          <caret line="439" column="31" lean-forward="true" selection-start-line="439" selection-start-column="31" selection-end-line="439" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/whiteboard/WhiteboardBottomRight.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/src/components/whiteboard/UserCursor.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="78" column="48" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-2137" />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/room/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/room/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
