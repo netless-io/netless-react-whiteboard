@@ -1,15 +1,17 @@
 import * as React from "react";
 import "./MenuHotKey.less";
-import close from "../../assets/image/close.svg";
-import * as selector from "../../assets/image/hotkey/selector.svg";
-import * as pencil from "../../assets/image/hotkey/pencil.svg";
-import * as text from "../../assets/image/hotkey/text.svg";
-import * as eraser from "../../assets/image/hotkey/eraser.svg";
-import * as ellipse from "../../assets/image/hotkey/ellipse.svg";
-import * as rectangle from "../../assets/image/hotkey/rectangle.svg";
-import * as up_cursor from "../../assets/image/up_cursor.svg";
-import * as down_cursor from "../../assets/image/down_cursor.svg";
-import * as hand from "../../assets/image/hotkey/hand.svg";
+
+import * as SelectorIcon from "../../assets/image/hotkey/selector.svg";
+import * as PencilIcon from "../../assets/image/hotkey/pencil.svg";
+import * as TextIcon from "../../assets/image/hotkey/text.svg";
+import * as EraserIcon from "../../assets/image/hotkey/eraser.svg";
+import * as EllipseIcon from "../../assets/image/hotkey/ellipse.svg";
+import * as RectangleIcon from "../../assets/image/hotkey/rectangle.svg";
+import * as UpCursorIcon from "../../assets/image/up_cursor.svg";
+import * as DownCursorIcon from "../../assets/image/down_cursor.svg";
+import * as HandIcon from "../../assets/image/hotkey/hand.svg";
+import * as CloseIcon from "../../assets/image/close.svg";
+
 import {InjectedIntlProps, injectIntl} from "react-intl";
 
 type toolsInnerType = {
@@ -29,9 +31,9 @@ type toolsOtherType = {
     hotKey: [toolsOtherHotKeyType],
 };
 
-export type MenuHotKeyProps = {
+export type MenuHotKeyProps = InjectedIntlProps & {
     handleHotKeyMenuState: () => void;
-} & InjectedIntlProps;
+};
 
 class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
 
@@ -41,46 +43,38 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
         this.renderPlusIcon = this.renderPlusIcon.bind(this);
     }
 
-    private renderPlusIcon(isLast: boolean, needPlusIcon: boolean): React.ReactNode {
-        if (needPlusIcon && !isLast) {
-            return <div className="menu-other-hot-box-plus">+</div>;
-        } else {
-            return null;
-        }
-    }
-
     public render(): React.ReactNode {
         const MenuHotKeyDoc = {
             tools: {
                 name: this.props.intl.formatMessage({id: "tool"}),
                 inner: [
                     {
-                        icon: selector,
+                        icon: SelectorIcon,
                         toolName: this.props.intl.formatMessage({id: "selector"}),
                         hotKey: "V",
                     },
                     {
-                        icon: pencil,
+                        icon: PencilIcon,
                         toolName: this.props.intl.formatMessage({id: "pencil"}),
                         hotKey: "P",
                     },
                     {
-                        icon: text,
+                        icon: TextIcon,
                         toolName: this.props.intl.formatMessage({id: "text"}),
                         hotKey: "T",
                     },
                     {
-                        icon: eraser,
+                        icon: EraserIcon,
                         toolName: this.props.intl.formatMessage({id: "eraser"}),
                         hotKey: "E",
                     },
                     {
-                        icon: ellipse,
+                        icon: EllipseIcon,
                         toolName: this.props.intl.formatMessage({id: "ellipse"}),
                         hotKey: "O",
                     },
                     {
-                        icon: rectangle,
+                        icon: RectangleIcon,
                         toolName: this.props.intl.formatMessage({id: "rectangle"}),
                         hotKey: "R",
                     },
@@ -89,58 +83,18 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
             others: {
                 name: this.props.intl.formatMessage({id: "other"}),
                 inner: [
-                    // {
-                    //     actionName: "撤销",
-                    //     needPlusIcon: true,
-                    //     hotKey: [
-                    //         {
-                    //             type: "img",
-                    //             inner: command,
-                    //         },
-                    //         {
-                    //             type: "font",
-                    //             inner: "Z",
-                    //         },
-                    //     ],
-                    // },
-                    // {
-                    //     actionName: "重做",
-                    //     needPlusIcon: true,
-                    //     hotKey: [
-                    //         {
-                    //             type: "img",
-                    //             inner: command,
-                    //         },
-                    //         {
-                    //             type: "font",
-                    //             inner: "Shift",
-                    //         },
-                    //         {
-                    //             type: "font",
-                    //             inner: "Z",
-                    //         },
-                    //     ],
-                    // },
                     {
                         actionName: this.props.intl.formatMessage({id: "switch-page"}),
                         needPlusIcon: false,
                         hotKey: [
                             {
                                 type: "img",
-                                inner: up_cursor,
+                                inner: UpCursorIcon,
                             },
                             {
                                 type: "img",
-                                inner: down_cursor,
+                                inner: DownCursorIcon,
                             },
-                            // {
-                            //     type: "img",
-                            //     inner: left_cursor,
-                            // },
-                            // {
-                            //     type: "img",
-                            //     inner: right_cursor,
-                            // },
                         ],
                     },
                     {
@@ -154,7 +108,7 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
                             {
                                 type: "mixing",
                                 inner: {
-                                    img: hand,
+                                    img: HandIcon,
                                     text: this.props.intl.formatMessage({id: "drag"}),
                                 },
                             },
@@ -191,150 +145,6 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
                 ],
             },
         };
-
-
-        const WindowsMenuHotKeyDoc = {
-            tools: {
-                name: this.props.intl.formatMessage({id: "tool"}),
-                inner: [
-                    {
-                        icon: selector,
-                        toolName: this.props.intl.formatMessage({id: "selector"}),
-                        hotKey: "V",
-                    },
-                    {
-                        icon: pencil,
-                        toolName: this.props.intl.formatMessage({id: "pencil"}),
-                        hotKey: "P",
-                    },
-                    {
-                        icon: text,
-                        toolName: this.props.intl.formatMessage({id: "text"}),
-                        hotKey: "T",
-                    },
-                    {
-                        icon: eraser,
-                        toolName: this.props.intl.formatMessage({id: "eraser"}),
-                        hotKey: "E",
-                    },
-                    {
-                        icon: ellipse,
-                        toolName: this.props.intl.formatMessage({id: "ellipse"}),
-                        hotKey: "O",
-                    },
-                    {
-                        icon: rectangle,
-                        toolName: this.props.intl.formatMessage({id: "rectangle"}),
-                        hotKey: "R",
-                    },
-                ],
-            },
-            others: {
-                name: this.props.intl.formatMessage({id: "other"}),
-                inner: [
-                    // {
-                    //     actionName: "撤销",
-                    //     needPlusIcon: true,
-                    //     hotKey: [
-                    //         {
-                    //             type: "img",
-                    //             inner: command,
-                    //         },
-                    //         {
-                    //             type: "font",
-                    //             inner: "Z",
-                    //         },
-                    //     ],
-                    // },
-                    // {
-                    //     actionName: "重做",
-                    //     needPlusIcon: true,
-                    //     hotKey: [
-                    //         {
-                    //             type: "img",
-                    //             inner: command,
-                    //         },
-                    //         {
-                    //             type: "font",
-                    //             inner: "Shift",
-                    //         },
-                    //         {
-                    //             type: "font",
-                    //             inner: "Z",
-                    //         },
-                    //     ],
-                    // },
-                    {
-                        actionName: this.props.intl.formatMessage({id: "switch-page"}),
-                        needPlusIcon: false,
-                        hotKey: [
-                            {
-                                type: "img",
-                                inner: up_cursor,
-                            },
-                            {
-                                type: "img",
-                                inner: down_cursor,
-                            },
-                            // {
-                            //     type: "img",
-                            //     inner: left_cursor,
-                            // },
-                            // {
-                            //     type: "img",
-                            //     inner: right_cursor,
-                            // },
-                        ],
-                    },
-                    {
-                        actionName: this.props.intl.formatMessage({id: "move-canvas"}),
-                        needPlusIcon: true,
-                        hotKey: [
-                            {
-                                type: "font",
-                                inner: this.props.intl.formatMessage({id: "space-key"}),
-                            },
-                            {
-                                type: "mixing",
-                                inner: {
-                                    img: hand,
-                                    text: this.props.intl.formatMessage({id: "drag"}),
-                                },
-                            },
-                        ],
-                    },
-                    {
-                        actionName: this.props.intl.formatMessage({id: "scale-big"}),
-                        needPlusIcon: true,
-                        hotKey: [
-                            {
-                                type: "font",
-                                inner: "Ctrl",
-                            },
-                            {
-                                type: "font",
-                                inner: "+",
-                            },
-                        ],
-                    },
-                    {
-                        actionName: this.props.intl.formatMessage({id: "scale-small"}),
-                        needPlusIcon: true,
-                        hotKey: [
-                            {
-                                type: "font",
-                                inner: "Ctrl",
-                            },
-                            {
-                                type: "font",
-                                inner: "-",
-                            },
-                        ],
-                    },
-                ],
-            },
-        };
-
         let menuHotKeyDocToolArray;
         let menuHotKeyDocOtherArray;
 
@@ -380,7 +190,7 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
                             <div className={isAlphabet ? "menu-other-hot-box" : "menu-other-hot-box-word"}
                                  style={{marginRight: isLast ? 0 : 5}}>
                                 <img className="menu-other-hot-out-box-mix" src={subData.inner.img}/>
-                                {subData.inner.text}
+                                {subData.inner.TextIcon}
                             </div>
                             {this.renderPlusIcon(isLast, data.needPlusIcon)}
                         </div>
@@ -402,7 +212,7 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
                         Hot Key
                     </div>
                     <div className="menu-close-btn" onClick={this.props.handleHotKeyMenuState}>
-                        <img className="menu-title-close-icon" src={close}/>
+                        <img className="menu-title-close-icon" src={CloseIcon}/>
                     </div>
                 </div>
                 <div style={{height: 42}}/>
@@ -413,6 +223,14 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
                 <div style={{width: "100%", height: 24, backgroundColor: "white"}}/>
             </div>
         );
+    }
+
+    private renderPlusIcon(isLast: boolean, needPlusIcon: boolean): React.ReactNode {
+        if (needPlusIcon && !isLast) {
+            return <div className="menu-other-hot-box-plus">+</div>;
+        } else {
+            return null;
+        }
     }
 }
 
