@@ -151,7 +151,7 @@ class WhiteboardChat extends React.Component<WhiteboardChatProps, WhiteboardChat
                                         this.props.room.dispatchMagixEvent("message", {
                                             name: user.name.substring(0, 6),
                                             avatar: this.state.url,
-                                            id: user.uuid,
+                                            id: user.userId,
                                             messageInner: [event],
                                         });
                                     }
