@@ -1,35 +1,39 @@
 import * as React from "react";
+
+import "./WhiteboardTopRight.less";
+
+import AddIcon from "../assets/image/add.svg";
+import BoardIcon from "../assets/image/board.svg";
+import BoardBlackIcon from "../assets/image/board_black.svg";
+
+import Identicon from "react-identicons";
+import Clipboard from "react-clipboard.js";
+import WhiteboardPerspectiveSet from "../components/WhiteboardPerspectiveSet";
+
 import {Button, Input, message, Modal, Popover, Tooltip} from "antd";
 import {Room, RoomState} from "white-react-sdk";
 import {ViewMode} from "white-react-sdk";
-import Identicon from "react-identicons";
 import {InjectedIntlProps, injectIntl} from "react-intl";
-import Clipboard from "react-clipboard.js";
-import * as add from "../../assets/image/add.svg";
-import * as board from "../../assets/image/board.svg";
-import * as board_black from "../../assets/image/board_black.svg";
-import WhiteboardPerspectiveSet from "./WhiteboardPerspectiveSet";
-import "./WhiteboardTopRight.less";
-import {netlessWhiteboardApi} from "../../apiMiddleware";
 import {UserPayload} from "../common/UserPayload";
 
-export type WhiteboardTopRightState = {
-    scaleAnimation: boolean;
-    reverseState: boolean;
-    isFirst: boolean;
-    isInviteVisible: boolean;
-    isSetVisible: boolean;
-};
-
-export type WhiteboardTopRightProps = InjectedIntlProps & {
+export type RealtimeRoomRightProps = InjectedIntlProps & {
     readonly room: Room;
     readonly roomState: RoomState;
     readonly userPayload: UserPayload;
+    readonly onGoBack?: () => void;
 };
 
-class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, WhiteboardTopRightState> {
+export type RealtimeRoomRightState = {
+    readonly scaleAnimation: boolean;
+    readonly reverseState: boolean;
+    readonly isFirst: boolean;
+    readonly isInviteVisible: boolean;
+    readonly isSetVisible: boolean;
+};
 
-    public constructor(props: WhiteboardTopRightProps) {
+class RealtimeRoomRight extends React.Component<RealtimeRoomRightProps, RealtimeRoomRightState> {
+
+    public constructor(props: RealtimeRoomRightProps) {
         super(props);
         this.state = {
             scaleAnimation: true,
@@ -38,13 +42,9 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
             isInviteVisible: false,
             isSetVisible: false,
         };
-        this.renderBroadController = this.renderBroadController.bind(this);
     }
 
-    public componentWillMount(): void {
-    }
-
-    public componentWillReceiveProps(nextProps: WhiteboardTopRightProps): void {
+    public componentWillReceiveProps(nextProps: RealtimeRoomRightProps): void {
         if (this.props.roomState.broadcastState !== nextProps.roomState.broadcastState ) {
             const perspectiveState = nextProps.roomState.broadcastState;
             const isBeforeBroadcaster = this.props.roomState.broadcastState.mode === ViewMode.Broadcaster;
@@ -70,7 +70,7 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
     }
 
 
-    private renderBroadController(): React.ReactNode {
+    private renderBroadController = (): React.ReactNode => {
         const {room, roomState} = this.props;
         const perspectiveState = roomState.broadcastState;
         const isBroadcaster = perspectiveState.mode === ViewMode.Broadcaster;
@@ -84,7 +84,7 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
                             message.info(this.props.intl.formatMessage({id: "out-lecture"}));
                         }}
                         className="whiteboard-top-bar-btn">
-                        <img src={board_black}/>
+                        <img src={BoardBlackIcon}/>
                     </div>
                 </Tooltip>
             );
@@ -97,7 +97,7 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
                         placement="bottom">
                         <div
                             className="whiteboard-top-bar-btn">
-                            <img src={board}/>
+                            <img src={BoardIcon}/>
                         </div>
                     </Popover>
                 );
@@ -110,7 +110,7 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
                                 message.info(this.props.intl.formatMessage({id: "go-to-lecture"}));
                             }}
                             className="whiteboard-top-bar-btn">
-                            <img src={board}/>
+                            <img src={BoardIcon}/>
                         </div>
                     </Tooltip>
                 );
@@ -138,20 +138,19 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
     }
 
     public render(): React.ReactNode {
-        const user = netlessWhiteboardApi.user.getUser(`${parseInt(this.props.number)}`)!;
         return (
             <div className="whiteboard-box-top-right">
                 <div
                     className="whiteboard-box-top-right-mid">
                     <div onClick={this.handleSetting} className="whiteboard-top-bar-box">
-                        <Identicon size={28} string={user.uuid}/>
+                        <Identicon size={28} string={this.props.userPayload.userUUID}/>
                     </div>
                     {this.renderBroadController()}
                     <Tooltip placement="bottomLeft" title={"invite your friend"}>
                         <div
                             style={{marginRight: 12}}
                             className="whiteboard-top-bar-btn" onClick={this.handleInvite}>
-                            <img src={add}/>
+                            <img src={AddIcon}/>
                         </div>
                     </Tooltip>
                 </div>
@@ -187,26 +186,26 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
                     visible={this.state.isSetVisible}
                     footer={null}
                     title="Setting"
-                    onCancel={() => this.setState({isSetVisible: false})}
-                >
+                    onCancel={() => this.setState({isSetVisible: false})}>
                     <div className="whiteboard-set-box">
                         <div className="whiteboard-set-box-img">
-                            <Identicon
-                                size={36}
-                                string={netlessWhiteboardApi.user.getUser(`${parseInt(this.props.number)}`)!.uuid}/>
+                            <Identicon size={36}
+                                       string={this.props.userPayload.userUUID}/>
                         </div>
-                        <div className="whiteboard-set-box-inner"> <span>name: </span>{user.name}</div>
-                        <div className="whiteboard-set-box-inner"> <span>uuid: </span>{user.uuid}</div>
+                        <div className="whiteboard-set-box-inner"> <span>name: </span>{this.props.userPayload.nickName}</div>
+                        <div className="whiteboard-set-box-inner"> <span>uuid: </span>{this.props.userPayload.userUUID}</div>
                     </div>
                     <div className="whiteboard-set-footer">
                         <div style={{marginRight: 16}}>
-                            <Button
-                                size="large"
-                                onClick={() => {
-                                    netlessWhiteboardApi.user.clearUsers();
-                                    this.props.history.push("/");
-                                }}
-                                className="white-btn-size">Clean</Button>
+                            <Button className="white-btn-size"
+                                    size="large"
+                                    onClick={() => {
+                                        if (this.props.onGoBack) {
+                                            this.props.onGoBack();
+                                        }
+                                    }}>
+                                Clean
+                            </Button>
                         </div>
                         <Button size="large" className="white-btn-size" type="primary">Edit</Button>
                     </div>
@@ -216,4 +215,4 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
     }
 }
 
-export default injectIntl(WhiteboardTopRight);
+export default injectIntl(RealtimeRoomRight);

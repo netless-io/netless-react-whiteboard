@@ -8,19 +8,19 @@ import {Button, message, Modal, Tooltip} from "antd";
 import {InjectedIntlProps, injectIntl} from "react-intl";
 import {Room} from "white-react-sdk";
 
-export type WhiteboardTopLeftProps = InjectedIntlProps & {
+export type RealtimeRoomLeftProps = InjectedIntlProps & {
     readonly room: Room;
     readonly onGoBack?: () => void;
 };
 
-export type WhiteboardTopLeftState = {
+export type RealtimeRoomLeftState = {
     readonly isMouseOn: boolean;
     readonly isVisible: boolean;
 };
 
-class RealtimeRoomLeft extends React.Component<WhiteboardTopLeftProps, WhiteboardTopLeftState> {
+class RealtimeRoomLeft extends React.Component<RealtimeRoomLeftProps, RealtimeRoomLeftState> {
 
-    public constructor(props: WhiteboardTopLeftProps) {
+    public constructor(props: RealtimeRoomLeftProps) {
         super(props);
         this.state = {
             isMouseOn: false,

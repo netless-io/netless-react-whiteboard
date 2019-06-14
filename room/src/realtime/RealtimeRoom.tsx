@@ -18,7 +18,7 @@ import MenuPPTDoc from "./MenuPPTDoc";
 import UploadBtn from "./UploadBtn";
 
 import RealtimeRoomLeft from "./RealtimeRoomLeft";
-import WhiteboardTopRight from "./WhiteboardTopRight";
+import RealtimeRoomRight from "./RealtimeRoomRight";
 import WhiteboardBottomLeft from "./WhiteboardBottomLeft";
 import WhiteboardBottomRight from "./WhiteboardBottomRight";
 
@@ -271,9 +271,9 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
             <React.Fragment>
                 <RealtimeRoomLeft room={this.room}
                                   onGoBack={this.props.callbacks.onGoBack}/>
-                <WhiteboardTopRight room={this.room}
-                                    roomState={this.props.roomState}
-                                    userPayload={this.userPayload}/>
+                <RealtimeRoomRight room={this.room}
+                                   roomState={this.props.roomState}
+                                   userPayload={this.userPayload}/>
                 <WhiteboardBottomLeft room={this.room}
                                       roomState={this.props.roomState}
                                       userPayload={this.userPayload}/>
