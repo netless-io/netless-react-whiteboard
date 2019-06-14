@@ -1,51 +1,61 @@
 import * as React from "react";
+
 import "./MenuPPTDoc.less";
 import PPTDatas from "./PPTDatas";
 import {SceneDefinition, Room} from "white-react-sdk";
 
 export type MenuPPTDocProps = {
-    room: Room;
-};
-export type PPTDataType = {active: boolean, cover: string, id: number, data: ReadonlyArray<SceneDefinition>};
-export type MenuPPTDocStates = {
-    docs: PPTDataType[];
-    activeDocData?: PPTDataType;
+    readonly room: Room;
 };
 
-class MenuPPTDoc extends React.Component<MenuPPTDocProps, MenuPPTDocStates> {
+export type MenuPPTDocState = {
+    readonly docs: PPTDataType[];
+    readonly activeDocData?: PPTDataType;
+};
+
+export type PPTDataType = {
+    readonly id: number;
+    readonly active: boolean;
+    readonly cover: string;
+    readonly data: ReadonlyArray<SceneDefinition>;
+};
+
+class MenuPPTDoc extends React.Component<MenuPPTDocProps, MenuPPTDocState> {
 
     public constructor(props: MenuPPTDocProps) {
         super(props);
         this.state = {
-            docs: [],
+            docs: this.createDocs(),
         };
     }
-    public componentDidMount(): void {
-       const docs = PPTDatas.map((PPTData: {active: boolean, id: number, data: string}) => {
-            const dataObj = JSON.parse(PPTData.data);
+
+    private createDocs(): PPTDataType[] {
+        return PPTDatas.map((pptData: {active: boolean, id: number, data: string}) => {
+            const dataObj = JSON.parse(pptData.data);
             return {
-                active: PPTData.active,
+                active: pptData.active,
                 cover: dataObj[0].ppt.src,
-                id: PPTData.id,
+                id: pptData.id,
                 data: dataObj,
             };
         });
-       this.setState({docs: docs});
     }
 
     private selectDoc = (id: number) => {
         const {room} = this.props;
         const activeData = this.state.docs!.find(data => data.id === id)!;
+
         this.setState({activeDocData: activeData});
         room.putScenes(`/defaultPPT${activeData.id}`, activeData.data);
         room.setScenePath(`/defaultPPT${activeData.id}/${activeData.data[0].name}`);
+
         const docsArray = this.state.docs.map(data => {
-            if (data.id === id) {
-                data.active = true;
+            const changeToActive = data.id === id;
+
+            if (changeToActive === data.active) {
                 return data;
             } else {
-                data.active = false;
-                return data;
+                return {...data, active: changeToActive};
             }
         });
         this.setState({docs: docsArray});

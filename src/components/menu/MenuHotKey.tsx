@@ -15,24 +15,24 @@ import * as CloseIcon from "../../assets/image/close.svg";
 import {InjectedIntlProps, injectIntl} from "react-intl";
 
 type toolsInnerType = {
-    icon: string,
-    toolName: string,
-    hotKey: string,
+    readonly icon: string,
+    readonly toolName: string,
+    readonly hotKey: string,
 };
 
 type toolsOtherHotKeyType = {
-    type: string,
-    inner: any,
+    readonly type: string,
+    readonly inner: any,
 };
 
 type toolsOtherType = {
-    actionName: string,
-    needPlusIcon: boolean,
-    hotKey: [toolsOtherHotKeyType],
+    readonly actionName: string,
+    readonly needPlusIcon: boolean,
+    readonly hotKey: [toolsOtherHotKeyType],
 };
 
 export type MenuHotKeyProps = InjectedIntlProps & {
-    handleHotKeyMenuState: () => void;
+    readonly handleHotKeyMenuState: () => void;
 };
 
 class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
