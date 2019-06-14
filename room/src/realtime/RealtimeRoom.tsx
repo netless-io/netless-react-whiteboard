@@ -12,7 +12,7 @@ import TopLoadingBar from "@netless/react-loading-bar";
 import ToolBox from "@netless/react-tool-box";
 
 import MenuHotKey from "./MenuHotKey";
-import MenuBox from "./MenuBox";
+import MenuBox, {MenuInnerType} from "./MenuBox";
 import MenuAnnexBox from "./MenuAnnexBox";
 import MenuPPTDoc from "./MenuPPTDoc";
 import UploadBtn from "./UploadBtn";
@@ -35,27 +35,22 @@ import {message} from "antd";
 import {PPTProgressPhase, UploadManager} from "@netless/oss-upload-manager";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
 import {UserPayload} from "../common/UserPayload";
+import {createOSS, OSSOptions} from "../tools/OSSCreator";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
 }
 
-export enum MenuInnerType {
-    HotKey = "HotKey",
-    AnnexBox = "AnnexBox",
-    PPTBox = "PPTBox",
-}
-
-export type WhiteboardPageProps = {
+export type RealtimeRoomProps = {
     readonly room: Room;
     readonly roomToken: string;
-    readonly oss: OSS;
+    readonly ossOptions: OSSOptions;
     readonly userPayload: UserPayload;
     readonly phase: RoomPhase;
     readonly roomState: RoomState;
 };
 
-export type WhiteboardPageState = {
+export type RealtimeRoomState = {
     readonly isHandClap: boolean;
     readonly menuInnerState: MenuInnerType;
     readonly isMenuVisible: boolean;
@@ -68,13 +63,14 @@ export type WhiteboardPageState = {
     readonly whiteboardLayerDownRef?: HTMLDivElement;
 };
 
-export default class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPageState> {
+export default class RealtimeRoom extends React.Component<RealtimeRoomProps, RealtimeRoomState> {
 
     private readonly room: Room;
     private readonly oss: OSS;
+    private readonly ossOptions: OSSOptions;
     private readonly userPayload: UserPayload;
 
-    public constructor(props: WhiteboardPageProps) {
+    public constructor(props: RealtimeRoomProps) {
         super(props);
         this.state = {
             isHandClap: false,
@@ -84,7 +80,8 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
             converterPercent: 0,
             isMenuOpen: false,
         };
-        this.oss = props.oss;
+        this.ossOptions = props.ossOptions;
+        this.oss = createOSS(props.ossOptions);
         this.userPayload = props.userPayload;
         this.room = props.room;
         this.room.addMagixEventListener("handclap", this.onHandClap);
@@ -288,16 +285,20 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
 
     private renderToolsBar(): React.ReactNode {
         const isFollower = this.props.roomState.broadcastState.mode === ViewMode.Follower;
-        const className = isFollower ? "whiteboard-tool-box-disable" : "whiteboard-tool-box"
+        const className = isFollower ? "whiteboard-tool-box-disable" : "whiteboard-tool-box";
+        const ossOptions = this.props.ossOptions;
+
         return (
             <div className={className}>
                 <ToolBox setMemberState={this.setMemberState}
                          memberState={this.room.state.memberState}
                          customerComponent={[
-                             <UploadBtn oss={this.oss}
-                                        room={this.room}
+                             <UploadBtn room={this.room}
                                         roomToken={this.props.roomToken}
-                                        onProgress={this.progress}
+                                        bucket={ossOptions.bucket}
+                                        folder={ossOptions.folder}
+                                        prefix={ossOptions.prefix}
+                                        onProgress={this.progress}oss={this.oss}
                                         whiteboardRef={this.state.whiteboardLayerDownRef}/>,
                          ]}/>
             </div>

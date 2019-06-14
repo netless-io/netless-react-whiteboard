@@ -1,13 +1,17 @@
 import * as React from "react";
 import * as OSS from "ali-oss";
-import {Popover, Upload} from "antd";
-import {ToolBoxUpload} from "./ToolBoxUpload";
-import {PPTProgressListener, UploadManager} from "./UploadManager";
+
 import "./UploadBtn.less";
+
+import ImageIcon from "../assets/image/image.svg";
+import DocToImageIcon from "../assets/image/doc_to_image.svg";
+import DocToWebIcon from "../assets/image/doc_to_web.svg";
+
+import {Popover, Upload} from "antd";
 import {PptKind, Room, WhiteWebSdk} from "white-react-sdk";
-import * as image from "../assets/image/image.svg";
-import * as doc_to_image from "../assets/image/doc_to_image.svg";
-import * as doc_to_web from "../assets/image/doc_to_web.svg";
+import {ToolBoxUpload} from "../components/ToolBoxUpload";
+import {PPTProgressListener, UploadManager} from "../tools/UploadManager";
+import {OSSBucketInformation} from "../tools/OSSCreator";
 
 export type ToolBoxUploadBoxState = {
     toolBoxColor: string,
@@ -19,47 +23,46 @@ export const FileUploadStatic: string = "application/pdf, " +
     "application/msword, " +
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-export type UploadBtnProps = {
+export type UploadBtnProps = OSSBucketInformation & {
     readonly oss: OSS;
-    room: Room,
-    roomToken: string | null,
-    whiteboardRef?: HTMLDivElement,
-    onProgress?: PPTProgressListener,
+    readonly room: Room,
+    readonly roomToken: string,
+    readonly whiteboardRef?: HTMLDivElement,
+    readonly onProgress?: PPTProgressListener,
 };
 
 export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUploadBoxState> {
-    private readonly client: any;
+
+    private readonly oss: OSS;
+
     public constructor(props: UploadBtnProps) {
         super(props);
+        this.oss = props.oss;
         this.state = {
             toolBoxColor: "#A2A7AD",
         };
-        this.client = new OSS({
-            accessKeyId: this.props.oss.accessKeyId,
-            accessKeySecret: this.props.oss.accessKeySecret,
-            region: this.props.oss.region,
-            bucket: this.props.oss.bucket,
-        });
     }
 
     private uploadStatic = (event: any) => {
-        const uploadManager = new UploadManager(this.client, this.props.room);
+        const uploadManager = new UploadManager(this.oss, this.props.room);
         const whiteWebSdk = new WhiteWebSdk();
         const pptConverter = whiteWebSdk.pptConverter(this.props.roomToken!);
+
         uploadManager.convertFile(
             event.file,
             pptConverter,
             PptKind.Static,
             {
-                bucket: this.props.oss.bucket,
-                folder: this.props.oss.folder,
-                prefix: this.props.oss.prefix,
+                bucket: this.props.bucket,
+                folder: this.props.folder,
+                prefix: this.props.prefix,
             },
-            this.props.onProgress).catch(error => alert("upload file error" + error));
+            this.props.onProgress).catch(error => alert("upload file error" + error),
+        );
     }
 
     private uploadDynamic = (event: any) => {
-        const uploadManager = new UploadManager(this.client, this.props.room);
+        const uploadManager = new UploadManager(this.oss, this.props.room);
         const whiteWebSdk = new WhiteWebSdk();
         const pptConverter = whiteWebSdk.pptConverter(this.props.roomToken!);
         uploadManager.convertFile(
@@ -67,17 +70,18 @@ export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUp
             pptConverter,
             PptKind.Dynamic,
             {
-                bucket: this.props.oss.bucket,
-                folder: this.props.oss.folder,
-                prefix: this.props.oss.prefix,
+                bucket: this.props.bucket,
+                folder: this.props.folder,
+                prefix: this.props.prefix,
             },
-            this.props.onProgress).catch(error => alert("upload file error" + error));
+            this.props.onProgress,
+        ).catch(error => alert("upload file error" + error));
     }
 
     private uploadImage = (event: any) => {
         const uploadFileArray: File[] = [];
         uploadFileArray.push(event.file);
-        const uploadManager = new UploadManager(this.client, this.props.room);
+        const uploadManager = new UploadManager(this.oss, this.props.room);
         if (this.props.whiteboardRef) {
             const {clientWidth, clientHeight} = this.props.whiteboardRef;
             uploadManager.uploadImageFiles(uploadFileArray, clientWidth / 2, clientHeight / 2, this.props.onProgress)
@@ -99,7 +103,7 @@ export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUp
                         customRequest={this.uploadStatic}>
                     <div className="popover-box-cell">
                         <div className="popover-box-cell-img-box">
-                            <img src={doc_to_image} style={{height: 28}}/>
+                            <img src={DocToImageIcon} style={{height: 28}}/>
                         </div>
                         <div className="popover-box-cell-title">
                             资料转图片
@@ -113,7 +117,7 @@ export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUp
                         customRequest={this.uploadDynamic}>
                     <div className="popover-box-cell">
                         <div className="popover-box-cell-img-box">
-                            <img src={doc_to_web} style={{height: 28}}/>
+                            <img src={DocToWebIcon} style={{height: 28}}/>
                         </div>
                         <div className="popover-box-cell-title">
                             资料转网页
@@ -127,7 +131,7 @@ export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUp
                         customRequest={this.uploadImage}>
                     <div className="popover-box-cell">
                         <div className="popover-box-cell-img-box">
-                            <img src={image} style={{height: 28}}/>
+                            <img src={ImageIcon} style={{height: 28}}/>
                         </div>
                         <div className="popover-box-cell-title">
                             上传图片

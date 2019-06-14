@@ -2,8 +2,8 @@ import * as React from "react";
 
 import "./MenuAnnexBox.less";
 
-import CloseIcon from "../../assets/image/close.svg";
-import AddIcon from "../../assets/image/add_icon.svg";
+import CloseIcon from "../assets/image/close.svg";
+import AddIcon from "../assets/image/add_icon.svg";
 
 import TweenOne from "rc-tween-one";
 import {Room, RoomState, Scene} from "white-react-sdk";

@@ -1,20 +1,20 @@
 import * as React from "react";
-import * as OSS from "ali-oss";
 
-import WhiteboardPage from "./RealtimeRoom";
+import RealtimeRoom from "./RealtimeRoom";
 
 import {message} from "antd";
 import {JoinRoomParams, PptConverter, Room, RoomPhase, RoomState, WhiteWebSdk} from "white-web-sdk";
 import {UserPayload} from "../common/UserPayload";
 import {UserCursor} from "../components/UserCursor";
 import {LoadingPage} from "../components/LoadingPage";
+import {OSSOptions} from "../tools/OSSCreator";
 
 export type RealtimeRoomPageProps = {
     readonly uuid: string;
     readonly roomToken: string;
     readonly userPayload: UserPayload;
     readonly sdk: WhiteWebSdk;
-    readonly oss: OSS;
+    readonly ossOptions: OSSOptions;
 };
 
 export type RealtimeRoomPageState = {
@@ -95,12 +95,12 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
 
     public render(): React.ReactNode {
         if (this.state.room && this.state.roomState && this.isPhaseVisible()) {
-            return <WhiteboardPage oss={this.props.oss}
-                                   room={this.state.room}
-                                   roomToken={this.props.roomToken}
-                                   phase={this.state.phase}
-                                   roomState={this.state.roomState}
-                                   userPayload={this.props.userPayload}/>
+            return <RealtimeRoom ossOptions={this.props.ossOptions}
+                                 room={this.state.room}
+                                 roomToken={this.props.roomToken}
+                                 phase={this.state.phase}
+                                 roomState={this.state.roomState}
+                                 userPayload={this.props.userPayload}/>
         } else {
             return <LoadingPage/>;
         }

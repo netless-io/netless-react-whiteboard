@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import {slide as Menu, reveal as MenuLeft} from "react-burger-menu";
-import {MenuInnerType} from "../../pages/WhiteboardPage";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
@@ -27,6 +26,12 @@ const styles3: any = {
         background: "rgba(0, 0, 0, 0.0)",
    },
 };
+
+export enum MenuInnerType {
+    HotKey = "HotKey",
+    AnnexBox = "AnnexBox",
+    PPTBox = "PPTBox",
+}
 
 export type MenuBoxProps = {
     readonly isVisible: boolean;
