@@ -6,8 +6,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "rimraf dist && tsc -w -p .",
-    "build": "rimraf dist && tsc -p ."
+    "clean": "rimraf dist",
+    "dev": "scripts/prebuild.sh && tsc -w -p .",
+    "build": "scripts/prebuild.sh && tsc -p ."
   },
   "dependencies": {
     "@livechat/ui-kit": "^0.4.0-1",
