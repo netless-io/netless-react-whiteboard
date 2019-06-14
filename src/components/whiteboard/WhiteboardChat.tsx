@@ -18,7 +18,7 @@ import {netlessWhiteboardApi, UserInfType} from "../../apiMiddleware";
 const timeout = (ms: any) => new Promise(res => setTimeout(res, ms));
 
 export type WhiteboardChatProps = {
-    room: Room;
+    room?: Room;
     messages: MessageType[];
     userId: string;
 };
@@ -141,14 +141,15 @@ class WhiteboardChat extends React.Component<WhiteboardChatProps, WhiteboardChat
                         <div className="chat-box-input">
                             <TextComposer
                                 onSend={(event: any) => {
-                                    this.props.room.dispatchMagixEvent("message", {
-                                        name: netlessWhiteboardApi.user.getUserInf(UserInfType.name, this.props.userId).substring(0, 6),
-                                        avatar: this.state.url,
-                                        id: netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, this.props.userId),
-                                        messageInner: [event],
-                                    });
-                                }}
-                            >
+                                    if (this.props.room) {
+                                        this.props.room.dispatchMagixEvent("message", {
+                                            name: netlessWhiteboardApi.user.getUserInf(UserInfType.name, this.props.userId).substring(0, 6),
+                                            avatar: this.state.url,
+                                            id: netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, this.props.userId),
+                                            messageInner: [event],
+                                        });
+                                    }
+                                }}>
                                 <Row align="center">
                                     <TextInput fill="true"/>
                                     <SendButton fit />

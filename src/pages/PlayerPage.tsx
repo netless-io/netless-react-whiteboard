@@ -1,48 +1,48 @@
 import * as React from "react";
-import {Badge, Icon, Popover} from "antd";
-import {WhiteWebSdk, PlayerWhiteboard, PlayerPhase, Player, Room} from "white-react-sdk";
-import * as loading from "../assets/image/loading.svg";
-import * as chat from "../assets/image/chat.svg";
+
 import "./PlayerPage.less";
-import {RouteComponentProps} from "react-router";
-import SeekSlider from "@netless/react-seek-slider";
-import * as player_stop from "../assets/image/player_stop.svg";
-import * as player_begin from "../assets/image/player_begin.svg";
-import {displayWatch} from "../tools/WatchDisplayer";
-import {push} from "@netless/i18n-react-router";
-import * as home from "../assets/image/home.svg";
-import * as board from "../assets/image/board.svg";
+
+import * as LoadingIcon from "../assets/image/loading.svg";
+import * as HomeIcon from "../assets/image/home.svg";
+import * as BoardIcon from "../assets/image/board.svg";
+import * as LikeIcon from "../assets/image/like.svg";
+
 import Identicon from "react-identicons";
 import TweenOne from "rc-tween-one";
-import * as like from "../assets/image/like.svg";
+
 import {message} from "antd";
+import {RouteComponentProps} from "react-router";
+import {WhiteWebSdk, PlayerWhiteboard, PlayerPhase, Player, ReplayRoomParams} from "white-react-sdk";
+import {push} from "@netless/i18n-react-router";
 import {UserCursor} from "../components/whiteboard/UserCursor";
 import {netlessWhiteboardApi, UserInfType} from "../apiMiddleware";
-import WhiteboardChat from "../components/whiteboard/WhiteboardChat";
 import {MessageType} from "../components/whiteboard/WhiteboardBottomRight";
-const timeout = (ms: any) => new Promise(res => setTimeout(res, ms));
+import {PlayerProgressBar} from "../components/player/PlayerProgressBar";
+import {IAnimObject} from "rc-tween-one/typings/AnimObject";
+
+function sleep(duration: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, duration));
+}
 
 export type PlayerPageProps = RouteComponentProps<{
-    uuid: string;
-    userId: string;
-}> & {room: Room};
+   readonly uuid: string;
+   readonly userId: string;
+}>;
 
-export type PlayerPageStates = {
-    player: Player | null;
-    phase: PlayerPhase;
-    currentTime: number;
-    isFullScreen: boolean;
-    isFirstScreenReady: boolean;
-    isHandClap: boolean;
-    isPlayerSeeking: boolean;
-    isVisible: boolean;
-    messages: MessageType[];
-    seenMessagesLength: number;
+export type PlayerPageState = {
+    readonly player: Player | null;
+    readonly phase: PlayerPhase;
+    readonly currentTime: number;
+    readonly isFullScreen: boolean;
+    readonly isFirstScreenReady: boolean;
+    readonly isHandClap: boolean;
+    readonly messages: MessageType[];
 };
 
-export default class PlayerPage extends React.Component<PlayerPageProps, PlayerPageStates> {
-    private scheduleTime: number = 0;
+export default class PlayerPage extends React.Component<PlayerPageProps, PlayerPageState> {
+
     private readonly cursor: any;
+
     public constructor(props: PlayerPageProps) {
         super(props);
         this.cursor = new UserCursor();
@@ -53,12 +53,10 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
             isFirstScreenReady: false,
             isHandClap: false,
             player: null,
-            isPlayerSeeking: false,
-            isVisible: false,
             messages: [],
-            seenMessagesLength: 0,
         };
     }
+
     private getRoomToken = async (uuid: string): Promise<string | null> => {
         const res = await netlessWhiteboardApi.room.joinRoomApi(uuid);
         if (res.code === 200) {
@@ -72,8 +70,14 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
         const uuid = this.props.match.params.uuid;
         const whiteWebSdk = new WhiteWebSdk();
         const roomToken = await this.getRoomToken(uuid);
+
         if (uuid && roomToken) {
-            const player = await whiteWebSdk.replayRoom({room: uuid, roomToken: roomToken, cursorAdapter: this.cursor}, {
+            const playerParams: ReplayRoomParams = {
+                room: uuid,
+                roomToken: roomToken,
+                cursorAdapter: this.cursor,
+            };
+            const player = await whiteWebSdk.replayRoom(playerParams, {
                 onPhaseChanged: phase => {
                     this.setState({phase: phase});
                 },
@@ -95,12 +99,11 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
                     this.setState({currentTime: scheduleTime});
                 },
             });
-            this.setState({
-                player: player,
-            });
+            this.setState({player});
+
             player.addMagixEventListener("handclap", async () => {
                 this.setState({isHandClap: true});
-                await timeout(800);
+                await sleep(800);
                 this.setState({isHandClap: false});
             });
             player.addMagixEventListener("message",  event => {
@@ -113,181 +116,95 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
             this.state.player.refreshViewSize();
         }
     }
+
     public componentWillMount(): void {
         window.addEventListener("resize", this.onWindowResize);
     }
-
 
     public componentWillUnmount(): void {
         window.removeEventListener("resize", this.onWindowResize);
     }
 
-    private operationButton = (phase: PlayerPhase): React.ReactNode => {
-        switch (phase) {
-            case PlayerPhase.Playing: {
-                return <img src={player_begin}/>;
-            }
-            case PlayerPhase.Buffering: {
-                return <Icon style={{fontSize: 18}} type="loading" />;
-            }
-            case PlayerPhase.Ended: {
-                return <img style={{marginLeft: 2}} src={player_stop}/>;
-            }
-            default: {
-                return <img style={{marginLeft: 2}} src={player_stop}/>;
-            }
-        }
-    }
-
-    private getCurrentTime = (scheduleTime: number): number => {
-        if (this.state.isPlayerSeeking) {
-            this.scheduleTime = scheduleTime;
-            return this.state.currentTime;
-        } else {
-            const isChange = this.scheduleTime !== scheduleTime;
-            if (isChange) {
-                return scheduleTime;
-            } else {
-                return this.state.currentTime;
-            }
-        }
-    }
-
-    private onClickOperationButton = (player: Player): void => {
-        switch (player.phase) {
-            case PlayerPhase.WaitingFirstFrame:
-            case PlayerPhase.Pause: {
-                player.play();
-                break;
-            }
-            case PlayerPhase.Playing: {
-                player.pause();
-                break;
-            }
-            case PlayerPhase.Ended: {
-                player.seekToScheduleTime(0);
-                break;
-            }
-        }
-    }
-    private renderScheduleView(): React.ReactNode {
-        if (this.state.player) {
+    public render(): React.ReactNode {
+        if (!this.state.player) {
             return (
-                <div
-                    style={{display: "flex"}}
-                    className="player-schedule">
-                    <div className="player-left-box">
-                        <div
-                            onClick={() => this.onClickOperationButton(this.state.player!)}
-                            className="player-controller">
-                            {this.operationButton(this.state.phase)}
-                        </div>
-                    </div>
-                    <div className="player-mid-box">
-                        <SeekSlider
-                            fullTime={this.state.player.timeDuration}
-                            currentTime={this.getCurrentTime(this.state.currentTime)}
-                            onChange={(time: number, offsetTime: number) => {
-                                if (this.state.player) {
-                                    this.setState({currentTime: time});
-                                   this.state.player.seekToScheduleTime(time);
-                                }
-                            }}
-                            hideHoverTime={true}
-                            limitTimeTooltipBySides={true}/>
-                    </div>
-                    <div className="player-mid-box-time">
-                        {displayWatch(Math.floor(this.state.player.scheduleTime / 1000))} / {displayWatch(Math.floor(this.state.player.timeDuration / 1000))}
-                    </div>
-                    <Badge overflowCount={99} offset={[-3, 6]} count={this.state.isVisible ? 0 : (this.state.messages.length - this.state.seenMessagesLength)}>
-                        <Popover
-                            overlayClassName="whiteboard-chat"
-                            content={<WhiteboardChat messages={this.state.messages} room={this.props.room} userId={this.props.match.params.userId}/>}
-                            trigger="click"
-                            onVisibleChange={(visible: boolean) => {
-                                if (visible) {
-                                    this.setState({isVisible: true});
-                                } else {
-                                    this.setState({isVisible: false, seenMessagesLength: this.state.messages.length});
-                                }
-                            }}
-                            placement="topLeft">
-                            <div className="player-right-box">
-                                <div className="player-right-box-inner">
-                                    <img style={{width: 17}} src={chat}/>
-                                </div>
-                            </div>
-                        </Popover>
-                    </Badge>
+                <div className="white-board-loading">
+                    <img src={LoadingIcon}/>
+                </div>
+            );
+        } else if (this.state.phase === PlayerPhase.WaitingFirstFrame) {
+            return (
+                <div className="white-board-loading">
+                    <img src={LoadingIcon}/>
                 </div>
             );
         } else {
-            return null;
-        }
-    }
-
-    public render(): React.ReactNode {
-        if (!this.state.player) {
-            return <div className="white-board-loading">
-                <img src={loading}/>
-            </div>;
-        } else if (this.state.phase === PlayerPhase.WaitingFirstFrame) {
-            return <div className="white-board-loading">
-                <img src={loading}/>
-            </div>;
-        } else {
             return (
                 <div className="player-out-box">
-                    <div
-                        style={{display: "flex"}}
-                        className="player-nav-box">
-                        <div className="player-nav-left-box">
-                            <div className="player-nav-left">
-                                <div
-                                    onClick={() => push(this.props.history, `/`)}
-                                    className="player-nav-icon-box-left">
-                                    <img src={home}/>
-                                </div>
-                                <div
-                                    onClick={() => push(this.props.history, `/whiteboard/${this.props.match.params.uuid}/${this.props.match.params.userId}/`)}
-                                    className="player-nav-icon-box-right">
-                                    <img src={board}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="player-nav-right">
-                            <Identicon
-                                size={36}
-                                string={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${parseInt(this.props.match.params.userId)}`)}/>
-                        </div>
-                    </div>
-                    {this.renderScheduleView()}
-                    {this.state.isHandClap && <div className="whiteboard-box-gift-box">
-                        <TweenOne
-                            animation={[
-                                {
-                                    scale: 1,
-                                    duration: 360,
-                                    ease: "easeInOutQuart",
-                                },
-                                {
-                                    opacity: 0,
-                                    scale: 2,
-                                    ease: "easeInOutQuart",
-                                    duration: 400,
-                                },
-                            ]}
-                            style={{
-                                transform: "scale(0)",
-                                borderTopLeftRadius: 4,
-                            }}className="whiteboard-box-gift-inner-box"
-                        >
-                            <img src={like}/>
-                        </TweenOne>
-                    </div>}
+                    {this.renderTopBar()}
+                    {this.state.player && (
+                        <PlayerProgressBar player={this.state.player}
+                                           phase={this.state.phase}
+                                           userId={this.props.match.params.userId}
+                                           currentTime={this.state.currentTime}
+                                           messages={this.state.messages}
+                                           onChangeCurrentTime={currentTime => this.setState({currentTime})}/>
+                    )}
+                    {this.state.isHandClap && this.renderHandClap()}
+
                     <PlayerWhiteboard className="player-box" player={this.state.player}/>
                 </div>
             );
         }
+    }
+
+    private renderTopBar(): React.ReactNode {
+        return (
+            <div className="player-nav-box"
+                 style={{display: "flex"}}>
+                <div className="player-nav-left-box">
+                    <div className="player-nav-left">
+                        <div className="player-nav-icon-box-left"
+                             onClick={() => push(this.props.history, "/")}>
+                            <img src={HomeIcon}/>
+                        </div>
+                        <div className="player-nav-icon-box-right"
+                             onClick={() => push(this.props.history, `/whiteboard/${this.props.match.params.uuid}/${this.props.match.params.userId}/`)}>
+                            <img src={BoardIcon}/>
+                        </div>
+                    </div>
+                </div>
+                <div className="player-nav-right">
+                    <Identicon size={36}
+                               string={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${parseInt(this.props.match.params.userId)}`)}/>
+                </div>
+            </div>
+        );
+    }
+
+    private renderHandClap(): React.ReactNode {
+        const animations: IAnimObject[] = [{
+            scale: 1,
+            duration: 360,
+            ease: "easeInOutQuart",
+        }, {
+            opacity: 0,
+            scale: 2,
+            ease: "easeInOutQuart",
+            duration: 400,
+        }];
+        const style: React.CSSProperties = {
+            transform: "scale(0)",
+            borderTopLeftRadius: 4,
+        };
+        return (
+            <div className="whiteboard-box-gift-box">
+                <TweenOne className="whiteboard-box-gift-inner-box"
+                          animation={animations}
+                          style={style}>
+                    <img src={LikeIcon}/>
+                </TweenOne>
+            </div>
+        );
     }
 }
