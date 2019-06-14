@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import "./WhiteboardTopRight.less";
+import "./RealtimeRoomTopRight.less";
 
 import AddIcon from "../assets/image/add.svg";
 import BoardIcon from "../assets/image/board.svg";
@@ -31,7 +31,7 @@ export type RealtimeRoomRightState = {
     readonly isSetVisible: boolean;
 };
 
-class RealtimeRoomRight extends React.Component<RealtimeRoomRightProps, RealtimeRoomRightState> {
+class RealtimeRoomTopRight extends React.Component<RealtimeRoomRightProps, RealtimeRoomRightState> {
 
     public constructor(props: RealtimeRoomRightProps) {
         super(props);
@@ -219,4 +219,4 @@ class RealtimeRoomRight extends React.Component<RealtimeRoomRightProps, Realtime
     }
 }
 
-export default injectIntl(RealtimeRoomRight);
+export default injectIntl(RealtimeRoomTopRight);

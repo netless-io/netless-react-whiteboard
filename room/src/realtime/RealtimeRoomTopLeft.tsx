@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import "./WhiteboardTopLeft.less";
+import "./RealtimeRoomTopLeft.less";
 
 import HomeIcon from "../assets/image/home.svg";
 
@@ -18,7 +18,7 @@ export type RealtimeRoomLeftState = {
     readonly isVisible: boolean;
 };
 
-class RealtimeRoomLeft extends React.Component<RealtimeRoomLeftProps, RealtimeRoomLeftState> {
+class RealtimeRoomTopLeft extends React.Component<RealtimeRoomLeftProps, RealtimeRoomLeftState> {
 
     public constructor(props: RealtimeRoomLeftProps) {
         super(props);
@@ -77,4 +77,4 @@ class RealtimeRoomLeft extends React.Component<RealtimeRoomLeftProps, RealtimeRo
     }
 }
 
-export default injectIntl(RealtimeRoomLeft);
+export default injectIntl(RealtimeRoomTopLeft);

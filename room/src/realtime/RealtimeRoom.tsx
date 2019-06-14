@@ -17,10 +17,10 @@ import MenuAnnexBox from "./MenuAnnexBox";
 import MenuPPTDoc from "./MenuPPTDoc";
 import UploadBtn from "./UploadBtn";
 
-import RealtimeRoomLeft from "./RealtimeRoomLeft";
-import RealtimeRoomRight from "./RealtimeRoomRight";
+import RealtimeRoomTopLeft from "./RealtimeRoomTopLeft";
+import RealtimeRoomTopRight from "./RealtimeRoomTopRight";
 import RealtimeRoomBottomLeft from "./RealtimeRoomBottomLeft";
-import WhiteboardBottomRight from "./WhiteboardBottomRight";
+import RealtimeRoomBottomRight from "./RealtimeRoomBottomRight";
 
 import {
     RoomWhiteboard,
@@ -269,24 +269,24 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
     private renderRoundOperationViews(): React.ReactNode {
         return (
             <React.Fragment>
-                <RealtimeRoomLeft room={this.room}
-                                  onGoBack={this.props.callbacks.onGoBack}/>
+                <RealtimeRoomTopLeft room={this.room}
+                                     onGoBack={this.props.callbacks.onGoBack}/>
 
-                <RealtimeRoomRight room={this.room}
-                                   roomState={this.props.roomState}
-                                   userPayload={this.userPayload}
-                                   onGoBack={this.props.callbacks.onGoBack}/>
+                <RealtimeRoomTopRight room={this.room}
+                                      roomState={this.props.roomState}
+                                      userPayload={this.userPayload}
+                                      onGoBack={this.props.callbacks.onGoBack}/>
 
                 <RealtimeRoomBottomLeft room={this.room}
                                         roomState={this.props.roomState}
                                         userPayload={this.userPayload}
                                         onGoReplay={this.props.callbacks.onGoReplay}/>
 
-                <WhiteboardBottomRight room={this.room}
-                                       roomState={this.props.roomState}
-                                       userPayload={this.userPayload}
-                                       handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}
-                                       handleHotKeyMenuState={this.handleHotKeyMenuState}/>
+                <RealtimeRoomBottomRight room={this.room}
+                                         roomState={this.props.roomState}
+                                         userPayload={this.userPayload}
+                                         handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}
+                                         handleHotKeyMenuState={this.handleHotKeyMenuState}/>
             </React.Fragment>
         );
     }

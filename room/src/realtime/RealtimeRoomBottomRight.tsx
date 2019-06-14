@@ -1,32 +1,21 @@
 import * as React from "react";
-import * as annex_box from "../../assets/image/annex_box.svg";
-import * as whiteboard_keyboard from "../../assets/image/whiteboard_keyboard.svg";
-import * as left_arrow from "../../assets/image/left_arrow.svg";
-import * as right_arrow from "../../assets/image/right_arrow.svg";
-import * as chat from "../../assets/image/chat.svg";
-import "./WhiteboardBottomRight.less";
-import WhiteboardChat from "./WhiteboardChat";
+
+import "./RealtimeRoomBottomRight.less";
+
+import AnnexBoxIcon from "../assets/image/annex_box.svg";
+import WhiteboardKeyboardIcon from "../assets/image/whiteboard_keyboard.svg";
+import LeftArrowIcon from "../assets/image/left_arrow.svg";
+import RightArrowIcon from "../assets/image/right_arrow.svg";
+import ChatIcon from "../assets/image/chat.svg";
+
+import WhiteboardChat from "../components/WhiteboardChat";
+
 import {Badge, Popover, Tooltip} from "antd";
 import {InjectedIntlProps, injectIntl} from "react-intl";
-import {Room, Scene, RoomState} from "white-web-sdk";
+import {Room, RoomState} from "white-web-sdk";
 import {UserPayload} from "../common/UserPayload";
 
-export type MessageType = {
-    name: string,
-    avatar: string,
-    id: string,
-    messageInner: string[],
-};
-
-export type hotkeyTooltipState = {
-    hotkeyTooltipDisplay: boolean,
-    annexBoxTooltipDisplay: boolean,
-    messages:  MessageType[],
-    seenMessagesLength: number,
-    isVisible: boolean,
-};
-
-export type WhiteboardBottomRightProps = InjectedIntlProps & {
+export type RealtimeRoomBottomRightProps = InjectedIntlProps & {
     readonly room: Room;
     readonly roomState: RoomState;
     readonly userPayload: UserPayload;
@@ -34,9 +23,24 @@ export type WhiteboardBottomRightProps = InjectedIntlProps & {
     readonly handleAnnexBoxMenuState: () => void;
 };
 
-class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, hotkeyTooltipState> {
+export type RealtimeRoomBottomRightState = {
+    readonly hotkeyTooltipDisplay: boolean,
+    readonly annexBoxTooltipDisplay: boolean,
+    readonly messages:  MessageType[],
+    readonly seenMessagesLength: number,
+    readonly isVisible: boolean,
+};
 
-    public constructor(props: WhiteboardBottomRightProps) {
+export type MessageType = {
+    readonly name: string,
+    readonly avatar: string,
+    readonly id: string,
+    readonly messageInner: string[],
+};
+
+class RealtimeRoomBottomRight extends React.Component<RealtimeRoomBottomRightProps, RealtimeRoomBottomRightState> {
+
+    public constructor(props: RealtimeRoomBottomRightProps) {
         super(props);
         this.state = {
             hotkeyTooltipDisplay: false,
@@ -55,10 +59,6 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
         });
     }
 
-    private setScenePath = (newActiveIndex: number) => {
-        const {room} = this.props;
-        room.setSceneIndex(newActiveIndex);
-    }
     private renderAnnexBox(): React.ReactNode {
         const {roomState, room} = this.props;
         const activeIndex = roomState.sceneState.index;
@@ -70,7 +70,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
                         <div
                             onClick={() => room.pptPreviousStep()}
                             className="whiteboard-annex-arrow-left">
-                            <img src={left_arrow}/>
+                            <img src={LeftArrowIcon}/>
                         </div>
                         <Tooltip placement="top" title={this.props.intl.formatMessage({id: "attachment"})} visible={this.state.annexBoxTooltipDisplay}>
                             <div
@@ -87,7 +87,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
                                 onClick={this.props.handleAnnexBoxMenuState}
                                 className="whiteboard-annex-arrow-mid">
                                 <div className="whiteboard-annex-img-box">
-                                    <img src={annex_box}/>
+                                    <img src={AnnexBoxIcon}/>
                                 </div>
                                 <div className="whiteboard-annex-arrow-page">
                                     {activeIndex + 1} / {scenes.length}
@@ -97,7 +97,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
                         <div
                             onClick={() => room.pptNextStep()}
                             className="whiteboard-annex-arrow-right">
-                            <img src={right_arrow}/>
+                            <img src={RightArrowIcon}/>
                         </div>
                     </div> :
                     <Tooltip placement="topRight" title={this.props.intl.formatMessage({id: "attachment"})} visible={this.state.annexBoxTooltipDisplay}>
@@ -114,7 +114,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
                             }}
                             onClick={this.props.handleAnnexBoxMenuState}
                             className="whiteboard-bottom-right-cell">
-                            <img src={annex_box}/>
+                            <img src={AnnexBoxIcon}/>
                         </div>
                     </Tooltip>}
             </div>
@@ -122,6 +122,11 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
     }
 
     public render(): React.ReactNode {
+        const chatContent = (
+            <WhiteboardChat messages={this.state.messages}
+                            room={this.props.room}
+                            userPayload={this.props.userPayload}/>
+        );
         return (
             <div className="whiteboard-box-bottom-right">
                 <div className="whiteboard-box-bottom-right-mid">
@@ -130,14 +135,14 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
                             style={{marginRight: 8}}
                             className="whiteboard-bottom-right-cell"
                              onClick={this.props.handleHotKeyMenuState}>
-                            <img src={whiteboard_keyboard}/>
+                            <img src={WhiteboardKeyboardIcon}/>
                         </div>
                     </Tooltip>
                     {this.renderAnnexBox()}
                     <Badge overflowCount={99} offset={[-3, 6]} count={this.state.isVisible ? 0 : (this.state.messages.length - this.state.seenMessagesLength)}>
                         <Popover
                             overlayClassName="whiteboard-chat"
-                            content={<WhiteboardChat messages={this.state.messages} room={this.props.room} userId={this.props.userId}/>}
+                            content={chatContent}
                             trigger="click"
                             onVisibleChange={(visible: boolean) => {
                                 if (visible) {
@@ -148,7 +153,7 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
                             }}
                             placement="topLeft">
                             <div style={{marginLeft: 8}} className="whiteboard-bottom-right-cell">
-                                <img style={{width: 17}} src={chat}/>
+                                <img style={{width: 17}} src={ChatIcon}/>
                             </div>
                         </Popover>
                     </Badge>
@@ -158,5 +163,5 @@ class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, 
     }
 }
 
-export default injectIntl(WhiteboardBottomRight);
+export default injectIntl(RealtimeRoomBottomRight);
 
