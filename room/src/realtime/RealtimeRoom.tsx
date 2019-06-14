@@ -3,8 +3,8 @@ import * as OSS from "ali-oss";
 
 import "./RealtimeRoom.less";
 
-import * as LikeIcon from "../assets/image/like.svg";
-import * as ArrowIcon from "../assets/image/arrow.svg";
+import LikeIcon from "../assets/image/like.svg";
+import ArrowIcon from "../assets/image/arrow.svg";
 
 import TweenOne from "rc-tween-one";
 import Dropzone from "react-dropzone";
@@ -36,7 +36,6 @@ import {
 
 import {message} from "antd";
 import {PPTProgressPhase, UploadManager} from "@netless/oss-upload-manager";
-import {RouteComponentProps} from "react-router";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
 import {UserCursor} from "../components/UserCursor";
 
@@ -51,10 +50,11 @@ export enum MenuInnerType {
     DocSet = "DocSet",
 }
 
-export type WhiteboardPageProps = RouteComponentProps<{
-    readonly uuid: string;
-    readonly userId: string;
-}>;
+export type WhiteboardPageProps = {
+    readonly room: Room;
+    readonly phase: RoomPhase;
+    readonly roomState: RoomState;
+};
 
 export type WhiteboardPageState = {
     readonly phase: RoomPhase;
@@ -68,19 +68,15 @@ export type WhiteboardPageState = {
     readonly converterPercent: number;
     readonly userId: string;
     readonly isMenuOpen: boolean;
-    readonly room?: Room;
-    readonly roomState?: RoomState;
-    readonly pptConverter?: PptConverter;
     readonly isMenuLeft?: boolean;
     readonly progressDescription?: string,
     readonly fileUrl?: string,
     readonly whiteboardLayerDownRef?: HTMLDivElement;
 };
 
-class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPageState> {
+export default class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPageState> {
 
-    private readonly cursor: UserCursor;
-    private didLeavePage: boolean = false;
+    private readonly room: Room;
 
     public constructor(props: WhiteboardPageProps) {
         super(props);
@@ -97,94 +93,24 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
             userId: "",
             isMenuOpen: false,
         };
-        this.cursor = new UserCursor();
-    }
-
-    private getRoomToken = async (uuid: string): Promise<string | null> => {
-        const res = await netlessWhiteboardApi.room.joinRoomApi(uuid);
-        if (res.code === 200) {
-            return res.msg.roomToken;
-        } else {
-            return null;
-        }
-    }
-
-    private startJoinRoom = async (): Promise<void> => {
-        const uuid = this.props.match.params.uuid;
-        const userId = this.props.match.params.userId;
-
-        this.setState({userId: userId});
-
-        const roomToken = await this.getRoomToken(uuid);
-        const user = netlessWhiteboardApi.user.getUserAndCreateIfNotExit(userId);
-
-        if (roomToken && uuid) {
-            const whiteWebSdk = new WhiteWebSdk();
-            const pptConverter = whiteWebSdk.pptConverter(netlessToken.sdkToken);
-
-            this.setState({pptConverter: pptConverter});
-
-            const roomParams: JoinRoomParams = {
-                uuid: uuid,
-                roomToken: roomToken,
-                cursorAdapter: this.cursor,
-                userPayload: {id: userId, userId: user.uuid, nickName: name, avatar: user.uuid},
-            };
-            const room = await whiteWebSdk.joinRoom(roomParams, {
-                onPhaseChanged: phase => {
-                    if (!this.didLeavePage) {
-                        this.setState({phase});
-                    }
-                    console.log(`room ${this.props.match.params.uuid} changed: ${phase}`);
-                },
-                onDisconnectWithError: error => {
-                    console.error(error);
-                },
-                onKickedWithReason: reason => {
-                    console.error("kicked with reason: " + reason);
-                },
-                onRoomStateChanged: modifyState => {
-                    if (modifyState.roomMembers) {
-                        this.cursor.setColorAndAppliance(modifyState.roomMembers);
-                    }
-                    this.setState({
-                        roomState: {...this.state.roomState, ...modifyState} as RoomState,
-                    });
-                },
-            });
-            room.addMagixEventListener("handclap", async () => {
-                this.setState({isHandClap: true});
-                await sleep(800);
-                this.setState({isHandClap: false});
-            });
-            this.setState({room: room, roomState: room.state, roomToken: roomToken});
-
-        } else {
-            message.error("join fail");
-        }
-    }
-
-    private onWindowResize = (): void => {
-        if (this.state.room) {
-            this.state.room.refreshViewSize();
-        }
+        this.room = props.room;
+        this.room.addMagixEventListener("handclap", async () => {
+            this.setState({isHandClap: true});
+            await sleep(800);
+            this.setState({isHandClap: false});
+        });
     }
 
     public componentWillMount(): void {
-        document.body.style.overflow = "hidden";
         window.addEventListener("resize", this.onWindowResize);
     }
 
-    public async componentDidMount(): Promise<void> {
-        await this.startJoinRoom();
-        if (this.state.room && this.state.room.state.roomMembers) {
-            this.cursor.setColorAndAppliance(this.state.room.state.roomMembers);
-        }
+    public componentWillUnmount(): void {
+        window.removeEventListener("resize", this.onWindowResize);
     }
 
-    public componentWillUnmount(): void {
-        this.didLeavePage = true;
-        window.removeEventListener("resize", this.onWindowResize);
+    private onWindowResize = (): void => {
+        this.room.refreshViewSize();
     }
 
     private renderMenuInner = (): React.ReactNode => {
@@ -439,5 +365,3 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
         }
     }
 }
-
-export default WhiteboardPage;
