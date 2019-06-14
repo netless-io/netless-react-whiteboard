@@ -4,6 +4,7 @@ import "./PageNameInput.less";
 
 import NetlessBlack from "../assets/image/netless_black.svg";
 
+import {stringify} from "query-string";
 import {Input, Button} from "antd";
 import {RouteComponentProps} from "react-router";
 import {Link} from "@netless/i18n-react-router";
@@ -33,9 +34,9 @@ class NameInputPage extends React.Component<PageNameInputProps, PageNameInputSta
         if (name === "") {
             name = undefined;
         }
-        netlessWhiteboardApi.user.createUser(name);
+        const user = netlessWhiteboardApi.user.createUser(name);
 
-        this.props.history.push("/whiteboard/");
+        this.props.history.push("/whiteboard?" + stringify({userId: user.userId}));
     }
 
     public render(): React.ReactNode {
