@@ -16,9 +16,9 @@ import {WhiteWebSdk, PlayerWhiteboard, PlayerPhase, Player, ReplayRoomParams} fr
 import {push} from "@netless/i18n-react-router";
 import {UserCursor} from "../components/whiteboard/UserCursor";
 import {netlessWhiteboardApi} from "../apiMiddleware";
-import {MessageType} from "../components/whiteboard/WhiteboardBottomRight";
 import {PlayerProgressBar} from "../components/player/PlayerProgressBar";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
+import {MessageType} from "../components/whiteboard/WhiteboardChat";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));

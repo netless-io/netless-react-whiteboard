@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import "./WhiteboardPage.less";
-
 import PageError from "./PageError";
 
 import {message} from "antd";

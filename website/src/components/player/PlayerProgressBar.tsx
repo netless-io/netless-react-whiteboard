@@ -4,13 +4,12 @@ import * as ChatIcon from "../../assets/image/chat.svg";
 import * as PlayerBeginIcon from "../../assets/image/player_begin.svg";
 import * as PlayerStopIcon from "../../assets/image/player_stop.svg";
 
-import WhiteboardChat from "../whiteboard/WhiteboardChat";
+import WhiteboardChat, {MessageType} from "../whiteboard/WhiteboardChat";
 import SeekSlider from "@netless/react-seek-slider";
 
 import {Badge, Icon, Popover} from "antd";
 import {PlayerPhase, Player} from "white-react-sdk";
 import {displayWatch} from "../../tools/WatchDisplayer";
-import {MessageType} from "../whiteboard/WhiteboardBottomRight";
 
 export type PlayerProgressBarProps = {
     readonly player: Player;

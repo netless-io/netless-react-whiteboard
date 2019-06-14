@@ -15,12 +15,17 @@ import {
 } from "@livechat/ui-kit";
 
 import {Room} from "white-web-sdk";
-import {MessageType} from "./WhiteboardBottomRight";
 import {netlessWhiteboardApi} from "../../apiMiddleware";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
 }
+export type MessageType = {
+    readonly name: string,
+    readonly avatar: string,
+    readonly id: string,
+    readonly messageInner: string[],
+};
 
 export type WhiteboardChatProps = {
     room?: Room;
