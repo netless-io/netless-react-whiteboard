@@ -1,16 +1,16 @@
 import * as React from "react";
 import "./MenuHotKey.less";
 
-import * as SelectorIcon from "../../assets/image/hotkey/selector.svg";
-import * as PencilIcon from "../../assets/image/hotkey/pencil.svg";
-import * as TextIcon from "../../assets/image/hotkey/text.svg";
-import * as EraserIcon from "../../assets/image/hotkey/eraser.svg";
-import * as EllipseIcon from "../../assets/image/hotkey/ellipse.svg";
-import * as RectangleIcon from "../../assets/image/hotkey/rectangle.svg";
-import * as UpCursorIcon from "../../assets/image/up_cursor.svg";
-import * as DownCursorIcon from "../../assets/image/down_cursor.svg";
-import * as HandIcon from "../../assets/image/hotkey/hand.svg";
-import * as CloseIcon from "../../assets/image/close.svg";
+import SelectorIcon from "../assets/image/hotkey/selector.svg";
+import PencilIcon from "../assets/image/hotkey/pencil.svg";
+import TextIcon from "../assets/image/hotkey/text.svg";
+import EraserIcon from "../assets/image/hotkey/eraser.svg";
+import EllipseIcon from "../assets/image/hotkey/ellipse.svg";
+import HandIcon from "../assets/image/hotkey/hand.svg";
+import RectangleIcon from "../assets/image/hotkey/rectangle.svg";
+import UpCursorIcon from "../assets/image/up_cursor.svg";
+import DownCursorIcon from "../assets/image/down_cursor.svg";
+import CloseIcon from "../assets/image/close.svg";
 
 import {InjectedIntlProps, injectIntl} from "react-intl";
 
