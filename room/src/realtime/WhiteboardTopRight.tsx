@@ -10,9 +10,8 @@ import * as board from "../../assets/image/board.svg";
 import * as board_black from "../../assets/image/board_black.svg";
 import WhiteboardPerspectiveSet from "./WhiteboardPerspectiveSet";
 import "./WhiteboardTopRight.less";
-import {withRouter} from "react-router-dom";
-import {RouteComponentProps} from "react-router";
 import {netlessWhiteboardApi} from "../../apiMiddleware";
+import {UserPayload} from "../common/UserPayload";
 
 export type WhiteboardTopRightState = {
     scaleAnimation: boolean;
@@ -22,7 +21,11 @@ export type WhiteboardTopRightState = {
     isSetVisible: boolean;
 };
 
-export type WhiteboardTopRightProps = RouteComponentProps<{}> & InjectedIntlProps & {room: Room, number: string, uuid: string, roomState: RoomState};
+export type WhiteboardTopRightProps = InjectedIntlProps & {
+    readonly room: Room;
+    readonly roomState: RoomState;
+    readonly userPayload: UserPayload;
+};
 
 class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, WhiteboardTopRightState> {
 
@@ -213,4 +216,4 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
     }
 }
 
-export default withRouter(injectIntl(WhiteboardTopRight));
+export default injectIntl(WhiteboardTopRight);

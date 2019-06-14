@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as OSS from "ali-oss";
 
 import WhiteboardPage from "./RealtimeRoom";
 
@@ -13,6 +14,7 @@ export type RealtimeRoomPageProps = {
     readonly roomToken: string;
     readonly userPayload: UserPayload;
     readonly sdk: WhiteWebSdk;
+    readonly oss: OSS;
 };
 
 export type RealtimeRoomPageState = {
@@ -93,9 +95,12 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
 
     public render(): React.ReactNode {
         if (this.state.room && this.state.roomState && this.isPhaseVisible()) {
-            return <WhiteboardPage room={this.state.room}
+            return <WhiteboardPage oss={this.props.oss}
+                                   room={this.state.room}
+                                   roomToken={this.props.roomToken}
                                    phase={this.state.phase}
-                                   roomState={this.state.roomState}/>
+                                   roomState={this.state.roomState}
+                                   userPayload={this.props.userPayload}/>
         } else {
             return <LoadingPage/>;
         }

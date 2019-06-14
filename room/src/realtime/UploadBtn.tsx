@@ -1,6 +1,6 @@
 import * as React from "react";
-import {Popover, Upload} from "antd";
 import * as OSS from "ali-oss";
+import {Popover, Upload} from "antd";
 import {ToolBoxUpload} from "./ToolBoxUpload";
 import {PPTProgressListener, UploadManager} from "./UploadManager";
 import "./UploadBtn.less";
@@ -20,14 +20,7 @@ export const FileUploadStatic: string = "application/pdf, " +
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
 export type UploadBtnProps = {
-    oss: {
-        accessKeyId: string,
-        accessKeySecret: string,
-        region: string,
-        bucket: string,
-        folder: string,
-        prefix: string,
-    },
+    readonly oss: OSS;
     room: Room,
     roomToken: string | null,
     whiteboardRef?: HTMLDivElement,

@@ -5,19 +5,15 @@ import ScaleController from "@netless/react-scale-controller";
 import * as player from "../../assets/image/player.svg";
 import * as like_icon from "../../assets/image/like_icon.svg";
 import {Tooltip} from "antd";
-import {withRouter} from "react-router-dom";
-import {RouteComponentProps} from "react-router";
 import {InjectedIntlProps, injectIntl} from "react-intl";
 import {push} from "@netless/i18n-react-router";
+import {UserPayload} from "../common/UserPayload";
 
-export type WhiteboardBottomLeftInnerProps = {
-    room: Room;
-    roomState: RoomState;
-    uuid: string;
-    userId: string;
+export type WhiteboardBottomLeftProps = InjectedIntlProps & {
+    readonly room: Room;
+    readonly roomState: RoomState;
+    readonly userPayload: UserPayload;
 };
-
-export type WhiteboardBottomLeftProps = RouteComponentProps<{}> & WhiteboardBottomLeftInnerProps & InjectedIntlProps;
 
 class WhiteboardBottomLeft extends React.Component<WhiteboardBottomLeftProps, {}> {
 
@@ -53,4 +49,4 @@ class WhiteboardBottomLeft extends React.Component<WhiteboardBottomLeftProps, {}
     }
 }
 
-export default withRouter(injectIntl(WhiteboardBottomLeft));
+export default injectIntl(WhiteboardBottomLeft);

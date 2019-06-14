@@ -9,6 +9,7 @@ import WhiteboardChat from "./WhiteboardChat";
 import {Badge, Popover, Tooltip} from "antd";
 import {InjectedIntlProps, injectIntl} from "react-intl";
 import {Room, Scene, RoomState} from "white-web-sdk";
+import {UserPayload} from "../common/UserPayload";
 
 export type MessageType = {
     name: string,
@@ -25,13 +26,13 @@ export type hotkeyTooltipState = {
     isVisible: boolean,
 };
 
-export type WhiteboardBottomRightProps = {
-    room: Room;
-    userId: string;
-    roomState: RoomState;
-    handleHotKeyMenuState: () => void;
-    handleAnnexBoxMenuState: () => void;
-} & InjectedIntlProps;
+export type WhiteboardBottomRightProps = InjectedIntlProps & {
+    readonly room: Room;
+    readonly roomState: RoomState;
+    readonly userPayload: UserPayload;
+    readonly handleHotKeyMenuState: () => void;
+    readonly handleAnnexBoxMenuState: () => void;
+};
 
 class WhiteboardBottomRight extends React.Component<WhiteboardBottomRightProps, hotkeyTooltipState> {
 

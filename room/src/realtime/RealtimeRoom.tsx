@@ -23,21 +23,18 @@ import WhiteboardBottomLeft from "./WhiteboardBottomLeft";
 import WhiteboardBottomRight from "./WhiteboardBottomRight";
 
 import {
-    WhiteWebSdk,
     RoomWhiteboard,
     Room,
     RoomState,
     RoomPhase,
-    PptConverter,
     MemberState,
     ViewMode,
-    JoinRoomParams,
 } from "white-react-sdk";
 
 import {message} from "antd";
 import {PPTProgressPhase, UploadManager} from "@netless/oss-upload-manager";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
-import {UserCursor} from "../components/UserCursor";
+import {UserPayload} from "../common/UserPayload";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
@@ -47,58 +44,50 @@ export enum MenuInnerType {
     HotKey = "HotKey",
     AnnexBox = "AnnexBox",
     PPTBox = "PPTBox",
-    DocSet = "DocSet",
 }
 
 export type WhiteboardPageProps = {
     readonly room: Room;
+    readonly roomToken: string;
+    readonly oss: OSS;
+    readonly userPayload: UserPayload;
     readonly phase: RoomPhase;
     readonly roomState: RoomState;
 };
 
 export type WhiteboardPageState = {
-    readonly phase: RoomPhase;
-    readonly connectedFail: boolean;
-    readonly didSlaveConnected: boolean;
     readonly isHandClap: boolean;
     readonly menuInnerState: MenuInnerType;
     readonly isMenuVisible: boolean;
-    readonly roomToken: string | null;
     readonly ossPercent: number;
     readonly converterPercent: number;
-    readonly userId: string;
     readonly isMenuOpen: boolean;
     readonly isMenuLeft?: boolean;
-    readonly progressDescription?: string,
-    readonly fileUrl?: string,
+
+    // ref 后调用 setState 有问题
     readonly whiteboardLayerDownRef?: HTMLDivElement;
 };
 
 export default class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPageState> {
 
     private readonly room: Room;
+    private readonly oss: OSS;
+    private readonly userPayload: UserPayload;
 
     public constructor(props: WhiteboardPageProps) {
         super(props);
         this.state = {
-            phase: RoomPhase.Connecting,
-            connectedFail: false,
-            didSlaveConnected: false,
             isHandClap: false,
             menuInnerState: MenuInnerType.HotKey,
             isMenuVisible: false,
-            roomToken: null,
             ossPercent: 0,
             converterPercent: 0,
-            userId: "",
             isMenuOpen: false,
         };
+        this.oss = props.oss;
+        this.userPayload = props.userPayload;
         this.room = props.room;
-        this.room.addMagixEventListener("handclap", async () => {
-            this.setState({isHandClap: true});
-            await sleep(800);
-            this.setState({isHandClap: false});
-        });
+        this.room.addMagixEventListener("handclap", this.onHandClap);
     }
 
     public componentWillMount(): void {
@@ -113,30 +102,10 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
         this.room.refreshViewSize();
     }
 
-    private renderMenuInner = (): React.ReactNode => {
-        switch (this.state.menuInnerState) {
-            case MenuInnerType.HotKey: {
-                return (
-                    <MenuHotKey handleHotKeyMenuState={this.handleHotKeyMenuState}/>
-                );
-            }
-            case MenuInnerType.AnnexBox: {
-                return (
-                    <MenuAnnexBox isMenuOpen={this.state.isMenuOpen}
-                                  room={this.state.room!}
-                                  roomState={this.state.roomState!}
-                                  handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}/>
-                );
-            }
-            case MenuInnerType.PPTBox: {
-                return (
-                    <MenuPPTDoc room={this.state.room!}/>
-                );
-            }
-            default: {
-                return null;
-            }
-        }
+    private onHandClap = async (): Promise<void> => {
+        this.setState({isHandClap: true});
+        await sleep(800);
+        this.setState({isHandClap: false});
     }
 
     private setWhiteboardLayerDownRef = (whiteboardLayerDownRef: HTMLDivElement): void => {
@@ -189,25 +158,15 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
         event.persist();
         try {
             const imageFiles = acceptedFiles.filter(file => this.isImageType(file.type));
-            const client = new OSS({
-                accessKeyId: ossConfigObj.accessKeyId,
-                accessKeySecret: ossConfigObj.accessKeySecret,
-                region: ossConfigObj.region,
-                bucket: ossConfigObj.bucket,
-            });
-            const uploadManager = new UploadManager(client, this.state.room!);
+            const uploadManager = new UploadManager(this.oss, this.room);
             await Promise.all([
                 uploadManager.uploadImageFiles(imageFiles, event.clientX, event.clientY),
             ]);
         } catch (error) {
-            this.state.room!.setMemberState({
+            this.room.setMemberState({
                 currentApplianceName: "selector",
             });
         }
-    }
-
-    private setMemberState = (modifyState: Partial<MemberState>) => {
-        this.state.room!.setMemberState(modifyState);
     }
 
     private progress = (phase: PPTProgressPhase, percent: number): void => {
@@ -230,37 +189,54 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
         this.setState({isMenuOpen: state});
     }
 
+    private setMemberState = (modifyState: Partial<MemberState>) => {
+        this.room.setMemberState(modifyState);
+    }
+
     public render(): React.ReactNode {
+        return (
+            <div id="outer-container">
+                <MenuBox setMenuState={this.setMenuState}
+                         resetMenu={this.resetMenu}
+                         pageWrapId={"page-wrap" }
+                         outerContainerId={ "outer-container" }
+                         isLeft={this.state.isMenuLeft}
+                         isVisible={this.state.isMenuVisible}
+                         menuInnerState={this.state.menuInnerState}>
+                    {this.renderMenuInner()}
+                </MenuBox>
+                {this.renderPageWrapper()}
+            </div>
+        );
+    }
 
-        if (this.state.connectedFail) {
-            return null;
-
-        } else if (this.state.phase === RoomPhase.Connecting ||
-            this.state.phase === RoomPhase.Disconnecting) {
-            return null;
-        } else if (!this.state.room) {
-            return null;
-        } else if (!this.state.roomState) {
-            return null;
-        } else {
-            return (
-                <div id="outer-container">
-                    <MenuBox setMenuState={this.setMenuState}
-                             resetMenu={this.resetMenu}
-                             pageWrapId={"page-wrap" }
-                             outerContainerId={ "outer-container" }
-                             isLeft={this.state.isMenuLeft}
-                             isVisible={this.state.isMenuVisible}
-                             menuInnerState={this.state.menuInnerState}>
-                        {this.renderMenuInner()}
-                    </MenuBox>
-                    {this.renderPageWrapper(this.state.room, this.state.roomState)}
-                </div>
-            );
+    private renderMenuInner = (): React.ReactNode => {
+        switch (this.state.menuInnerState) {
+            case MenuInnerType.HotKey: {
+                return (
+                    <MenuHotKey handleHotKeyMenuState={this.handleHotKeyMenuState}/>
+                );
+            }
+            case MenuInnerType.AnnexBox: {
+                return (
+                    <MenuAnnexBox room={this.room}
+                                  roomState={this.props.roomState}
+                                  isMenuOpen={this.state.isMenuOpen}
+                                  handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}/>
+                );
+            }
+            case MenuInnerType.PPTBox: {
+                return (
+                    <MenuPPTDoc room={this.room}/>
+                );
+            }
+            default: {
+                return null;
+            }
         }
     }
 
-    private renderPageWrapper(room: Room, roomState: RoomState): React.ReactNode {
+    private renderPageWrapper(): React.ReactNode {
         return (
             <div style={{backgroundColor: "white"}} id="page-wrap">
                 <Dropzone accept={"image/*"}
@@ -273,15 +249,17 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
 
                     <div className="whiteboard-out-box">
                         {this.renderClipView()}
-                        {this.renderRoundOperationViews(room, roomState)}
-                        {this.renderToolsBar(room, roomState)}
+                        {this.renderRoundOperationViews()}
+                        {this.renderToolsBar()}
 
                         <div onClick={this.handlePPtBoxMenuState}
                              className={(this.state.menuInnerState === MenuInnerType.PPTBox && this.state.isMenuVisible) ? "slide-box-active" : "slide-box"}>
                             <img src={ArrowIcon}/>
                         </div>
-                        <div className="whiteboard-tool-layer-down" ref={this.setWhiteboardLayerDownRef}>
-                            {this.renderWhiteboard()}
+                        <div className="whiteboard-tool-layer-down"
+                             ref={this.setWhiteboardLayerDownRef}>
+                            <RoomWhiteboard room={this.room}
+                                            style={{width: "100%", height: "100vh"}}/>
                         </div>
                     </div>
                 </Dropzone>
@@ -289,40 +267,38 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
         );
     }
 
-    private renderRoundOperationViews(room: Room, roomState: RoomState): React.ReactNode {
+    private renderRoundOperationViews(): React.ReactNode {
         return (
             <React.Fragment>
-                <WhiteboardTopLeft room={room}/>
-                <WhiteboardTopRight room={room}
-                                    roomState={roomState}
-                                    uuid={this.props.match.params.uuid}
-                                    number={this.state.userId}/>
-                <WhiteboardBottomLeft room={room}
-                                      roomState={roomState}
-                                      uuid={this.props.match.params.uuid}
-                                      userId={this.state.userId}/>
-                <WhiteboardBottomRight room={room}
-                                       roomState={roomState}
-                                       userId={this.state.userId}
+                <WhiteboardTopLeft room={this.room}/>
+                <WhiteboardTopRight room={this.room}
+                                    roomState={this.props.roomState}
+                                    userPayload={this.userPayload}/>
+                <WhiteboardBottomLeft room={this.room}
+                                      roomState={this.props.roomState}
+                                      userPayload={this.userPayload}/>
+                <WhiteboardBottomRight room={this.room}
+                                       roomState={this.props.roomState}
+                                       userPayload={this.userPayload}
                                        handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}
                                        handleHotKeyMenuState={this.handleHotKeyMenuState}/>
             </React.Fragment>
         );
     }
 
-    private renderToolsBar(room: Room, roomState: RoomState): React.ReactNode {
+    private renderToolsBar(): React.ReactNode {
+        const isFollower = this.props.roomState.broadcastState.mode === ViewMode.Follower;
+        const className = isFollower ? "whiteboard-tool-box-disable" : "whiteboard-tool-box"
         return (
-            <div className={roomState.broadcastState.mode === ViewMode.Follower ? "whiteboard-tool-box-disable" : "whiteboard-tool-box"}>
+            <div className={className}>
                 <ToolBox setMemberState={this.setMemberState}
-                         memberState={room.state.memberState}
+                         memberState={this.room.state.memberState}
                          customerComponent={[
-                             <UploadBtn
-                                 oss={ossConfigObj}
-                                 room={room}
-                                 roomToken={this.state.roomToken}
-                                 onProgress={this.progress}
-                                 whiteboardRef={this.state.whiteboardLayerDownRef}
-                             />,
+                             <UploadBtn oss={this.oss}
+                                        room={this.room}
+                                        roomToken={this.props.roomToken}
+                                        onProgress={this.progress}
+                                        whiteboardRef={this.state.whiteboardLayerDownRef}/>,
                          ]}/>
             </div>
         );
@@ -351,15 +327,6 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
                     </TweenOne>
                 </div>
             );
-        } else {
-            return null;
-        }
-    }
-
-    private renderWhiteboard(): React.ReactNode {
-        if (this.state.room) {
-            return <RoomWhiteboard room={this.state.room}
-                                   style={{width: "100%", height: "100vh"}}/>;
         } else {
             return null;
         }
