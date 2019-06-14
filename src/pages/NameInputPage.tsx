@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as uuid from "uuid/v4";
 
 import "./PageNameInput.less";
 
@@ -29,11 +28,13 @@ class NameInputPage extends React.Component<PageNameInputProps, PageNameInputSta
     }
 
     private onClickButton = (): void => {
-        if (this.state.name) {
-            netlessWhiteboardApi.user.updateUserInf(this.state.name, uuid(), "1");
-        } else {
-            netlessWhiteboardApi.user.updateUserInf("Netless user", uuid(), "1");
+        let name: string | undefined = this.state.name;
+
+        if (name === "") {
+            name = undefined;
         }
+        netlessWhiteboardApi.user.createUser(name);
+
         this.props.history.push("/whiteboard/");
     }
 

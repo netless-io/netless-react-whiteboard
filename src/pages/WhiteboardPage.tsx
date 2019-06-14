@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as OSS from "ali-oss";
-import * as uuidv4 from "uuid/v4";
 
 import "./WhiteboardPage.less";
 
@@ -40,9 +39,9 @@ import {message} from "antd";
 import {PPTProgressPhase, UploadManager} from "@netless/oss-upload-manager";
 import {RouteComponentProps} from "react-router";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
-import {netlessToken, ossConfigObj} from "../appToken";
+import {netlessToken, ossConfigObj} from "../AppToken";
 import {UserCursor} from "../components/whiteboard/UserCursor";
-import {netlessWhiteboardApi, UserInfType} from "../apiMiddleware";
+import {netlessWhiteboardApi} from "../apiMiddleware";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
@@ -120,13 +119,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
         this.setState({userId: userId});
 
         const roomToken = await this.getRoomToken(uuid);
-
-        if (netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${userId}`) === `Netless uuid ${userId}`) {
-            const userUuid = uuidv4();
-            netlessWhiteboardApi.user.updateUserInf(userUuid, userUuid, userId);
-        }
-        const userUuid = netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${userId}`);
-        const name = netlessWhiteboardApi.user.getUserInf(UserInfType.name, `${userId}`);
+        const user = netlessWhiteboardApi.user.getUserAndCreateIfNotExit(userId);
 
         if (roomToken && uuid) {
             const whiteWebSdk = new WhiteWebSdk();
@@ -138,7 +131,7 @@ class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPage
                 uuid: uuid,
                 roomToken: roomToken,
                 cursorAdapter: this.cursor,
-                userPayload: {id: userId, userId: userUuid, nickName: name, avatar: userUuid},
+                userPayload: {id: userId, userId: user.uuid, nickName: name, avatar: user.uuid},
             };
             const room = await whiteWebSdk.joinRoom(roomParams, {
                 onPhaseChanged: phase => {

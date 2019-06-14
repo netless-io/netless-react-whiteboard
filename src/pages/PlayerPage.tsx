@@ -15,7 +15,7 @@ import {RouteComponentProps} from "react-router";
 import {WhiteWebSdk, PlayerWhiteboard, PlayerPhase, Player, ReplayRoomParams} from "white-react-sdk";
 import {push} from "@netless/i18n-react-router";
 import {UserCursor} from "../components/whiteboard/UserCursor";
-import {netlessWhiteboardApi, UserInfType} from "../apiMiddleware";
+import {netlessWhiteboardApi} from "../apiMiddleware";
 import {MessageType} from "../components/whiteboard/WhiteboardBottomRight";
 import {PlayerProgressBar} from "../components/player/PlayerProgressBar";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
@@ -159,6 +159,7 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
     }
 
     private renderTopBar(): React.ReactNode {
+        const user = netlessWhiteboardApi.user.getUser(`${parseInt(this.props.match.params.userId)}`)!;
         return (
             <div className="player-nav-box"
                  style={{display: "flex"}}>
@@ -175,8 +176,7 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
                     </div>
                 </div>
                 <div className="player-nav-right">
-                    <Identicon size={36}
-                               string={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${parseInt(this.props.match.params.userId)}`)}/>
+                    <Identicon size={36} string={user.uuid}/>
                 </div>
             </div>
         );
