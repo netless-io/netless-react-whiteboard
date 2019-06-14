@@ -1,24 +1,24 @@
 import * as React from "react";
+
 import "./WhiteboardTopLeft.less";
-import * as homeIcon from "../../assets/image/home.svg";
-import {RouteComponentProps} from "react-router";
-import {withRouter} from "react-router-dom";
+
+import HomeIcon from "../assets/image/home.svg";
+
 import {Button, message, Modal, Tooltip} from "antd";
 import {InjectedIntlProps, injectIntl} from "react-intl";
-import {push} from "@netless/i18n-react-router";
 import {Room} from "white-react-sdk";
-import {netlessWhiteboardApi} from "../../apiMiddleware";
 
-export type WhiteboardTopLeftState = {
-    isMouseOn: boolean;
-    isVisible: boolean;
+export type WhiteboardTopLeftProps = InjectedIntlProps & {
+    readonly room: Room;
+    readonly onGoBack?: () => void;
 };
 
+export type WhiteboardTopLeftState = {
+    readonly isMouseOn: boolean;
+    readonly isVisible: boolean;
+};
 
-export type WhiteboardTopLeftProps = RouteComponentProps<{}> & InjectedIntlProps & {room: Room};
-
-
-class WhiteboardTopLeft extends React.Component<WhiteboardTopLeftProps, WhiteboardTopLeftState> {
+class RealtimeRoomLeft extends React.Component<WhiteboardTopLeftProps, WhiteboardTopLeftState> {
 
     public constructor(props: WhiteboardTopLeftProps) {
         super(props);
@@ -34,8 +34,10 @@ class WhiteboardTopLeft extends React.Component<WhiteboardTopLeftProps, Whiteboa
     private disconnect = async (): Promise<void> => {
         try {
             await this.props.room.disconnect();
-            netlessWhiteboardApi.user.clearUsers();
-            push(this.props.history, "/");
+
+            if (this.props.onGoBack) {
+                this.props.onGoBack();
+            }
         } catch (err) {
             message.error("disconnect fail");
             this.handleGoBackHome();
@@ -47,14 +49,12 @@ class WhiteboardTopLeft extends React.Component<WhiteboardTopLeftProps, Whiteboa
         return (
             <Tooltip placement="bottomRight" title={this.props.intl.formatMessage({id: "goback"})}>
                 <div onClick={this.handleGoBackHome} className="whiteboard-box-top-left">
-                    <img src={homeIcon}/>
+                    <img src={HomeIcon}/>
                 </div>
-                <Modal
-                    title="Go Back"
-                    visible={this.state.isVisible}
-                    footer={null}
-                    onCancel={() => this.setState({isVisible: false})}
-                >
+                <Modal title="Go Back"
+                       visible={this.state.isVisible}
+                       footer={null}
+                       onCancel={() => this.setState({isVisible: false})}>
                     <div className="go-back-title">
                         Are you leaving the room?
                     </div>
@@ -77,5 +77,4 @@ class WhiteboardTopLeft extends React.Component<WhiteboardTopLeftProps, Whiteboa
     }
 }
 
-
-export default withRouter(injectIntl(WhiteboardTopLeft));
+export default injectIntl(RealtimeRoomLeft);

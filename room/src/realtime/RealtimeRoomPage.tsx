@@ -15,6 +15,11 @@ export type RealtimeRoomPageProps = {
     readonly userPayload: UserPayload;
     readonly sdk: WhiteWebSdk;
     readonly ossOptions: OSSOptions;
+    readonly callbacks?: RealtimeRoomPageCallbacks;
+};
+
+export type RealtimeRoomPageCallbacks = {
+    readonly onGoBack?: () => void;
 };
 
 export type RealtimeRoomPageState = {
@@ -22,6 +27,8 @@ export type RealtimeRoomPageState = {
     readonly phase: RoomPhase;
     readonly roomState?: RoomState;
 };
+
+const EmptyObject = Object.freeze({});
 
 export default class RealtimeRoomPage extends React.Component<RealtimeRoomPageProps, RealtimeRoomPageState> {
 
@@ -100,7 +107,8 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
                                  roomToken={this.props.roomToken}
                                  phase={this.state.phase}
                                  roomState={this.state.roomState}
-                                 userPayload={this.props.userPayload}/>
+                                 userPayload={this.props.userPayload}
+                                 callbacks={this.props.callbacks || EmptyObject}/>
         } else {
             return <LoadingPage/>;
         }

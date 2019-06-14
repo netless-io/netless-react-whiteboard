@@ -17,7 +17,7 @@ import MenuAnnexBox from "./MenuAnnexBox";
 import MenuPPTDoc from "./MenuPPTDoc";
 import UploadBtn from "./UploadBtn";
 
-import WhiteboardTopLeft from "./WhiteboardTopLeft";
+import RealtimeRoomLeft from "./RealtimeRoomLeft";
 import WhiteboardTopRight from "./WhiteboardTopRight";
 import WhiteboardBottomLeft from "./WhiteboardBottomLeft";
 import WhiteboardBottomRight from "./WhiteboardBottomRight";
@@ -36,6 +36,7 @@ import {PPTProgressPhase, UploadManager} from "@netless/oss-upload-manager";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
 import {UserPayload} from "../common/UserPayload";
 import {createOSS, OSSOptions} from "../tools/OSSCreator";
+import {RealtimeRoomPageCallbacks} from "./RealtimeRoomPage";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
@@ -48,6 +49,7 @@ export type RealtimeRoomProps = {
     readonly userPayload: UserPayload;
     readonly phase: RoomPhase;
     readonly roomState: RoomState;
+    readonly callbacks: RealtimeRoomPageCallbacks;
 };
 
 export type RealtimeRoomState = {
@@ -267,7 +269,8 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
     private renderRoundOperationViews(): React.ReactNode {
         return (
             <React.Fragment>
-                <WhiteboardTopLeft room={this.room}/>
+                <RealtimeRoomLeft room={this.room}
+                                  onGoBack={this.props.callbacks.onGoBack}/>
                 <WhiteboardTopRight room={this.room}
                                     roomState={this.props.roomState}
                                     userPayload={this.userPayload}/>
