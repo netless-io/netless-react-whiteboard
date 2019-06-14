@@ -19,7 +19,7 @@ import UploadBtn from "./UploadBtn";
 
 import RealtimeRoomLeft from "./RealtimeRoomLeft";
 import RealtimeRoomRight from "./RealtimeRoomRight";
-import WhiteboardBottomLeft from "./WhiteboardBottomLeft";
+import RealtimeRoomBottomLeft from "./RealtimeRoomBottomLeft";
 import WhiteboardBottomRight from "./WhiteboardBottomRight";
 
 import {
@@ -271,12 +271,17 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
             <React.Fragment>
                 <RealtimeRoomLeft room={this.room}
                                   onGoBack={this.props.callbacks.onGoBack}/>
+
                 <RealtimeRoomRight room={this.room}
                                    roomState={this.props.roomState}
-                                   userPayload={this.userPayload}/>
-                <WhiteboardBottomLeft room={this.room}
-                                      roomState={this.props.roomState}
-                                      userPayload={this.userPayload}/>
+                                   userPayload={this.userPayload}
+                                   onGoBack={this.props.callbacks.onGoBack}/>
+
+                <RealtimeRoomBottomLeft room={this.room}
+                                        roomState={this.props.roomState}
+                                        userPayload={this.userPayload}
+                                        onGoReplay={this.props.callbacks.onGoReplay}/>
+
                 <WhiteboardBottomRight room={this.room}
                                        roomState={this.props.roomState}
                                        userPayload={this.userPayload}

@@ -137,6 +137,14 @@ class RealtimeRoomRight extends React.Component<RealtimeRoomRightProps, Realtime
 
     }
 
+    private logoutUser = async (): Promise<void> => {
+        await this.props.room.disconnect();
+
+        if (this.props.onGoBack) {
+            this.props.onGoBack();
+        }
+    }
+
     public render(): React.ReactNode {
         return (
             <div className="whiteboard-box-top-right">
@@ -199,11 +207,7 @@ class RealtimeRoomRight extends React.Component<RealtimeRoomRightProps, Realtime
                         <div style={{marginRight: 16}}>
                             <Button className="white-btn-size"
                                     size="large"
-                                    onClick={() => {
-                                        if (this.props.onGoBack) {
-                                            this.props.onGoBack();
-                                        }
-                                    }}>
+                                    onClick={this.logoutUser}>
                                 Clean
                             </Button>
                         </div>

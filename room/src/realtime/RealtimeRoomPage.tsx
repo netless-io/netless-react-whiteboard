@@ -20,6 +20,7 @@ export type RealtimeRoomPageProps = {
 
 export type RealtimeRoomPageCallbacks = {
     readonly onGoBack?: () => void;
+    readonly onGoReplay?: (uuid: string, slice?: string) => void;
 };
 
 export type RealtimeRoomPageState = {
