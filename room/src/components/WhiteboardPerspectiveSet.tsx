@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import "./WhiteboardPerspectiveSet.less";
-
 import Identicon from "react-identicons";
 import {message, Switch} from "antd";
 import {RoomState, ViewMode, Room} from "white-react-sdk";

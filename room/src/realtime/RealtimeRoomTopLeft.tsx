@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import "./RealtimeRoomTopLeft.less";
-
 import HomeIcon from "../assets/image/home.svg";
 
 import {Button, message, Modal, Tooltip} from "antd";

@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import "./RealtimeRoomTopRight.less";
-
 import AddIcon from "../assets/image/add.svg";
 import BoardIcon from "../assets/image/board.svg";
 import BoardBlackIcon from "../assets/image/board_black.svg";

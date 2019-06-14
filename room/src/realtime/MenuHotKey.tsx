@@ -1,5 +1,4 @@
 import * as React from "react";
-import "./MenuHotKey.less";
 
 import SelectorIcon from "../assets/image/hotkey/selector.svg";
 import PencilIcon from "../assets/image/hotkey/pencil.svg";

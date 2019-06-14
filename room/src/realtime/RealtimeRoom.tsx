@@ -1,8 +1,6 @@
 import * as React from "react";
 import * as OSS from "ali-oss";
 
-import "./RealtimeRoom.less";
-
 import LikeIcon from "../assets/image/like.svg";
 import ArrowIcon from "../assets/image/arrow.svg";
 

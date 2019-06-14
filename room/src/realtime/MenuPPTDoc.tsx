@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import "./MenuPPTDoc.less";
-
 import PPTDatas from "./PPTDatas";
 import {SceneDefinition, Room} from "white-react-sdk";
 

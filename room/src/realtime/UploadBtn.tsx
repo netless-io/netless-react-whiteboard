@@ -1,8 +1,6 @@
 import * as React from "react";
 import * as OSS from "ali-oss";
 
-import "./UploadBtn.less";
-
 import ImageIcon from "../assets/image/image.svg";
 import DocToImageIcon from "../assets/image/doc_to_image.svg";
 import DocToWebIcon from "../assets/image/doc_to_web.svg";

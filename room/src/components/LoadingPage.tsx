@@ -1,5 +1,4 @@
 import * as React from "React";
-import "./LoadingPage.less";
 
 import LoadingIcon from "../assets/image/loading.svg";
 

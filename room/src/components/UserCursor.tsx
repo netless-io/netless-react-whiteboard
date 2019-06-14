@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import "./UserCursor.less";
-
 import SelectorIcon from "../assets/image/selector.svg";
 import PencilIcon from "../assets/image/pencil.svg";
 import TextIcon from "../assets/image/text.svg";

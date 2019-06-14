@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import "./RealtimeRoomBottomRight.less";
-
 import AnnexBoxIcon from "../assets/image/annex_box.svg";
 import WhiteboardKeyboardIcon from "../assets/image/whiteboard_keyboard.svg";
 import LeftArrowIcon from "../assets/image/left_arrow.svg";

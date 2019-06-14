@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import "./RealtimeRoomBottomLeft.less";
-
 import PlayerIcon from "../assets/image/player.svg";
 import LikeIcon from "../assets/image/like_icon.svg";
 
