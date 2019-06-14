@@ -18,6 +18,7 @@ import {UserCursor} from "../components/whiteboard/UserCursor";
 import {netlessWhiteboardApi, UserInfType} from "../apiMiddleware";
 import {MessageType} from "../components/whiteboard/WhiteboardBottomRight";
 import {PlayerProgressBar} from "../components/player/PlayerProgressBar";
+import {IAnimObject} from "rc-tween-one/typings/AnimObject";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
@@ -40,7 +41,6 @@ export type PlayerPageState = {
 
 export default class PlayerPage extends React.Component<PlayerPageProps, PlayerPageState> {
 
-    private scheduleTime: number = 0;
     private readonly cursor: any;
 
     public constructor(props: PlayerPageProps) {
@@ -56,6 +56,7 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
             messages: [],
         };
     }
+
     private getRoomToken = async (uuid: string): Promise<string | null> => {
         const res = await netlessWhiteboardApi.room.joinRoomApi(uuid);
         if (res.code === 200) {
@@ -126,39 +127,21 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
 
     public render(): React.ReactNode {
         if (!this.state.player) {
-            return <div className="white-board-loading">
-                <img src={LoadingIcon}/>
-            </div>;
+            return (
+                <div className="white-board-loading">
+                    <img src={LoadingIcon}/>
+                </div>
+            );
         } else if (this.state.phase === PlayerPhase.WaitingFirstFrame) {
-            return <div className="white-board-loading">
-                <img src={LoadingIcon}/>
-            </div>;
+            return (
+                <div className="white-board-loading">
+                    <img src={LoadingIcon}/>
+                </div>
+            );
         } else {
             return (
                 <div className="player-out-box">
-                    <div
-                        style={{display: "flex"}}
-                        className="player-nav-box">
-                        <div className="player-nav-left-box">
-                            <div className="player-nav-left">
-                                <div
-                                    onClick={() => push(this.props.history, `/`)}
-                                    className="player-nav-icon-box-left">
-                                    <img src={HomeIcon}/>
-                                </div>
-                                <div
-                                    onClick={() => push(this.props.history, `/whiteboard/${this.props.match.params.uuid}/${this.props.match.params.userId}/`)}
-                                    className="player-nav-icon-box-right">
-                                    <img src={BoardIcon}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="player-nav-right">
-                            <Identicon
-                                size={36}
-                                string={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${parseInt(this.props.match.params.userId)}`)}/>
-                        </div>
-                    </div>
+                    {this.renderTopBar()}
                     {this.state.player && (
                         <PlayerProgressBar player={this.state.player}
                                            phase={this.state.phase}
@@ -167,32 +150,61 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
                                            messages={this.state.messages}
                                            onChangeCurrentTime={currentTime => this.setState({currentTime})}/>
                     )}
-                    {this.state.isHandClap && <div className="whiteboard-box-gift-box">
-                        <TweenOne
-                            animation={[
-                                {
-                                    scale: 1,
-                                    duration: 360,
-                                    ease: "easeInOutQuart",
-                                },
-                                {
-                                    opacity: 0,
-                                    scale: 2,
-                                    ease: "easeInOutQuart",
-                                    duration: 400,
-                                },
-                            ]}
-                            style={{
-                                transform: "scale(0)",
-                                borderTopLeftRadius: 4,
-                            }}className="whiteboard-box-gift-inner-box"
-                        >
-                            <img src={LikeIcon}/>
-                        </TweenOne>
-                    </div>}
+                    {this.state.isHandClap && this.renderHandClap()}
+
                     <PlayerWhiteboard className="player-box" player={this.state.player}/>
                 </div>
             );
         }
+    }
+
+    private renderTopBar(): React.ReactNode {
+        return (
+            <div className="player-nav-box"
+                 style={{display: "flex"}}>
+                <div className="player-nav-left-box">
+                    <div className="player-nav-left">
+                        <div className="player-nav-icon-box-left"
+                             onClick={() => push(this.props.history, "/")}>
+                            <img src={HomeIcon}/>
+                        </div>
+                        <div className="player-nav-icon-box-right"
+                             onClick={() => push(this.props.history, `/whiteboard/${this.props.match.params.uuid}/${this.props.match.params.userId}/`)}>
+                            <img src={BoardIcon}/>
+                        </div>
+                    </div>
+                </div>
+                <div className="player-nav-right">
+                    <Identicon size={36}
+                               string={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${parseInt(this.props.match.params.userId)}`)}/>
+                </div>
+            </div>
+        );
+    }
+
+    private renderHandClap(): React.ReactNode {
+        const animations: IAnimObject[] = [{
+            scale: 1,
+            duration: 360,
+            ease: "easeInOutQuart",
+        }, {
+            opacity: 0,
+            scale: 2,
+            ease: "easeInOutQuart",
+            duration: 400,
+        }];
+        const style: React.CSSProperties = {
+            transform: "scale(0)",
+            borderTopLeftRadius: 4,
+        };
+        return (
+            <div className="whiteboard-box-gift-box">
+                <TweenOne className="whiteboard-box-gift-inner-box"
+                          animation={animations}
+                          style={style}>
+                    <img src={LikeIcon}/>
+                </TweenOne>
+            </div>
+        );
     }
 }
