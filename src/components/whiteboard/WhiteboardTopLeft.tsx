@@ -34,7 +34,7 @@ class WhiteboardTopLeft extends React.Component<WhiteboardTopLeftProps, Whiteboa
     private disconnect = async (): Promise<void> => {
         try {
             await this.props.room.disconnect();
-            netlessWhiteboardApi.user.logout();
+            netlessWhiteboardApi.user.clearUsers();
             push(this.props.history, "/");
         } catch (err) {
             message.error("disconnect fail");

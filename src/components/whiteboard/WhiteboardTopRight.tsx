@@ -12,8 +12,7 @@ import WhiteboardPerspectiveSet from "./WhiteboardPerspectiveSet";
 import "./WhiteboardTopRight.less";
 import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
-import {netlessWhiteboardApi} from "../../apiMiddleware/netlessWhiteboardApi";
-import {UserInfType} from "../../apiMiddleware/UserOperator";
+import {netlessWhiteboardApi} from "../../apiMiddleware";
 
 export type WhiteboardTopRightState = {
     scaleAnimation: boolean;
@@ -136,14 +135,13 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
     }
 
     public render(): React.ReactNode {
+        const user = netlessWhiteboardApi.user.getUser(`${parseInt(this.props.number)}`)!;
         return (
             <div className="whiteboard-box-top-right">
                 <div
                     className="whiteboard-box-top-right-mid">
                     <div onClick={this.handleSetting} className="whiteboard-top-bar-box">
-                        <Identicon
-                            size={28}
-                            string={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${parseInt(this.props.number)}`)}/>
+                        <Identicon size={28} string={user.uuid}/>
                     </div>
                     {this.renderBroadController()}
                     <Tooltip placement="bottomLeft" title={"invite your friend"}>
@@ -192,17 +190,17 @@ class WhiteboardTopRight extends React.Component<WhiteboardTopRightProps, Whiteb
                         <div className="whiteboard-set-box-img">
                             <Identicon
                                 size={36}
-                                string={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${parseInt(this.props.number)}`)}/>
+                                string={netlessWhiteboardApi.user.getUser(`${parseInt(this.props.number)}`)!.uuid}/>
                         </div>
-                        <div className="whiteboard-set-box-inner"> <span>name: </span>{netlessWhiteboardApi.user.getUserInf(UserInfType.name, `${this.props.number}`)}</div>
-                        <div className="whiteboard-set-box-inner"> <span>uuid: </span>{netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, `${this.props.number}`)}</div>
+                        <div className="whiteboard-set-box-inner"> <span>name: </span>{user.name}</div>
+                        <div className="whiteboard-set-box-inner"> <span>uuid: </span>{user.uuid}</div>
                     </div>
                     <div className="whiteboard-set-footer">
                         <div style={{marginRight: 16}}>
                             <Button
                                 size="large"
                                 onClick={() => {
-                                    netlessWhiteboardApi.user.logout();
+                                    netlessWhiteboardApi.user.clearUsers();
                                     this.props.history.push("/");
                                 }}
                                 className="white-btn-size">Clean</Button>

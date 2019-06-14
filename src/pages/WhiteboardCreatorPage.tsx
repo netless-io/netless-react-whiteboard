@@ -1,67 +1,62 @@
 import * as React from "react";
-import {Redirect} from "@netless/i18n-react-router";
-import {InjectedIntlProps, injectIntl} from "react-intl";
-import PageError from "./PageError";
-import {netlessWhiteboardApi, RoomType} from "../apiMiddleware";
-import {message} from "antd";
-import {RouteComponentProps} from "react-router";
 
-export type WhiteboardCreatorPageState = {
-    uuid?: string;
-    userId?: string;
-    foundError: boolean;
-};
-export type WhiteboardCreatorPageProps = InjectedIntlProps & RouteComponentProps<{
-    uuid?: string;
+import PageError from "./PageError";
+
+import {parse} from "query-string";
+import {Redirect} from "@netless/i18n-react-router";
+import {RouteComponentProps} from "react-router";
+import {netlessWhiteboardApi, RoomType} from "../apiMiddleware";
+
+export type WhiteboardCreatorPageProps = RouteComponentProps<{
+    readonly uuid?: string;
 }>;
 
+export type WhiteboardCreatorPageState = {
+    readonly foundError: boolean;
+    readonly roomUUID?: string;
+};
 
 class WhiteboardCreatorPage extends React.Component<WhiteboardCreatorPageProps, WhiteboardCreatorPageState> {
+
+    private readonly userId: string;
 
     public constructor(props: WhiteboardCreatorPageProps) {
         super(props);
         this.state = {
             foundError: false,
+            roomUUID: props.match.params.uuid,
         };
-    }
+        const {userId} = parse(props.location.search);
 
-    private createRoomAndGetUuid = async (room: string, limit: number, mode: RoomType): Promise<string | null>  => {
-        const res = await netlessWhiteboardApi.room.createRoomApi(room, limit, mode);
-        if (res.code === 200) {
-            return res.msg.room.uuid;
+        if (typeof userId !== "string") {
+            this.userId = netlessWhiteboardApi.user.createUser().userId;
         } else {
-            return null;
+            this.userId = userId;
         }
     }
+
     public async componentWillMount(): Promise<void> {
-        try {
-            let uuid: string | null;
-            if (this.props.match.params.uuid) {
-                uuid = this.props.match.params.uuid;
+        if (this.state.roomUUID === undefined) {
+            const limit = 0;
+            const mode = RoomType.historied;
+            const response = await netlessWhiteboardApi.room.createRoomApi("test1", limit, mode);
+
+            if (response.code === 200) {
+                this.setState({roomUUID: response.msg.room.uuid});
             } else {
-                uuid = await this.createRoomAndGetUuid("test1", 0, RoomType.historied);
+                this.setState({foundError: true});
             }
-            const userId = `${Math.floor(Math.random() * 100000)}`;
-            this.setState({userId: userId});
-            if (uuid) {
-                this.setState({uuid: uuid});
-            } else {
-                message.error("create room fail");
-            }
-        } catch (error) {
-            this.setState({foundError: true});
-            throw error;
         }
     }
 
     public render(): React.ReactNode {
         if (this.state.foundError) {
             return <PageError/>;
-        } else if (this.state.uuid && this.state.userId) {
-            return <Redirect to={`/whiteboard/${this.state.uuid}/${this.state.userId}/`}/>;
+        } else if (this.state.roomUUID) {
+            return <Redirect to={`/whiteboard/${this.state.roomUUID}/${this.userId}/`}/>;
         }
         return null;
     }
 }
 
-export default injectIntl(WhiteboardCreatorPage);
+export default WhiteboardCreatorPage;

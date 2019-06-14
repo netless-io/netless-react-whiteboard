@@ -1,5 +1,7 @@
 import * as React from "react";
+
 import "./WhiteboardChat.less";
+
 import {
     ThemeProvider,
     MessageGroup,
@@ -11,14 +13,17 @@ import {
     TextInput,
     SendButton,
 } from "@livechat/ui-kit";
+
 import {Room} from "white-web-sdk";
 import {MessageType} from "./WhiteboardBottomRight";
-import {netlessWhiteboardApi, UserInfType} from "../../apiMiddleware";
+import {netlessWhiteboardApi} from "../../apiMiddleware";
 
-const timeout = (ms: any) => new Promise(res => setTimeout(res, ms));
+function sleep(duration: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, duration));
+}
 
 export type WhiteboardChatProps = {
-    room: Room;
+    room?: Room;
     messages: MessageType[];
     userId: string;
 };
@@ -47,7 +52,7 @@ class WhiteboardChat extends React.Component<WhiteboardChatProps, WhiteboardChat
     }
 
     public async componentDidMount(): Promise<void> {
-        await timeout(0);
+        await sleep(0);
         this.scrollToBottom();
         const canvasArray: any = document.getElementsByClassName("identicon").item(0);
         const url = canvasArray.toDataURL();
@@ -55,12 +60,14 @@ class WhiteboardChat extends React.Component<WhiteboardChatProps, WhiteboardChat
     }
 
     public async componentWillReceiveProps(): Promise<void> {
-        await timeout(0);
+        await sleep(0);
         this.scrollToBottom();
     }
 
     public render(): React.ReactNode {
         const messages: MessageType[] = this.props.messages; // 有很多内容
+        const user = netlessWhiteboardApi.user.getUser(this.props.userId)!;
+
         if (messages.length > 0) {
             let previousName = messages[0].name;
             let previousId = messages[0].id;
@@ -82,7 +89,7 @@ class WhiteboardChat extends React.Component<WhiteboardChatProps, WhiteboardChat
             messageNodes = messages.map((data: MessageType, index: number) => {
                 const messageTextNode = data.messageInner.map((inner: string, index: number) => {
                     return (
-                        <Message key={`${index}`} isOwn={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, this.props.userId) === data.id} authorName={data.name}>
+                        <Message key={`${index}`} isOwn={user.userId === data.id} authorName={data.name}>
                             <MessageText>{inner}</MessageText>
                         </Message>
                     );
@@ -91,9 +98,8 @@ class WhiteboardChat extends React.Component<WhiteboardChatProps, WhiteboardChat
                     <MessageGroup
                         key={`${index}`}
                         avatar={data.avatar}
-                        isOwn={netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, this.props.userId) === data.id}
-                        onlyFirstWithMeta
-                    >
+                        isOwn={user.userId === data.id}
+                        onlyFirstWithMeta>
                         {messageTextNode}
                     </MessageGroup>
                 );
@@ -141,14 +147,15 @@ class WhiteboardChat extends React.Component<WhiteboardChatProps, WhiteboardChat
                         <div className="chat-box-input">
                             <TextComposer
                                 onSend={(event: any) => {
-                                    this.props.room.dispatchMagixEvent("message", {
-                                        name: netlessWhiteboardApi.user.getUserInf(UserInfType.name, this.props.userId).substring(0, 6),
-                                        avatar: this.state.url,
-                                        id: netlessWhiteboardApi.user.getUserInf(UserInfType.uuid, this.props.userId),
-                                        messageInner: [event],
-                                    });
-                                }}
-                            >
+                                    if (this.props.room) {
+                                        this.props.room.dispatchMagixEvent("message", {
+                                            name: user.name.substring(0, 6),
+                                            avatar: this.state.url,
+                                            id: user.userId,
+                                            messageInner: [event],
+                                        });
+                                    }
+                                }}>
                                 <Row align="center">
                                     <TextInput fill="true"/>
                                     <SendButton fit />

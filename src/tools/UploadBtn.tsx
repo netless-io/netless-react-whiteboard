@@ -98,62 +98,60 @@ export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUp
     }
 
     private renderPopoverContent = (): React.ReactNode => {
-        return <div className="popover-box">
-            <Upload
-                disabled={!this.props.roomToken}
-                accept={FileUploadStatic}
-                showUploadList={false}
-                customRequest={this.uploadStatic}>
-                <div className="popover-box-cell">
-                    <div className="popover-box-cell-img-box">
-                        <img src={doc_to_image} style={{height: 28}}/>
+        return (
+            <div className="popover-box">
+                <Upload disabled={!this.props.roomToken}
+                        accept={FileUploadStatic}
+                        showUploadList={false}
+                        customRequest={this.uploadStatic}>
+                    <div className="popover-box-cell">
+                        <div className="popover-box-cell-img-box">
+                            <img src={doc_to_image} style={{height: 28}}/>
+                        </div>
+                        <div className="popover-box-cell-title">
+                            资料转图片
+                        </div>
+                        <div className="popover-box-cell-script">支持 pdf、ppt、pptx、word</div>
                     </div>
-                    <div className="popover-box-cell-title">
-                        资料转图片
+                </Upload>
+                <Upload disabled={!this.props.roomToken}
+                        accept={"application/vnd.openxmlformats-officedocument.presentationml.presentation"}
+                        showUploadList={false}
+                        customRequest={this.uploadDynamic}>
+                    <div className="popover-box-cell">
+                        <div className="popover-box-cell-img-box">
+                            <img src={doc_to_web} style={{height: 28}}/>
+                        </div>
+                        <div className="popover-box-cell-title">
+                            资料转网页
+                        </div>
+                        <div className="popover-box-cell-script">支持 pptx</div>
                     </div>
-                    <div className="popover-box-cell-script">支持 pdf、ppt、pptx、word</div>
-                </div>
-            </Upload>
-            <Upload
-                disabled={!this.props.roomToken}
-                accept={"application/vnd.openxmlformats-officedocument.presentationml.presentation"}
-                showUploadList={false}
-                customRequest={this.uploadDynamic}>
-                <div className="popover-box-cell">
-                    <div className="popover-box-cell-img-box">
-                        <img src={doc_to_web} style={{height: 28}}/>
+                </Upload>
+                <Upload disabled={!this.props.roomToken}
+                        accept={"image/*"}
+                        showUploadList={false}
+                        customRequest={this.uploadImage}>
+                    <div className="popover-box-cell">
+                        <div className="popover-box-cell-img-box">
+                            <img src={image} style={{height: 28}}/>
+                        </div>
+                        <div className="popover-box-cell-title">
+                            上传图片
+                        </div>
+                        <div className="popover-box-cell-script">支持常见图片格式</div>
                     </div>
-                    <div className="popover-box-cell-title">
-                        资料转网页
-                    </div>
-                    <div className="popover-box-cell-script">支持 pptx</div>
-                </div>
-            </Upload>
-            <Upload
-                disabled={!this.props.roomToken}
-                accept={"image/*"}
-                showUploadList={false}
-                customRequest={this.uploadImage}>
-                <div className="popover-box-cell">
-                    <div className="popover-box-cell-img-box">
-                        <img src={image} style={{height: 28}}/>
-                    </div>
-                    <div className="popover-box-cell-title">
-                        上传图片
-                    </div>
-                    <div className="popover-box-cell-script">支持常见图片格式</div>
-                </div>
-            </Upload>
-        </div>;
+                </Upload>
+            </div>
+        );
     }
 
     public render(): React.ReactNode {
         return (
             <Popover content={this.renderPopoverContent()}>
-                <div
-                    onMouseEnter={() => this.setState({toolBoxColor: "#141414"})}
-                    onMouseLeave={() => this.setState({toolBoxColor: "#A2A7AD"})}
-                    className="tool-box-cell-box">
+                <div className="tool-box-cell-box"
+                     onMouseEnter={() => this.setState({toolBoxColor: "#141414"})}
+                     onMouseLeave={() => this.setState({toolBoxColor: "#A2A7AD"})}>
                     <div className="tool-box-cell">
                         <ToolBoxUpload color={this.state.toolBoxColor}/>
                     </div>

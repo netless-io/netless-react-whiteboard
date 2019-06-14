@@ -39,23 +39,17 @@ export class WhiteUIButton extends React.Component<ButtonProps, {}> {
         if (this.props.type !== "danger") {
             return (
                 <div className={this.getBoxClassName(this.props.type)}>
-                    <Button
-                        style={{
-                            height: this.getButtonHeight(this.props.size),
-                        }}
-                        {...restProps}
-                    />
+                    <Button style={{
+                        height: this.getButtonHeight(this.props.size),
+                    }} {...restProps}/>
                 </div>
             );
         } else {
             return (
                 <div className={this.getBoxClassName(this.props.type)}>
-                    <Button
-                        style={{
-                            height: this.getButtonHeight(this.props.size),
-                        }}
-                        {...restProps}
-                    />
+                    <Button style={{
+                        height: this.getButtonHeight(this.props.size),
+                    }} {...restProps}/>
                 </div>
             );
         }
