@@ -1,10 +1,10 @@
 import * as React from "react";
-import * as uuid from "uuid/v4";
 
 import "./PageNameInput.less";
 
 import NetlessBlack from "../assets/image/netless_black.svg";
 
+import {stringify} from "query-string";
 import {Input, Button} from "antd";
 import {RouteComponentProps} from "react-router";
 import {Link} from "@netless/i18n-react-router";
@@ -29,12 +29,14 @@ class NameInputPage extends React.Component<PageNameInputProps, PageNameInputSta
     }
 
     private onClickButton = (): void => {
-        if (this.state.name) {
-            netlessWhiteboardApi.user.updateUserInf(this.state.name, uuid(), "1");
-        } else {
-            netlessWhiteboardApi.user.updateUserInf("Netless user", uuid(), "1");
+        let name: string | undefined = this.state.name;
+
+        if (name === "") {
+            name = undefined;
         }
-        this.props.history.push("/whiteboard/");
+        const user = netlessWhiteboardApi.user.createUser(name);
+
+        this.props.history.push("/whiteboard?" + stringify({userId: user.userId}));
     }
 
     public render(): React.ReactNode {

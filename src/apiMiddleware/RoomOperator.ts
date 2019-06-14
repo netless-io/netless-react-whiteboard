@@ -1,5 +1,5 @@
 import Fetcher from "@netless/fetch-middleware";
-import {netlessToken} from "../appToken";
+import {netlessToken} from "../AppToken";
 export enum RoomType {
     transitory = "transitory",
     persistent = "persistent",

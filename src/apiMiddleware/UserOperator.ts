@@ -1,27 +1,49 @@
-export enum UserInfType {
-    name = "name",
-    uuid = "uuid",
-}
+import * as uuidv4 from "uuid/v4";
+
+export type UserInf = {
+    readonly userId: string;
+    readonly name: string;
+    readonly uuid: string;
+};
 
 export class UserOperator {
-    public updateUserInf(name: string, uuid: string, index: string): void {
-        localStorage.setItem(`name${index}`, name);
-        localStorage.setItem(`uuid${index}`, uuid);
+
+    public getUserAndCreateIfNotExit(userId: string): UserInf {
+        let user = this.getUser(userId);
+        if (!user) {
+            user = this.createUser(userId);
+        }
+        return user;
     }
 
-    public getUserInf(type: UserInfType, index: string): string {
-        const userInf = localStorage.getItem(`${type}${index}`);
-        if (userInf) {
-            return userInf;
-        } else {
-            if (type === UserInfType.uuid) {
-                return `Netless uuid ${index}`;
-            } else {
-                return `Netless user ${index}`;
+    public createUser(name: string = "Netless user"): UserInf {
+        const user: UserInf = Object.freeze({
+            userId: "" + Math.floor(Math.random() * 10000),
+            uuid: uuidv4(),
+            name: name,
+        });
+        localStorage.setItem(user.userId, JSON.stringify(user));
+
+        return user;
+    }
+
+    public getUser(userId: string): UserInf | undefined {
+        let user: UserInf | undefined = undefined;
+        const json = localStorage.getItem(userId);
+
+        if (json) {
+            try {
+                user = Object.freeze(JSON.parse(json));
+
+            } catch (error) {
+                console.error(error);
+                localStorage.removeItem(userId);
             }
         }
+        return user;
     }
-    public logout(): void {
+
+    public clearUsers(): void {
         localStorage.clear();
     }
 }
