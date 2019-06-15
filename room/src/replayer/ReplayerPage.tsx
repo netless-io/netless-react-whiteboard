@@ -21,7 +21,6 @@ export type ReplayerPageState = {
     readonly player?: Player;
     readonly phase: PlayerPhase;
     readonly currentTime: number;
-    readonly isFirstScreenReady: boolean;
 };
 
 const EmptyObject = Object.freeze({});
@@ -35,9 +34,10 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
 
     public constructor(props: ReplayerPageProps) {
         super(props);
+        this.uuid = props.uuid;
+        this.roomToken = props.roomToken;
         this.state = {
             phase: PlayerPhase.WaitingFirstFrame,
-            isFirstScreenReady: false,
             currentTime: 0,
         };
     }
@@ -64,7 +64,6 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
                 }
             },
             onLoadFirstFrame: () => {
-                this.setState({isFirstScreenReady: true});
                 if (player.state.roomMembers) {
                     userCursor.refreshRoomMembers(player.state.roomMembers);
                 }
@@ -89,7 +88,7 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
     }
 
     public render(): React.ReactNode {
-        if (this.state.player && this.state.isFirstScreenReady) {
+        if (this.state.player) {
             return <Replayer player={this.state.player}
                              phase={this.state.phase}
                              currentTime={this.state.currentTime}
