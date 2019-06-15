@@ -1,14 +1,13 @@
 import * as React from "react";
 
-import * as ChatIcon from "../../assets/image/chat.svg";
-import * as PlayerBeginIcon from "../../assets/image/player_begin.svg";
-import * as PlayerStopIcon from "../../assets/image/player_stop.svg";
+import ChatIcon from "../assets/image/chat.svg";
+import PlayerBeginIcon from "../assets/image/player_begin.svg";
+import PlayerStopIcon from "../assets/image/player_stop.svg";
 
 import SeekSlider from "@netless/react-seek-slider";
 
 import {Badge, Icon, Popover} from "antd";
 import {PlayerPhase, Player} from "white-react-sdk";
-import {displayWatch} from "./WatchDisplayer";
 import {MessageType} from "../realtime/RealtimeRoomBottomRight";
 import WhiteboardChat from "../components/WhiteboardChat";
 
@@ -25,6 +24,21 @@ export type PlayerProgressBarState = {
     readonly isPlayerSeeking: boolean;
     readonly isChatBoxVisible: boolean;
 };
+
+function displayWatch(seconds: number): string {
+    const displaySeconds = seconds % 60;
+    const minutes = (seconds - displaySeconds) / 60;
+
+    if (minutes >= 60) {
+        const displayMinutes = minutes % 60;
+        const hours = (minutes - displayMinutes) / 60;
+
+        return `${hours} : ${displayMinutes} : ${displaySeconds}`;
+
+    } else {
+        return `${minutes} : ${displaySeconds}`;
+    }
+}
 
 export class PlayerProgressBar extends React.Component<PlayerProgressBarProps, PlayerProgressBarState> {
 
