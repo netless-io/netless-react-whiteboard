@@ -30,6 +30,7 @@
     "@types/react-burger-menu": "^2.2.5",
     "@types/react-dom": "^16.0.5",
     "@types/react-dropzone": "4.2.0",
+    "mkdirp": "^0.5.1",
     "rimraf": "^2.6.3"
   }
 }
