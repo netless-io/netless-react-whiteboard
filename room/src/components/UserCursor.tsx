@@ -11,9 +11,10 @@ import Identicon from "react-identicons";
 
 import {CursorAdapter, CursorDescription, Cursor, RoomMember} from "white-react-sdk";
 
-export type CursorComponentProps = {
+type CursorComponentProps = {
     roomMember: RoomMember;
 };
+
 type ApplianceDescription = {
     readonly iconUrl: string;
     readonly hasColor: boolean;
@@ -21,9 +22,7 @@ type ApplianceDescription = {
 };
 
 class CursorComponent extends React.Component<CursorComponentProps, {}> {
-    public constructor(props: CursorComponentProps) {
-        super(props);
-    }
+
     private static readonly descriptions: {readonly [applianceName: string]: ApplianceDescription} = Object.freeze({
         selector: Object.freeze({
             iconUrl: SelectorIcon,
@@ -98,6 +97,7 @@ export class UserCursor implements CursorAdapter {
         }
         this.cursors[cursor.memberId] = cursor;
     }
+
     public onRemovedCursor(cursor: Cursor): void {
         delete this.cursors[cursor.memberId];
     }

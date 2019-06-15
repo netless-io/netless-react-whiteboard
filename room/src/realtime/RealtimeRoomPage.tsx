@@ -63,7 +63,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
         const roomParams: JoinRoomParams = {
             uuid: this.uuid,
             roomToken: this.roomToken,
-            cursorAdapter: new UserCursor(),
+            cursorAdapter: userCursor,
             userPayload: this.props.userPayload,
         };
         const room = await whiteWebSdk.joinRoom(roomParams, {
