@@ -80,7 +80,7 @@ export default class Replayer extends React.Component<ReplayerProps, ReplayerSta
                 )}
                 {this.state.isHandClap && this.renderHandClap()}
 
-                <PlayerWhiteboard className="player-box" player={this.props.player}/>
+                <PlayerWhiteboard className="player-box" player={this.player}/>
             </div>
         );
     }

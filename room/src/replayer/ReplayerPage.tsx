@@ -8,6 +8,9 @@ import Replayer from "./Replayer";
 export type ReplayerPageProps = {
     readonly uuid: string;
     readonly roomToken: string;
+    readonly beginTimestamp?: number;
+    readonly duration?: number;
+    readonly slice?: string;
     readonly sdk: WhiteWebSdk;
     readonly callbacks?: ReplayerPageCallbacks;
 };
@@ -55,6 +58,9 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
         const playerParams: ReplayRoomParams = {
             room: this.uuid,
             roomToken: this.roomToken,
+            slice: this.props.slice,
+            beginTimestamp: this.props.beginTimestamp,
+            duration: this.props.duration,
             cursorAdapter: userCursor,
         };
         const player = await this.props.sdk.replayRoom(playerParams, {
