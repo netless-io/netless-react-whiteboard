@@ -6,11 +6,9 @@ import message from "antd/lib/message";
 import Button from "antd/lib/button";
 import Modal from "antd/lib/modal";
 import Tooltip from "antd/lib/tooltip";
-
-import {InjectedIntlProps, injectIntl} from "react-intl";
 import {Room} from "white-react-sdk";
 
-export type RealtimeRoomLeftProps = InjectedIntlProps & {
+export type RealtimeRoomLeftProps = {
     readonly room: Room;
     readonly onGoBack?: () => void;
 };
@@ -20,7 +18,7 @@ export type RealtimeRoomLeftState = {
     readonly isVisible: boolean;
 };
 
-class RealtimeRoomTopLeft extends React.Component<RealtimeRoomLeftProps, RealtimeRoomLeftState> {
+export default class RealtimeRoomTopLeft extends React.Component<RealtimeRoomLeftProps, RealtimeRoomLeftState> {
 
     public constructor(props: RealtimeRoomLeftProps) {
         super(props);
@@ -49,7 +47,7 @@ class RealtimeRoomTopLeft extends React.Component<RealtimeRoomLeftProps, Realtim
     public render(): React.ReactNode {
 
         return (
-            <Tooltip placement="bottomRight" title={this.props.intl.formatMessage({id: "goback"})}>
+            <Tooltip placement="bottomRight" title="回到首页">
                 <div onClick={this.handleGoBackHome} className="whiteboard-box-top-left">
                     <img src={HomeIcon}/>
                 </div>
@@ -78,5 +76,3 @@ class RealtimeRoomTopLeft extends React.Component<RealtimeRoomLeftProps, Realtim
         );
     }
 }
-
-export default injectIntl(RealtimeRoomTopLeft);

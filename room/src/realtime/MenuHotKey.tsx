@@ -11,8 +11,6 @@ import UpCursorIcon from "../assets/image/up_cursor.svg";
 import DownCursorIcon from "../assets/image/down_cursor.svg";
 import CloseIcon from "../assets/image/close.svg";
 
-import {InjectedIntlProps, injectIntl} from "react-intl";
-
 type toolsInnerType = {
     readonly icon: string,
     readonly toolName: string,
@@ -30,11 +28,11 @@ type toolsOtherType = {
     readonly hotKey: [toolsOtherHotKeyType],
 };
 
-export type MenuHotKeyProps = InjectedIntlProps & {
+export type MenuHotKeyProps = {
     readonly handleHotKeyMenuState: () => void;
 };
 
-class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
+export default class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
 
     public constructor(props: MenuHotKeyProps) {
         super(props);
@@ -45,45 +43,45 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
     public render(): React.ReactNode {
         const MenuHotKeyDoc = {
             tools: {
-                name: this.props.intl.formatMessage({id: "tool"}),
+                name: "工具",
                 inner: [
                     {
                         icon: SelectorIcon,
-                        toolName: this.props.intl.formatMessage({id: "selector"}),
+                        toolName: "选择工具",
                         hotKey: "V",
                     },
                     {
                         icon: PencilIcon,
-                        toolName: this.props.intl.formatMessage({id: "pencil"}),
+                        toolName: "铅笔",
                         hotKey: "P",
                     },
                     {
                         icon: TextIcon,
-                        toolName: this.props.intl.formatMessage({id: "text"}),
+                        toolName: "文字",
                         hotKey: "T",
                     },
                     {
                         icon: EraserIcon,
-                        toolName: this.props.intl.formatMessage({id: "eraser"}),
+                        toolName: "橡皮",
                         hotKey: "E",
                     },
                     {
                         icon: EllipseIcon,
-                        toolName: this.props.intl.formatMessage({id: "ellipse"}),
+                        toolName: "椭圆",
                         hotKey: "O",
                     },
                     {
                         icon: RectangleIcon,
-                        toolName: this.props.intl.formatMessage({id: "rectangle"}),
+                        toolName: "矩形",
                         hotKey: "R",
                     },
                 ],
             },
             others: {
-                name: this.props.intl.formatMessage({id: "other"}),
+                name: "其他",
                 inner: [
                     {
-                        actionName: this.props.intl.formatMessage({id: "switch-page"}),
+                        actionName: "切换页面",
                         needPlusIcon: false,
                         hotKey: [
                             {
@@ -97,24 +95,24 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
                         ],
                     },
                     {
-                        actionName: this.props.intl.formatMessage({id: "move-canvas"}),
+                        actionName: "移动画布",
                         needPlusIcon: true,
                         hotKey: [
                             {
                                 type: "font",
-                                inner: this.props.intl.formatMessage({id: "space-key"}),
+                                inner: "空格键",
                             },
                             {
                                 type: "mixing",
                                 inner: {
                                     img: HandIcon,
-                                    text: this.props.intl.formatMessage({id: "drag"}),
+                                    text: "拖动",
                                 },
                             },
                         ],
                     },
                     {
-                        actionName: this.props.intl.formatMessage({id: "scale-big"}),
+                        actionName: "放大画布",
                         needPlusIcon: true,
                         hotKey: [
                             {
@@ -128,7 +126,7 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
                         ],
                     },
                     {
-                        actionName: this.props.intl.formatMessage({id: "scale-small"}),
+                        actionName: "缩小画布",
                         needPlusIcon: true,
                         hotKey: [
                             {
@@ -232,5 +230,3 @@ class MenuHotKey extends React.Component<MenuHotKeyProps, {}> {
         }
     }
 }
-
-export default injectIntl(MenuHotKey);
