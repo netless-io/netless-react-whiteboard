@@ -145,9 +145,9 @@
   dependencies:
     rc-tween-one "^2.4.1"
 
-"@netless/react-scale-controller@^1.0.0":
+"@netless/react-scale-controller@^1.0.0", "@netless/react-scale-controller@^1.0.2":
   version "1.0.2"
-  resolved "https://registry.npmjs.org/@netless/react-scale-controller/-/react-scale-controller-1.0.2.tgz#e391cddf09f6977ad27eb2692dd0901cab60f9de"
+  resolved "https://registry.yarnpkg.com/@netless/react-scale-controller/-/react-scale-controller-1.0.2.tgz#e391cddf09f6977ad27eb2692dd0901cab60f9de"
   integrity sha512-l99vZHlJzpMKEqWRqxAAcosnqxVhYnuUJ8gV/+FOQ5ndPppNH0kvq1sc7xn9AIKXchh5mXpi8od6lQG1yzk+pA==
   dependencies:
     rc-tween-one "^2.4.1"
@@ -6166,23 +6166,7 @@ less-loader@^4.1.0:
     loader-utils "^1.1.0"
     pify "^3.0.0"
 
-less@^3.0.2:
-  version "3.9.0"
-  resolved "https://registry.npmjs.org/less/-/less-3.9.0.tgz#b7511c43f37cf57dc87dffd9883ec121289b1474"
-  integrity sha512-31CmtPEZraNUtuUREYjSqRkeETFdyEHSEPAGq4erDlUXtda7pzNmctdljdIagSb589d/qXGWiiP31R5JVf+v0w==
-  dependencies:
-    clone "^2.1.2"
-  optionalDependencies:
-    errno "^0.1.1"
-    graceful-fs "^4.1.2"
-    image-size "~0.5.0"
-    mime "^1.4.1"
-    mkdirp "^0.5.0"
-    promise "^7.1.1"
-    request "^2.83.0"
-    source-map "~0.6.0"
-
-less@^3.9.0:
+less@^3.0.2, less@^3.9.0:
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/less/-/less-3.9.0.tgz#b7511c43f37cf57dc87dffd9883ec121289b1474"
   integrity sha512-31CmtPEZraNUtuUREYjSqRkeETFdyEHSEPAGq4erDlUXtda7pzNmctdljdIagSb589d/qXGWiiP31R5JVf+v0w==
@@ -9242,6 +9226,15 @@ react-burger-menu@^2.6.10:
     prop-types "^15.7.2"
     snapsvg-cjs "0.0.6"
 
+react-clipboard.js@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/react-clipboard.js/-/react-clipboard.js-2.0.12.tgz#477393ca4264978516f66c44521656d20fe083f6"
+  integrity sha512-efRPkTpH+cJdEoFB+/A+JbT+RhwCtbdQiuCirqM4xTqFK3c2/tGkIt8kBNQr0NRH64quI69+XR2+CN6zkdmrvw==
+  dependencies:
+    "@types/clipboard" "^2.0.1"
+    clipboard "^2.0.0"
+    prop-types "^15.5.0"
+
 react-clipboard.js@^2.0.7:
   version "2.0.7"
   resolved "https://registry.npmjs.org/react-clipboard.js/-/react-clipboard.js-2.0.7.tgz#75bd13adede69858282b2d20cd1c6f2ee1ea9b55"
@@ -9303,9 +9296,9 @@ react-identicons@^1.1.7:
   resolved "https://registry.npmjs.org/react-identicons/-/react-identicons-1.1.7.tgz#8dc8dc98fe3179874d481584cf99e1b3de8264f9"
   integrity sha512-r+nCigLoQMffpf8gZo6l0we8RaRkgEIeRY6xS1vjp5ANxdTd3QwA2tjBTfmgf+4kFqYnaL2XvJH+iZ4mKqnb8Q==
 
-react-intl@^2.7.2:
+react-intl@^2.7.2, react-intl@^2.9.0:
   version "2.9.0"
-  resolved "https://registry.npmjs.org/react-intl/-/react-intl-2.9.0.tgz#c97c5d17d4718f1575fdbd5a769f96018a3b1843"
+  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-2.9.0.tgz#c97c5d17d4718f1575fdbd5a769f96018a3b1843"
   integrity sha512-27jnDlb/d2A7mSJwrbOBnUgD+rPep+abmoJE511Tf8BnoONIAUehy/U1zZCHGO17mnOwMWxqN4qC0nW11cD6rA==
   dependencies:
     hoist-non-react-statics "^3.3.0"
@@ -11540,7 +11533,7 @@ uuid@^2.0.2:
 
 uuid@^3.3.2:
   version "3.3.2"
-  resolved "https://registry.npmjs.org/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
 
 validate-npm-package-license@^3.0.1, validate-npm-package-license@^3.0.4:
