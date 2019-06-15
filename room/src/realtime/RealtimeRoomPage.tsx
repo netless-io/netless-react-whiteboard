@@ -75,7 +75,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             },
             onRoomStateChanged: modifyState => {
                 if (modifyState.roomMembers) {
-                    userCursor.setColorAndAppliance(modifyState.roomMembers);
+                    userCursor.refreshRoomMembers(modifyState.roomMembers);
                 }
                 this.setState({
                     roomState: {...this.state.roomState, ...modifyState} as RoomState,
@@ -84,6 +84,8 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             onDisconnectWithError: this.findError,
             onKickedWithReason: reason => this.findError(new Error("kicked with reason: " + reason)),
         });
+        userCursor.refreshRoomMembers(room.state.roomMembers);
+
         this.setState({
             room: room,
             phase: room.phase,

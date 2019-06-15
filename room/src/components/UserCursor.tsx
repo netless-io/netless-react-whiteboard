@@ -102,7 +102,7 @@ export class UserCursor implements CursorAdapter {
         delete this.cursors[cursor.memberId];
     }
 
-    public setColorAndAppliance(roomMembers: ReadonlyArray<RoomMember>): void {
+    public refreshRoomMembers(roomMembers: ReadonlyArray<RoomMember>): void {
         this.roomMembers = roomMembers;
         for (const roomMember of roomMembers) {
             const cursor = this.cursors[roomMember.memberId];
