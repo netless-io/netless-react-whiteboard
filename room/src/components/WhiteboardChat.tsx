@@ -22,8 +22,8 @@ function sleep(duration: number): Promise<void> {
 
 export type WhiteboardChatProps = {
     readonly room?: Room;
+    readonly authorPayload?: UserPayload;
     readonly messages: MessageType[];
-    readonly userPayload: UserPayload;
 };
 
 export type WhiteboardChatStates = {
@@ -82,9 +82,14 @@ export default class WhiteboardChat extends React.Component<WhiteboardChatProps,
         let messageNodes: React.ReactNode = null;
         if (messages.length > 0) {
             messageNodes = messages.map((data: MessageType, index: number) => {
+                let isOwn = false;
+
+                if (this.props.authorPayload) {
+                    isOwn = this.props.authorPayload.userId === data.id;
+                }
                 const messageTextNode = data.messageInner.map((inner: string, index: number) => {
                     return (
-                        <Message key={`${index}`} isOwn={this.props.userPayload.userId === data.id} authorName={data.name}>
+                        <Message key={`${index}`} isOwn={isOwn} authorName={data.name}>
                             <MessageText>{inner}</MessageText>
                         </Message>
                     );
@@ -93,7 +98,7 @@ export default class WhiteboardChat extends React.Component<WhiteboardChatProps,
                     <MessageGroup
                         key={`${index}`}
                         avatar={data.avatar}
-                        isOwn={this.props.userPayload.userId === data.id}
+                        isOwn={isOwn}
                         onlyFirstWithMeta>
                         {messageTextNode}
                     </MessageGroup>
@@ -142,11 +147,11 @@ export default class WhiteboardChat extends React.Component<WhiteboardChatProps,
                         <div className="chat-box-input">
                             <TextComposer
                                 onSend={(event: any) => {
-                                    if (this.props.room) {
+                                    if (this.props.room && this.props.authorPayload) {
                                         this.props.room.dispatchMagixEvent("message", {
-                                            name: this.props.userPayload.nickName.substring(0, 6),
+                                            name: this.props.authorPayload.nickName.substring(0, 6),
                                             avatar: this.state.url,
-                                            id: this.props.userPayload.userId,
+                                            id: this.props.authorPayload.userId,
                                             messageInner: [event],
                                         });
                                     }

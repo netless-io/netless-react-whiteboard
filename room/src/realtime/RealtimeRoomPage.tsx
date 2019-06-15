@@ -49,14 +49,14 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
     }
 
     public componentWillMount(): void {
-        this.startJoinRoom().catch(this.findError);
+        this.joinRoom().catch(this.findError);
     }
 
     public componentWillUnmount(): void {
         this.didLeavePage = true;
     }
 
-    private async startJoinRoom (): Promise<void> {
+    private async joinRoom (): Promise<void> {
         const whiteWebSdk = this.props.sdk;
         const userCursor = new UserCursor();
         const roomParams: JoinRoomParams = {

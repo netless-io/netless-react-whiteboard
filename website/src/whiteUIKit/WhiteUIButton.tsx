@@ -3,7 +3,6 @@ import {Button} from "antd";
 import "./WhiteUIButton.less";
 import {ButtonProps, ButtonSize, ButtonType} from "antd/lib/button/button";
 
-
 export class WhiteUIButton extends React.Component<ButtonProps, {}> {
 
     public constructor(props: ButtonProps) {
