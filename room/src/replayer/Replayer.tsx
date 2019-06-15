@@ -12,8 +12,8 @@ import {Player, PlayerPhase} from "white-web-sdk";
 import {PlayerWhiteboard} from "white-react-sdk";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
 import {MessageType} from "../realtime/RealtimeRoomBottomRight";
-import {PlayerProgressBar} from "./PlayerProgressBar";
 import {ReplayerPageCallbacks} from "./ReplayerPage";
+import {PlayerProgressBar} from "./PlayerProgressBar";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
@@ -22,13 +22,14 @@ function sleep(duration: number): Promise<void> {
 export type ReplayerProps = {
     readonly player: Player;
     readonly phase: PlayerPhase;
+    readonly currentTime: number;
+    readonly onChangeCurrentTime: (time: number) => void;
     readonly callbacks: ReplayerPageCallbacks;
 };
 
 export type ReplayerState = {
     readonly isHandClap: boolean;
     readonly messages:  MessageType[];
-    readonly currentTime: number;
 };
 
 export default class Replayer extends React.Component<ReplayerProps, ReplayerState> {
@@ -41,7 +42,6 @@ export default class Replayer extends React.Component<ReplayerProps, ReplayerSta
         this.state = {
             isHandClap: false,
             messages: [],
-            currentTime: 0,
         };
         this.player = props.player;
         this.callbacks = props.callbacks;
@@ -74,9 +74,9 @@ export default class Replayer extends React.Component<ReplayerProps, ReplayerSta
                 {this.props.player && (
                     <PlayerProgressBar player={this.props.player}
                                        phase={this.props.phase}
-                                       currentTime={this.state.currentTime}
+                                       currentTime={this.props.currentTime}
                                        messages={this.state.messages}
-                                       onChangeCurrentTime={currentTime => this.setState({currentTime})}/>
+                                       onChangeCurrentTime={this.props.onChangeCurrentTime}/>
                 )}
                 {this.state.isHandClap && this.renderHandClap()}
 
