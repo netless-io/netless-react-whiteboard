@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build": "cd room && yarn build && cd ../website && yarn build"
+  },
   "workspaces": [
     "room",
     "website"
