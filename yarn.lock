@@ -9317,7 +9317,7 @@ react-identicons@^1.1.7:
   resolved "https://registry.npmjs.org/react-identicons/-/react-identicons-1.1.7.tgz#8dc8dc98fe3179874d481584cf99e1b3de8264f9"
   integrity sha512-r+nCigLoQMffpf8gZo6l0we8RaRkgEIeRY6xS1vjp5ANxdTd3QwA2tjBTfmgf+4kFqYnaL2XvJH+iZ4mKqnb8Q==
 
-react-intl@^2.7.2, react-intl@^2.9.0:
+react-intl@^2.7.2:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-2.9.0.tgz#c97c5d17d4718f1575fdbd5a769f96018a3b1843"
   integrity sha512-27jnDlb/d2A7mSJwrbOBnUgD+rPep+abmoJE511Tf8BnoONIAUehy/U1zZCHGO17mnOwMWxqN4qC0nW11cD6rA==

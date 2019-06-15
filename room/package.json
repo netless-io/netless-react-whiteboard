@@ -22,7 +22,6 @@
     "react-dom": "^16.0.0",
     "react-dropzone": "4.0.0",
     "react-identicons": "^1.0.0",
-    "react-intl": "^2.0.0",
     "uuid": "^3.0.0",
     "white-react-sdk": "^2.0.0-beta.16"
   },
@@ -51,7 +50,6 @@
     "react-dom": "^16.3.2",
     "react-dropzone": "4.2.10",
     "react-identicons": "^1.1.7",
-    "react-intl": "^2.9.0",
     "rimraf": "^2.6.3",
     "uuid": "^3.3.2",
     "white-react-sdk": "^2.0.0-beta.16"

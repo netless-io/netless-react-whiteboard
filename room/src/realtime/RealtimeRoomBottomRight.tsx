@@ -11,11 +11,10 @@ import Popover from "antd/lib/popover";
 import Tooltip from "antd/lib/tooltip";
 import WhiteboardChat from "../components/WhiteboardChat";
 
-import {InjectedIntlProps, injectIntl} from "react-intl";
 import {Room, RoomState} from "white-web-sdk";
 import {UserPayload} from "../common";
 
-export type RealtimeRoomBottomRightProps = InjectedIntlProps & {
+export type RealtimeRoomBottomRightProps = {
     readonly room: Room;
     readonly roomState: RoomState;
     readonly userPayload: UserPayload;
@@ -38,7 +37,7 @@ export type MessageType = {
     readonly messageInner: string[];
 };
 
-class RealtimeRoomBottomRight extends React.Component<RealtimeRoomBottomRightProps, RealtimeRoomBottomRightState> {
+export default class RealtimeRoomBottomRight extends React.Component<RealtimeRoomBottomRightProps, RealtimeRoomBottomRightState> {
 
     public constructor(props: RealtimeRoomBottomRightProps) {
         super(props);
@@ -72,7 +71,7 @@ class RealtimeRoomBottomRight extends React.Component<RealtimeRoomBottomRightPro
                             className="whiteboard-annex-arrow-left">
                             <img src={LeftArrowIcon}/>
                         </div>
-                        <Tooltip placement="top" title={this.props.intl.formatMessage({id: "attachment"})} visible={this.state.annexBoxTooltipDisplay}>
+                        <Tooltip placement="top" title="附件资料" visible={this.state.annexBoxTooltipDisplay}>
                             <div
                                 onMouseEnter={() => {
                                     this.setState({
@@ -100,7 +99,7 @@ class RealtimeRoomBottomRight extends React.Component<RealtimeRoomBottomRightPro
                             <img src={RightArrowIcon}/>
                         </div>
                     </div> :
-                    <Tooltip placement="topRight" title={this.props.intl.formatMessage({id: "attachment"})} visible={this.state.annexBoxTooltipDisplay}>
+                    <Tooltip placement="topRight" title="附件资料" visible={this.state.annexBoxTooltipDisplay}>
                         <div
                             onMouseEnter={() => {
                                 this.setState({
@@ -130,7 +129,7 @@ class RealtimeRoomBottomRight extends React.Component<RealtimeRoomBottomRightPro
         return (
             <div className="whiteboard-box-bottom-right">
                 <div className="whiteboard-box-bottom-right-mid">
-                    <Tooltip placement="top" title={this.props.intl.formatMessage({id: "hot-key"})} visible={this.state.hotkeyTooltipDisplay}>
+                    <Tooltip placement="top" title="快捷键" visible={this.state.hotkeyTooltipDisplay}>
                         <div
                             style={{marginRight: 8}}
                             className="whiteboard-bottom-right-cell"
@@ -162,6 +161,3 @@ class RealtimeRoomBottomRight extends React.Component<RealtimeRoomBottomRightPro
         );
     }
 }
-
-export default injectIntl(RealtimeRoomBottomRight);
-

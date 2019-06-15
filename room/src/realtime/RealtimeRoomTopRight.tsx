@@ -17,10 +17,9 @@ import WhiteboardPerspectiveSet from '../components/WhiteboardPerspectiveSet';
 
 import {Room, RoomState} from "white-react-sdk";
 import {ViewMode} from "white-react-sdk";
-import {InjectedIntlProps, injectIntl} from "react-intl";
 import {UserPayload} from "../common";
 
-export type RealtimeRoomRightProps = InjectedIntlProps & {
+export type RealtimeRoomRightProps = {
     readonly room: Room;
     readonly roomState: RoomState;
     readonly userPayload: UserPayload;
@@ -35,7 +34,7 @@ export type RealtimeRoomRightState = {
     readonly isSetVisible: boolean;
 };
 
-class RealtimeRoomTopRight extends React.Component<RealtimeRoomRightProps, RealtimeRoomRightState> {
+export default class RealtimeRoomTopRight extends React.Component<RealtimeRoomRightProps, RealtimeRoomRightState> {
 
     public constructor(props: RealtimeRoomRightProps) {
         super(props);
@@ -58,14 +57,14 @@ class RealtimeRoomTopRight extends React.Component<RealtimeRoomRightProps, Realt
                 if (hasBroadcaster) {
                     if (perspectiveState.mode === ViewMode.Follower) {
                         this.props.room.disableOperations = true;
-                        message.info(this.props.intl.formatMessage({id: "current-speaker"}) + " " + perspectiveState.broadcasterInformation!.nickName + "," + this.props.intl.formatMessage({id: "follow-perspective"}));
+                        message.info("当前演讲者为 " + perspectiveState.broadcasterInformation!.nickName + ", 您将跟随其视角");
                     } else {
                         this.props.room.disableOperations = false;
-                        message.info(this.props.intl.formatMessage({id: "freedom-perspective"}));
+                        message.info("自由视角");
                     }
                 } else {
                     if (!isBeforeBroadcaster) {
-                        message.info(this.props.intl.formatMessage({id: "freedom-perspective"}));
+                        message.info("自由视角");
                     }
                     this.props.room.disableOperations = false;
                 }
@@ -81,11 +80,11 @@ class RealtimeRoomTopRight extends React.Component<RealtimeRoomRightProps, Realt
         const hasBroadcaster = perspectiveState.broadcasterId !== undefined;
         if (isBroadcaster) {
             return (
-                <Tooltip placement="bottom" title={this.props.intl.formatMessage({id: "in-lecture"})}>
+                <Tooltip placement="bottom" title="您正在演讲中...">
                     <div
                         onClick={ () => {
                             room.setViewMode(ViewMode.Freedom);
-                            message.info(this.props.intl.formatMessage({id: "out-lecture"}));
+                            message.info("退出演讲模式，他人不再跟随您的视角");
                         }}
                         className="whiteboard-top-bar-btn">
                         <img src={BoardBlackIcon}/>
@@ -107,11 +106,11 @@ class RealtimeRoomTopRight extends React.Component<RealtimeRoomRightProps, Realt
                 );
             } else {
                 return (
-                    <Tooltip placement="bottom" title={this.props.intl.formatMessage({id: "to-be-broadcaster"})}>
+                    <Tooltip placement="bottom" title="成为演讲者">
                         <div
                             onClick={ () => {
                                 room.setViewMode(ViewMode.Broadcaster);
-                                message.info(this.props.intl.formatMessage({id: "go-to-lecture"}));
+                                message.info("进入演讲模式，他人会跟随您的视角");
                             }}
                             className="whiteboard-top-bar-btn">
                             <img src={BoardIcon}/>
@@ -222,5 +221,3 @@ class RealtimeRoomTopRight extends React.Component<RealtimeRoomRightProps, Realt
         );
     }
 }
-
-export default injectIntl(RealtimeRoomTopRight);

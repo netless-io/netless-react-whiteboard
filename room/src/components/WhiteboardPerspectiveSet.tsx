@@ -5,14 +5,14 @@ import Switch from "antd/lib/switch";
 import message from "antd/lib/message";
 
 import {RoomState, ViewMode, Room} from "white-react-sdk";
-import {FormattedMessage, InjectedIntlProps, injectIntl} from "react-intl";
 
-export type WhiteboardPerspectiveSetProps = InjectedIntlProps & {
+export type WhiteboardPerspectiveSetProps = {
     readonly room: Room;
     readonly roomState: RoomState;
 };
 
-class WhiteboardPerspectiveSet extends React.Component<WhiteboardPerspectiveSetProps, {}> {
+export default class WhiteboardPerspectiveSet extends React.Component<WhiteboardPerspectiveSetProps, {}> {
+
     public render(): React.ReactNode {
         const {roomState, room} = this.props;
         const perspectiveState = roomState.broadcastState;
@@ -20,9 +20,7 @@ class WhiteboardPerspectiveSet extends React.Component<WhiteboardPerspectiveSetP
             <div className="whiteboard-perspective-box">
                 <div>
                     <div className="whiteboard-perspective-title">
-                        <FormattedMessage
-                            id="current-perspective"
-                        />
+                        当前视角
                     </div>
                     <div className="whiteboard-perspective-user-box">
                         <div className="whiteboard-perspective-user-head">
@@ -37,9 +35,7 @@ class WhiteboardPerspectiveSet extends React.Component<WhiteboardPerspectiveSetP
                 </div>
                 <div className="whiteboard-perspective-set-box">
                     <div className="whiteboard-perspective-set-title">
-                        <FormattedMessage
-                            id="follow-perspective-title"
-                        />
+                        跟随视角
                     </div>
                     <Switch
                         checked={perspectiveState.mode === ViewMode.Follower}
@@ -54,16 +50,14 @@ class WhiteboardPerspectiveSet extends React.Component<WhiteboardPerspectiveSetP
                 </div>
                 <div className="whiteboard-perspective-set-box">
                     <div className="whiteboard-perspective-set-title">
-                        <FormattedMessage
-                            id="to-be-broadcaster"
-                        />
+                        成为演讲者
                     </div>
                     <Switch size="small"
                             checked={perspectiveState.mode === ViewMode.Broadcaster}
                             onChange={checked => {
                                 if (checked) {
                                     room.setViewMode(ViewMode.Broadcaster);
-                                    message.info(this.props.intl.formatMessage({id: "go-to-lecture"}));
+                                    message.info("进入演讲模式，他人会跟随您的视角");
                                 } else {
                                     room.setViewMode(ViewMode.Freedom);
                                 }
@@ -73,5 +67,3 @@ class WhiteboardPerspectiveSet extends React.Component<WhiteboardPerspectiveSetP
         );
     }
 }
-
-export default injectIntl(WhiteboardPerspectiveSet);

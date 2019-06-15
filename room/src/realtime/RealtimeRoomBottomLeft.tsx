@@ -7,17 +7,16 @@ import Tooltip from "antd/lib/tooltip";
 import ScaleController from "@netless/react-scale-controller";
 
 import {Room, RoomState} from "white-react-sdk";
-import {InjectedIntlProps, injectIntl} from "react-intl";
 import {UserPayload} from "../common";
 
-export type RealtimeRoomBottomLeftProps = InjectedIntlProps & {
+export type RealtimeRoomBottomLeftProps = {
     readonly room: Room;
     readonly roomState: RoomState;
     readonly userPayload: UserPayload;
     readonly onGoReplay?: (uuid: string, slice?: string) => void;
 };
 
-class RealtimeRoomBottomLeft extends React.Component<RealtimeRoomBottomLeftProps, {}> {
+export default class RealtimeRoomBottomLeft extends React.Component<RealtimeRoomBottomLeftProps, {}> {
 
     private zoomChange = (scale: number): void => {
         const {room} = this.props;
@@ -38,7 +37,7 @@ class RealtimeRoomBottomLeft extends React.Component<RealtimeRoomBottomLeftProps
         return (
             <div className="whiteboard-box-bottom-left">
                 <ScaleController zoomScale={roomState.zoomScale} zoomChange={this.zoomChange}/>
-                <Tooltip placement="top" title={this.props.intl.formatMessage({id: "playback"})}>
+                <Tooltip placement="top" title="点击回放">
                     <div className="whiteboard-box-bottom-left-player"
                          onClick={this.replay}>
                         <img src={PlayerIcon}/>
@@ -55,5 +54,3 @@ class RealtimeRoomBottomLeft extends React.Component<RealtimeRoomBottomLeftProps
         );
     }
 }
-
-export default injectIntl(RealtimeRoomBottomLeft);
