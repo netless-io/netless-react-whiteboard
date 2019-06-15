@@ -71,7 +71,6 @@ export default class WhiteboardChat extends React.Component<WhiteboardChatProps,
             for (let i = 1; i < messages.length; ++ i) {
                 const message = messages[i];
                 if (previousName === message.name && previousId === message.id) {
-                    console.log(messages);
                     messages[i - 1].messageInner.push(...message.messageInner);
                     messages.splice(i, 1);
                     i --;

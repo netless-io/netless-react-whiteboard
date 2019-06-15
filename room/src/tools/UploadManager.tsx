@@ -1,5 +1,6 @@
+import * as uuidv4 from "uuid/v4";
+
 import {Room, PptConverter, PptKind, Ppt} from "white-react-sdk";
-import uuidv4 from "uuid/v4";
 import {MultipartUploadResult} from "ali-oss";
 
 export type imageSize = {
