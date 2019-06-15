@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "outDir": "dist",
+    "module": "commonjs",
+    "target": "es5",
+    "skipLibCheck": true,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": false,
+    "paths": {
+      "*" : ["node_modules/white-web-sdk/types/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "scripts"
+  ],
+  "include": [
+    "./src/**/*"
+  ]
+}
