@@ -9,6 +9,8 @@ node ./token.js
 cd ../
 yarn build
 
+cd website
+
 image=netless-react-whiteboard
 version=1.0.0
 
