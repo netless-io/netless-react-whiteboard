@@ -15,7 +15,6 @@ searchFiles(sourcePath, "assets", function(filePath) {
     const targetPath = path.resolve(distPath, filePath + ".js");
     const targetDirectory = targetPath.replace(/\/(\w|\.)+$/i, "");
 
-    console.log("CREATE " + JSON.stringify(targetPath));
     mkdirp.sync(targetDirectory);
 
     fs.writeFileSync(targetPath, targetContent, "utf8");
@@ -35,8 +34,3 @@ function searchFiles(basicPath, directory, fileHandler) {
         }
     }
 }
-
-function mkdirs() {
-
-}
-

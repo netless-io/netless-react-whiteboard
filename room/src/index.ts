@@ -1,5 +1,3 @@
-import "./less/index.less";
-
 export {createOSS, OSSOptions, OSSBucketInformation} from "./tools/OSSCreator";
 export {UserPayload} from "./common/UserPayload";
 export {LoadingPage} from "./components/LoadingPage";

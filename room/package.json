@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "style": "dist/index.css",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -30,6 +31,7 @@
     "@types/react-burger-menu": "^2.2.5",
     "@types/react-dom": "^16.0.5",
     "@types/react-dropzone": "4.2.0",
+    "less": "^3.9.0",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.3"
   }
