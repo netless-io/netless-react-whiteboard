@@ -6,9 +6,11 @@ import LeftArrowIcon from "../assets/image/left_arrow.svg";
 import RightArrowIcon from "../assets/image/right_arrow.svg";
 import ChatIcon from "../assets/image/chat.svg";
 
+import Badge from "antd/lib/badge";
+import Popover from "antd/lib/popover";
+import Tooltip from "antd/lib/tooltip";
 import WhiteboardChat from "../components/WhiteboardChat";
 
-import {Badge, Popover, Tooltip} from "antd";
 import {InjectedIntlProps, injectIntl} from "react-intl";
 import {Room, RoomState} from "white-web-sdk";
 import {UserPayload} from "../common/UserPayload";

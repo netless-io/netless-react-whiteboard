@@ -3,10 +3,10 @@ import * as React from "react";
 import PlayerIcon from "../assets/image/player.svg";
 import LikeIcon from "../assets/image/like_icon.svg";
 
+import Tooltip from "antd/lib/tooltip";
 import ScaleController from "@netless/react-scale-controller";
 
 import {Room, RoomState} from "white-react-sdk";
-import {Tooltip} from "antd";
 import {InjectedIntlProps, injectIntl} from "react-intl";
 import {UserPayload} from "../common/UserPayload";
 

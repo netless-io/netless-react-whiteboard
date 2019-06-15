@@ -1,7 +1,9 @@
 import * as React from "react";
 
 import Identicon from "react-identicons";
-import {message, Switch} from "antd";
+import Switch from "antd/lib/switch";
+import message from "antd/lib/message";
+
 import {RoomState, ViewMode, Room} from "white-react-sdk";
 import {FormattedMessage, InjectedIntlProps, injectIntl} from "react-intl";
 

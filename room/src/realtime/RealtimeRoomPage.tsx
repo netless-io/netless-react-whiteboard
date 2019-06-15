@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import RealtimeRoom from "./RealtimeRoom";
+import message from "antd/lib/message";
 
-import {message} from "antd";
 import {JoinRoomParams, PptConverter, Room, RoomPhase, RoomState, WhiteWebSdk} from "white-web-sdk";
 import {UserPayload} from "../common/UserPayload";
 import {UserCursor} from "../components/UserCursor";

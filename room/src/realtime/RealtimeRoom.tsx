@@ -29,7 +29,8 @@ import {
     ViewMode,
 } from "white-react-sdk";
 
-import {message} from "antd";
+import message from "antd/lib/message";
+
 import {PPTProgressPhase, UploadManager} from "@netless/oss-upload-manager";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
 import {UserPayload} from "../common/UserPayload";

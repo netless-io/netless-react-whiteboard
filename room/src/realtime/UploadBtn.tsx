@@ -5,7 +5,9 @@ import ImageIcon from "../assets/image/image.svg";
 import DocToImageIcon from "../assets/image/doc_to_image.svg";
 import DocToWebIcon from "../assets/image/doc_to_web.svg";
 
-import {Popover, Upload} from "antd";
+import Popover from "antd/lib/popover";
+import Upload from "antd/lib/upload";
+
 import {PptKind, Room, WhiteWebSdk} from "white-react-sdk";
 import {ToolBoxUpload} from "../components/ToolBoxUpload";
 import {PPTProgressListener, UploadManager} from "../tools/UploadManager";

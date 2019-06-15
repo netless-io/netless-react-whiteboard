@@ -6,9 +6,15 @@ import BoardBlackIcon from "../assets/image/board_black.svg";
 
 import Identicon from "react-identicons";
 import Clipboard from "react-clipboard.js";
+import message from "antd/lib/message";
+import Button from "antd/lib/button";
+import Input from "antd/lib/input";
+import Popover from "antd/lib/popover";
+import Tooltip from "antd/lib/tooltip";
+import Modal from "antd/lib/modal";
+
 import WhiteboardPerspectiveSet from "../components/WhiteboardPerspectiveSet";
 
-import {Button, Input, message, Modal, Popover, Tooltip} from "antd";
 import {Room, RoomState} from "white-react-sdk";
 import {ViewMode} from "white-react-sdk";
 import {InjectedIntlProps, injectIntl} from "react-intl";

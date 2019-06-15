@@ -2,7 +2,11 @@ import * as React from "react";
 
 import HomeIcon from "../assets/image/home.svg";
 
-import {Button, message, Modal, Tooltip} from "antd";
+import message from "antd/lib/message";
+import Button from "antd/lib/button";
+import Modal from "antd/lib/modal";
+import Tooltip from "antd/lib/tooltip";
+
 import {InjectedIntlProps, injectIntl} from "react-intl";
 import {Room} from "white-react-sdk";
 
