@@ -13,7 +13,7 @@ import WhiteboardChat from "../components/WhiteboardChat";
 
 import {InjectedIntlProps, injectIntl} from "react-intl";
 import {Room, RoomState} from "white-web-sdk";
-import {UserPayload} from "../common/UserPayload";
+import {UserPayload} from "../common";
 
 export type RealtimeRoomBottomRightProps = InjectedIntlProps & {
     readonly room: Room;

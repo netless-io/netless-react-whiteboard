@@ -13,12 +13,12 @@ import Popover from "antd/lib/popover";
 import Tooltip from "antd/lib/tooltip";
 import Modal from "antd/lib/modal";
 
-import WhiteboardPerspectiveSet from "../components/WhiteboardPerspectiveSet";
+import WhiteboardPerspectiveSet from '../components/WhiteboardPerspectiveSet';
 
 import {Room, RoomState} from "white-react-sdk";
 import {ViewMode} from "white-react-sdk";
 import {InjectedIntlProps, injectIntl} from "react-intl";
-import {UserPayload} from "../common/UserPayload";
+import {UserPayload} from "../common";
 
 export type RealtimeRoomRightProps = InjectedIntlProps & {
     readonly room: Room;

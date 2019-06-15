@@ -9,9 +9,8 @@ import Popover from "antd/lib/popover";
 import Upload from "antd/lib/upload";
 
 import {PptKind, Room, WhiteWebSdk} from "white-react-sdk";
-import {ToolBoxUpload} from "../components/ToolBoxUpload";
-import {PPTProgressListener, UploadManager} from "../tools/UploadManager";
-import {OSSBucketInformation} from "../tools/OSSCreator";
+import {ToolBoxUpload} from "../components";
+import {PPTProgressListener, UploadManager, OSSBucketInformation} from "../tools";
 
 export type ToolBoxUploadBoxState = {
     toolBoxColor: string,

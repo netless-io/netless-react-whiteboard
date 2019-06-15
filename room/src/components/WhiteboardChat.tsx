@@ -14,7 +14,7 @@ import {
 
 import {Room} from "white-web-sdk";
 import {MessageType} from "../realtime/RealtimeRoomBottomRight";
-import {UserPayload} from "../common/UserPayload";
+import {UserPayload} from "../common";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));

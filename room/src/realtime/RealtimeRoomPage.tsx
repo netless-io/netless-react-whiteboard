@@ -4,10 +4,9 @@ import RealtimeRoom from "./RealtimeRoom";
 import message from "antd/lib/message";
 
 import {JoinRoomParams, PptConverter, Room, RoomPhase, RoomState, WhiteWebSdk} from "white-web-sdk";
-import {UserPayload} from "../common/UserPayload";
-import {UserCursor} from "../components/UserCursor";
-import {LoadingPage} from "../components/LoadingPage";
-import {OSSOptions} from "../tools/OSSCreator";
+import {UserPayload} from "../common";
+import {UserCursor, LoadingPage} from "../components";
+import {OSSOptions} from "../tools";
 
 export type RealtimeRoomPageProps = {
     readonly uuid: string;

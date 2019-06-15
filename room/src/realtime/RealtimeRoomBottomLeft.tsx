@@ -8,7 +8,7 @@ import ScaleController from "@netless/react-scale-controller";
 
 import {Room, RoomState} from "white-react-sdk";
 import {InjectedIntlProps, injectIntl} from "react-intl";
-import {UserPayload} from "../common/UserPayload";
+import {UserPayload} from "../common";
 
 export type RealtimeRoomBottomLeftProps = InjectedIntlProps & {
     readonly room: Room;

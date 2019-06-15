@@ -33,8 +33,8 @@ import message from "antd/lib/message";
 
 import {PPTProgressPhase, UploadManager} from "@netless/oss-upload-manager";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
-import {UserPayload} from "../common/UserPayload";
-import {createOSS, OSSOptions} from "../tools/OSSCreator";
+import {UserPayload} from "../common";
+import {createOSS, OSSOptions} from "../tools";
 import {RealtimeRoomPageCallbacks} from "./RealtimeRoomPage";
 
 function sleep(duration: number): Promise<void> {

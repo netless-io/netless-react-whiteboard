@@ -1,5 +1,5 @@
-export {createOSS, OSSOptions, OSSBucketInformation} from "./tools/OSSCreator";
-export {UserPayload} from "./common/UserPayload";
-export {LoadingPage} from "./components/LoadingPage";
-export {RealtimeRoomPageProps, RealtimeRoomPageCallbacks, RealtimeRoomPageState} from "./realtime/RealtimeRoomPage";
-export {default as RealtimeRoomPage} from "./realtime/RealtimeRoomPage";
+export {createOSS, OSSOptions, OSSBucketInformation} from "./tools";
+export {UserPayload} from "./common";
+export {LoadingPage} from "./components";
+export {RealtimeRoomPageProps, RealtimeRoomPageCallbacks, RealtimeRoomPageState} from "./realtime";
+export {default as RealtimeRoomPage} from "./realtime";
