@@ -24,18 +24,18 @@ export type RealtimeRoomBottomRightProps = InjectedIntlProps & {
 };
 
 export type RealtimeRoomBottomRightState = {
-    readonly hotkeyTooltipDisplay: boolean,
-    readonly annexBoxTooltipDisplay: boolean,
-    readonly messages:  MessageType[],
-    readonly seenMessagesLength: number,
-    readonly isVisible: boolean,
+    readonly hotkeyTooltipDisplay: boolean;
+    readonly annexBoxTooltipDisplay: boolean;
+    readonly messages:  MessageType[];
+    readonly seenMessagesLength: number;
+    readonly isVisible: boolean;
 };
 
 export type MessageType = {
-    readonly name: string,
-    readonly avatar: string,
-    readonly id: string,
-    readonly messageInner: string[],
+    readonly name: string;
+    readonly avatar: string;
+    readonly id: string;
+    readonly messageInner: string[];
 };
 
 class RealtimeRoomBottomRight extends React.Component<RealtimeRoomBottomRightProps, RealtimeRoomBottomRightState> {
@@ -125,7 +125,7 @@ class RealtimeRoomBottomRight extends React.Component<RealtimeRoomBottomRightPro
         const chatContent = (
             <WhiteboardChat messages={this.state.messages}
                             room={this.props.room}
-                            userPayload={this.props.userPayload}/>
+                            authorPayload={this.props.userPayload}/>
         );
         return (
             <div className="whiteboard-box-bottom-right">

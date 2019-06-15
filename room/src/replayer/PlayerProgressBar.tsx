@@ -4,12 +4,13 @@ import * as ChatIcon from "../../assets/image/chat.svg";
 import * as PlayerBeginIcon from "../../assets/image/player_begin.svg";
 import * as PlayerStopIcon from "../../assets/image/player_stop.svg";
 
-import WhiteboardChat, {MessageType} from "../whiteboard/WhiteboardChat";
 import SeekSlider from "@netless/react-seek-slider";
 
 import {Badge, Icon, Popover} from "antd";
 import {PlayerPhase, Player} from "white-react-sdk";
-import {displayWatch} from "../../tools/WatchDisplayer";
+import {displayWatch} from "./WatchDisplayer";
+import {MessageType} from "../realtime/RealtimeRoomBottomRight";
+import WhiteboardChat from "../components/WhiteboardChat";
 
 export type PlayerProgressBarProps = {
     readonly player: Player;
@@ -149,8 +150,7 @@ export class PlayerProgressBar extends React.Component<PlayerProgressBarProps, P
             messagesCount = this.props.messages.length - this.state.seenMessagesLength;
         }
         const popoverContent = (
-            <WhiteboardChat messages={this.props.messages}
-                            userId={this.props.userId}/>
+            <WhiteboardChat messages={this.props.messages}/>
         );
         return (
             <Badge overflowCount={99}
