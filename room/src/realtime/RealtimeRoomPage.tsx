@@ -14,6 +14,7 @@ export type RealtimeRoomPageProps = {
     readonly userPayload: UserPayload;
     readonly sdk: WhiteWebSdk;
     readonly ossOptions: OSSOptions;
+    readonly disableAppFeatures?: boolean;
     readonly callbacks?: RealtimeRoomPageCallbacks;
 };
 
@@ -110,6 +111,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
                                  phase={this.state.phase}
                                  roomState={this.state.roomState}
                                  userPayload={this.props.userPayload}
+                                 disableAppFeatures={!!this.props.disableAppFeatures}
                                  callbacks={this.props.callbacks || EmptyObject}/>
         } else {
             return <LoadingPage/>;

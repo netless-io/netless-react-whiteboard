@@ -13,6 +13,7 @@ export type RealtimeRoomBottomLeftProps = {
     readonly room: Room;
     readonly roomState: RoomState;
     readonly userPayload: UserPayload;
+    readonly disableCustomEvents: boolean;
     readonly onGoReplay?: (uuid: string, slice?: string) => void;
 };
 
@@ -43,13 +44,14 @@ export default class RealtimeRoomBottomLeft extends React.Component<RealtimeRoom
                         <img src={PlayerIcon}/>
                     </div>
                 </Tooltip>
-                <div
-                    onClick={async () => {
-                        this.props.room.dispatchMagixEvent("handclap", "handclap");
-                    }}
-                    className="whiteboard-box-bottom-left-cell">
-                    <img style={{width: 15}} src={LikeIcon}/>
-                </div>
+                {!this.props.disableCustomEvents && (
+                    <div className="whiteboard-box-bottom-left-cell"
+                         onClick={async () => {
+                             this.props.room.dispatchMagixEvent("handclap", "handclap");
+                         }}>
+                        <img style={{width: 15}} src={LikeIcon}/>
+                    </div>
+                )}
             </div>
         );
     }

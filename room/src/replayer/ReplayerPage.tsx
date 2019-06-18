@@ -11,6 +11,7 @@ export type ReplayerPageProps = {
     readonly beginTimestamp?: number;
     readonly duration?: number;
     readonly slice?: string;
+    readonly disableAppFeatures?: boolean;
     readonly sdk: WhiteWebSdk;
     readonly callbacks?: ReplayerPageCallbacks;
 };
@@ -99,6 +100,7 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
                              phase={this.state.phase}
                              currentTime={this.state.currentTime}
                              callbacks={this.props.callbacks || EmptyObject}
+                             disableAppFeatures={!!this.props.disableAppFeatures}
                              onChangeCurrentTime={currentTime => this.setState({currentTime})}/>
         } else {
             return <LoadingPage/>;

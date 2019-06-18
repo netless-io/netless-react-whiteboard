@@ -23,6 +23,7 @@ export type ReplayerProps = {
     readonly player: Player;
     readonly phase: PlayerPhase;
     readonly currentTime: number;
+    readonly disableAppFeatures: boolean;
     readonly onChangeCurrentTime: (time: number) => void;
     readonly callbacks: ReplayerPageCallbacks;
 };
@@ -45,14 +46,17 @@ export default class Replayer extends React.Component<ReplayerProps, ReplayerSta
         };
         this.player = props.player;
         this.callbacks = props.callbacks;
-        this.player.addMagixEventListener("handclap", async () => {
-            this.setState({isHandClap: true});
-            await sleep(800);
-            this.setState({isHandClap: false});
-        });
-        this.player.addMagixEventListener("message",  event => {
-            this.setState({messages: [...this.state.messages, event.payload]});
-        });
+
+        if (!props.disableAppFeatures) {
+            this.player.addMagixEventListener("handclap", async () => {
+                this.setState({isHandClap: true});
+                await sleep(800);
+                this.setState({isHandClap: false});
+            });
+            this.player.addMagixEventListener("message",  event => {
+                this.setState({messages: [...this.state.messages, event.payload]});
+            });
+        }
     }
 
     public componentWillMount(): void {
@@ -76,6 +80,7 @@ export default class Replayer extends React.Component<ReplayerProps, ReplayerSta
                                        phase={this.props.phase}
                                        currentTime={this.props.currentTime}
                                        messages={this.state.messages}
+                                       disableChatBox={this.props.disableAppFeatures}
                                        onChangeCurrentTime={this.props.onChangeCurrentTime}/>
                 )}
                 {this.state.isHandClap && this.renderHandClap()}
