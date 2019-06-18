@@ -18,6 +18,7 @@ export type RealtimeRoomBottomRightProps = {
     readonly room: Room;
     readonly roomState: RoomState;
     readonly userPayload: UserPayload;
+    readonly disableCustomEvents: boolean;
     readonly handleHotKeyMenuState: () => void;
     readonly handleAnnexBoxMenuState: () => void;
 };
@@ -48,7 +49,6 @@ export default class RealtimeRoomBottomRight extends React.Component<RealtimeRoo
             seenMessagesLength: 0,
             isVisible: false,
         };
-        this.renderAnnexBox = this.renderAnnexBox.bind(this);
     }
 
     public componentDidMount(): void {
@@ -56,6 +56,31 @@ export default class RealtimeRoomBottomRight extends React.Component<RealtimeRoo
         room.addMagixEventListener("message",  event => {
             this.setState({messages: [...this.state.messages, event.payload]});
         });
+    }
+
+    public render(): React.ReactNode {
+        return (
+            <div className="whiteboard-box-bottom-right">
+                <div className="whiteboard-box-bottom-right-mid">
+                    {this.renderHotKeyBox()}
+                    {this.renderAnnexBox()}
+                    {!this.props.disableCustomEvents && this.renderChatBox()}
+                </div>
+            </div>
+        );
+    }
+
+    private renderHotKeyBox(): React.ReactNode {
+        return (
+            <Tooltip placement="top" title="快捷键" visible={this.state.hotkeyTooltipDisplay}>
+                <div
+                    style={{marginRight: 8}}
+                    className="whiteboard-bottom-right-cell"
+                    onClick={this.props.handleHotKeyMenuState}>
+                    <img src={WhiteboardKeyboardIcon}/>
+                </div>
+            </Tooltip>
+        );
     }
 
     private renderAnnexBox(): React.ReactNode {
@@ -120,44 +145,31 @@ export default class RealtimeRoomBottomRight extends React.Component<RealtimeRoo
         );
     }
 
-    public render(): React.ReactNode {
+    private renderChatBox(): React.ReactNode {
         const chatContent = (
             <WhiteboardChat messages={this.state.messages}
                             room={this.props.room}
                             authorPayload={this.props.userPayload}/>
         );
         return (
-            <div className="whiteboard-box-bottom-right">
-                <div className="whiteboard-box-bottom-right-mid">
-                    <Tooltip placement="top" title="快捷键" visible={this.state.hotkeyTooltipDisplay}>
-                        <div
-                            style={{marginRight: 8}}
-                            className="whiteboard-bottom-right-cell"
-                             onClick={this.props.handleHotKeyMenuState}>
-                            <img src={WhiteboardKeyboardIcon}/>
-                        </div>
-                    </Tooltip>
-                    {this.renderAnnexBox()}
-                    <Badge overflowCount={99} offset={[-3, 6]} count={this.state.isVisible ? 0 : (this.state.messages.length - this.state.seenMessagesLength)}>
-                        <Popover
-                            overlayClassName="whiteboard-chat"
-                            content={chatContent}
-                            trigger="click"
-                            onVisibleChange={(visible: boolean) => {
-                                if (visible) {
-                                    this.setState({isVisible: true});
-                                } else {
-                                    this.setState({isVisible: false, seenMessagesLength: this.state.messages.length});
-                                }
-                            }}
-                            placement="topLeft">
-                            <div style={{marginLeft: 8}} className="whiteboard-bottom-right-cell">
-                                <img style={{width: 17}} src={ChatIcon}/>
-                            </div>
-                        </Popover>
-                    </Badge>
-                </div>
-            </div>
+            <Badge overflowCount={99} offset={[-3, 6]} count={this.state.isVisible ? 0 : (this.state.messages.length - this.state.seenMessagesLength)}>
+                <Popover
+                    overlayClassName="whiteboard-chat"
+                    content={chatContent}
+                    trigger="click"
+                    onVisibleChange={(visible: boolean) => {
+                        if (visible) {
+                            this.setState({isVisible: true});
+                        } else {
+                            this.setState({isVisible: false, seenMessagesLength: this.state.messages.length});
+                        }
+                    }}
+                    placement="topLeft">
+                    <div style={{marginLeft: 8}} className="whiteboard-bottom-right-cell">
+                        <img style={{width: 17}} src={ChatIcon}/>
+                    </div>
+                </Popover>
+            </Badge>
         );
     }
 }

@@ -48,6 +48,7 @@ export type RealtimeRoomProps = {
     readonly userPayload: UserPayload;
     readonly phase: RoomPhase;
     readonly roomState: RoomState;
+    readonly disableCustomEvents?: boolean;
     readonly callbacks: RealtimeRoomPageCallbacks;
 };
 
@@ -279,11 +280,13 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
                 <RealtimeRoomBottomLeft room={this.room}
                                         roomState={this.props.roomState}
                                         userPayload={this.userPayload}
+                                        disableCustomEvents={!!this.props.disableCustomEvents}
                                         onGoReplay={this.props.callbacks.onGoReplay}/>
 
                 <RealtimeRoomBottomRight room={this.room}
                                          roomState={this.props.roomState}
                                          userPayload={this.userPayload}
+                                         disableCustomEvents={!!this.props.disableCustomEvents}
                                          handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}
                                          handleHotKeyMenuState={this.handleHotKeyMenuState}/>
             </React.Fragment>
