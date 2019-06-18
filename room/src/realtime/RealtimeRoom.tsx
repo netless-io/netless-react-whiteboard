@@ -48,7 +48,7 @@ export type RealtimeRoomProps = {
     readonly userPayload: UserPayload;
     readonly phase: RoomPhase;
     readonly roomState: RoomState;
-    readonly disableCustomEvents?: boolean;
+    readonly disableAppFeatures?: boolean;
     readonly callbacks: RealtimeRoomPageCallbacks;
 };
 
@@ -68,6 +68,7 @@ export type RealtimeRoomState = {
 export default class RealtimeRoom extends React.Component<RealtimeRoomProps, RealtimeRoomState> {
 
     private readonly room: Room;
+    private readonly session?: string;
     private readonly oss: OSS;
     private readonly ossOptions: OSSOptions;
     private readonly userPayload: UserPayload;
@@ -86,6 +87,7 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
         this.oss = createOSS(props.ossOptions);
         this.userPayload = props.userPayload;
         this.room = props.room;
+        this.session = props.room.session;
         this.room.addMagixEventListener("handclap", this.onHandClap);
     }
 
@@ -275,18 +277,21 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
                 <RealtimeRoomTopRight room={this.room}
                                       roomState={this.props.roomState}
                                       userPayload={this.userPayload}
+                                      disableInvite={!!this.props.disableAppFeatures}
+                                      disableLogout={!!this.props.disableAppFeatures}
+                                      session={this.session}
                                       onGoBack={this.props.callbacks.onGoBack}/>
 
                 <RealtimeRoomBottomLeft room={this.room}
                                         roomState={this.props.roomState}
                                         userPayload={this.userPayload}
-                                        disableCustomEvents={!!this.props.disableCustomEvents}
+                                        disableCustomEvents={!!this.props.disableAppFeatures}
                                         onGoReplay={this.props.callbacks.onGoReplay}/>
 
                 <RealtimeRoomBottomRight room={this.room}
                                          roomState={this.props.roomState}
                                          userPayload={this.userPayload}
-                                         disableCustomEvents={!!this.props.disableCustomEvents}
+                                         disableCustomEvents={!!this.props.disableAppFeatures}
                                          handleAnnexBoxMenuState={this.handleAnnexBoxMenuState}
                                          handleHotKeyMenuState={this.handleHotKeyMenuState}/>
             </React.Fragment>

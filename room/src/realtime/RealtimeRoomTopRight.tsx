@@ -23,6 +23,9 @@ export type RealtimeRoomRightProps = {
     readonly room: Room;
     readonly roomState: RoomState;
     readonly userPayload: UserPayload;
+    readonly disableInvite: boolean;
+    readonly disableLogout: boolean;
+    readonly session?: string;
     readonly onGoBack?: () => void;
 };
 
@@ -157,55 +160,72 @@ export default class RealtimeRoomTopRight extends React.Component<RealtimeRoomRi
                         <Identicon size={28} string={this.props.userPayload.userUUID}/>
                     </div>
                     {this.renderBroadController()}
-                    <Tooltip placement="bottomLeft" title={"invite your friend"}>
-                        <div
-                            style={{marginRight: 12}}
-                            className="whiteboard-top-bar-btn" onClick={this.handleInvite}>
-                            <img src={AddIcon}/>
-                        </div>
-                    </Tooltip>
+                    {!this.props.disableInvite && (
+                        <Tooltip placement="bottomLeft" title={"invite your friend"}>
+                            <div className="whiteboard-top-bar-btn"
+                                 style={{marginRight: 12}}
+                                 onClick={this.handleInvite}>
+                                <img src={AddIcon}/>
+                            </div>
+                        </Tooltip>
+                    )}
                 </div>
-                <Modal
-                    visible={this.state.isInviteVisible}
-                    footer={null}
-                    title="Invite"
-                    onCancel={() => this.setState({isInviteVisible: false})}
-                >
-                    <div className="whiteboard-share-box">
-                        <Input readOnly className="whiteboard-share-text" size="large" value={`${this.handleUrl(location.href)}`}/>
+                {this.renderInviteModal()}
+                {this.renderSettingModal()}
+            </div>
+        );
+    }
+
+    private renderInviteModal(): React.ReactNode {
+        return (
+            <Modal visible={this.state.isInviteVisible}
+                   footer={null}
+                   title="Invite"
+                   onCancel={() => this.setState({isInviteVisible: false})}>
+                <div className="whiteboard-share-box">
+                    <Input readOnly className="whiteboard-share-text" size="large" value={`${this.handleUrl(location.href)}`}/>
+                </div>
+                <div className="whiteboard-share-footer">
+                    <div style={{marginRight: 16}}>
+                        <Button
+                            size="large"
+                            onClick={() => this.setState({isInviteVisible: false})}
+                            className="white-btn-size">Cancel</Button>
                     </div>
-                    <div className="whiteboard-share-footer">
-                        <div style={{marginRight: 16}}>
-                            <Button
-                                size="large"
-                                onClick={() => this.setState({isInviteVisible: false})}
-                                className="white-btn-size">Cancel</Button>
+                    <Clipboard data-clipboard-text={`${this.handleUrl(location.href)}`}
+                               component="div"
+                               onSuccess={() => {
+                                   message.success("Copy already copied address to clipboard");
+                                   this.setState({isInviteVisible: false});
+                               }}>
+                        <Button size="large" className="white-btn-size" type="primary">Copy</Button>
+                    </Clipboard>
+                </div>
+            </Modal>
+        );
+    }
+
+    private renderSettingModal(): React.ReactNode {
+        return (
+            <Modal visible={this.state.isSetVisible}
+                   footer={null}
+                   title="Setting"
+                   onCancel={() => this.setState({isSetVisible: false})}>
+                <div className="whiteboard-set-box">
+                    <div className="whiteboard-set-box-img">
+                        <Identicon size={36}
+                                   string={this.props.userPayload.userUUID}/>
+                    </div>
+                    <div className="whiteboard-set-box-inner">
+                        <span>name: </span>{this.props.userPayload.nickName}
+                    </div>
+                    {this.props.session && (
+                        <div className="whiteboard-set-box-inner">
+                            <span>session: </span>{this.props.session}
                         </div>
-                        <Clipboard
-                            data-clipboard-text={`${this.handleUrl(location.href)}`}
-                            component="div"
-                            onSuccess={() => {
-                                message.success("Copy already copied address to clipboard");
-                                this.setState({isInviteVisible: false});
-                            }}
-                        >
-                            <Button size="large" className="white-btn-size" type="primary">Copy</Button>
-                        </Clipboard>
-                    </div>
-                </Modal>
-                <Modal
-                    visible={this.state.isSetVisible}
-                    footer={null}
-                    title="Setting"
-                    onCancel={() => this.setState({isSetVisible: false})}>
-                    <div className="whiteboard-set-box">
-                        <div className="whiteboard-set-box-img">
-                            <Identicon size={36}
-                                       string={this.props.userPayload.userUUID}/>
-                        </div>
-                        <div className="whiteboard-set-box-inner"> <span>name: </span>{this.props.userPayload.nickName}</div>
-                        <div className="whiteboard-set-box-inner"> <span>uuid: </span>{this.props.userPayload.userUUID}</div>
-                    </div>
+                    )}
+                </div>
+                {!this.props.disableLogout && (
                     <div className="whiteboard-set-footer">
                         <div style={{marginRight: 16}}>
                             <Button className="white-btn-size"
@@ -216,8 +236,8 @@ export default class RealtimeRoomTopRight extends React.Component<RealtimeRoomRi
                         </div>
                         <Button size="large" className="white-btn-size" type="primary">Edit</Button>
                     </div>
-                </Modal>
-            </div>
+                )}
+            </Modal>
         );
     }
 }
