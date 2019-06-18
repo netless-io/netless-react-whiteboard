@@ -16,6 +16,7 @@ export type PlayerProgressBarProps = {
     readonly phase: PlayerPhase;
     readonly currentTime: number;
     readonly messages: MessageType[];
+    readonly disableChatBox: boolean;
     readonly onChangeCurrentTime: (time: number) => void;
 };
 
@@ -113,7 +114,7 @@ export class PlayerProgressBar extends React.Component<PlayerProgressBarProps, P
                 </div>
                 {this.renderProgressBar()}
                 {this.renderTimeDescription()}
-                {this.renderChatBox()}
+                {!this.props.disableChatBox && this.renderChatBox()}
             </div>
         );
     }

@@ -80,6 +80,7 @@ export default class Replayer extends React.Component<ReplayerProps, ReplayerSta
                                        phase={this.props.phase}
                                        currentTime={this.props.currentTime}
                                        messages={this.state.messages}
+                                       disableChatBox={this.props.disableAppFeatures}
                                        onChangeCurrentTime={this.props.onChangeCurrentTime}/>
                 )}
                 {this.state.isHandClap && this.renderHandClap()}
