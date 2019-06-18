@@ -159,9 +159,11 @@ export class PlayerProgressBar extends React.Component<PlayerProgressBarProps, P
     }
 
     private renderChatBox(): React.ReactNode {
-        let messagesCount = 0;
+        let messagesCount: number;
 
         if (this.state.isChatBoxVisible) {
+            messagesCount = 0;
+        } else {
             messagesCount = this.props.messages.length - this.state.seenMessagesLength;
         }
         const popoverContent = (
