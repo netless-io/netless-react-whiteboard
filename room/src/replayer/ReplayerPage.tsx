@@ -85,6 +85,7 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
             },
             onStoppedWithError: this.findError,
         });
+        (window as any).player = player;
         this.setState({player, phase: player.phase});
     }
 

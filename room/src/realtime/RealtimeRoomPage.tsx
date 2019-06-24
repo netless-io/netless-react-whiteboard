@@ -85,7 +85,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             onKickedWithReason: reason => this.findError(new Error("kicked with reason: " + reason)),
         });
         userCursor.refreshRoomMembers(room.state.roomMembers);
-
+        (window as any).room = room;
         this.setState({
             room: room,
             phase: room.phase,
