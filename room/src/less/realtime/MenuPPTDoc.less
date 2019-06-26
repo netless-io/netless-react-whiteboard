@@ -1,3 +1,4 @@
+@import "../theme";
 .menu-ppt-box {
     width: 100%;
     height: 100%;
@@ -47,5 +48,29 @@
     cursor: pointer;
     &:hover {
         background-color: @gray;
+    }
+}
+
+.menu-ppt-image-box-inner {
+    width: 144px;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    img {
+        width: 100%;
+    }
+    div {
+        width: 100%;
+        position: absolute;
+        height: 32px;
+        background-color: @main_color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        z-index: 2;
+        bottom: 11px;
     }
 }
