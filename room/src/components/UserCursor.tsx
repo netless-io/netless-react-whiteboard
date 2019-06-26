@@ -65,7 +65,7 @@ class CursorComponent extends React.Component<CursorComponentProps, {}> {
         const color = `rgb(${roomMember.memberState.strokeColor[0]}, ${roomMember.memberState.strokeColor[1]}, ${roomMember.memberState.strokeColor[2]})`;
         return <div>
             <div style={{borderColor: color}} className="cursor-box">
-                <Identicon size={24} string={roomMember.information && roomMember.information.avatar}/>
+                <Identicon size={24} string={roomMember.payload && roomMember.payload.avatar}/>
             </div>
             <div style={{backgroundColor: color}}  className="cursor-box-tool">
                 <img src={this.iconUrl(roomMember.memberState.currentApplianceName)}/>
