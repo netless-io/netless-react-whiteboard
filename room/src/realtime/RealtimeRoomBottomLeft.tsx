@@ -20,8 +20,7 @@ export type RealtimeRoomBottomLeftProps = {
 export default class RealtimeRoomBottomLeft extends React.Component<RealtimeRoomBottomLeftProps, {}> {
 
     private zoomChange = (scale: number): void => {
-        const {room} = this.props;
-        room.zoomChange(scale);
+        this.props.room.moveCamera({scale});
     }
 
     private replay = async (): Promise<void> => {
