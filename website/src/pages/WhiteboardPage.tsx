@@ -4,11 +4,11 @@ import PageError from "./PageError";
 
 import {message} from "antd";
 import {LoadingPage, RealtimeRoomPage, UserPayload} from "netless-whiteboard-room";
-import {WhiteWebSdk} from "white-react-sdk";
 import {RouteComponentProps} from "react-router";
+import {Redirect} from "@netless/i18n-react-router";
 import {netlessWhiteboardApi} from "../apiMiddleware";
 import {ossOptions} from "../AppOptions";
-import {Redirect} from "@netless/i18n-react-router";
+import {whiteWebSdk} from "../SDK";
 
 export type WhiteboardPageProps = RouteComponentProps<{
     readonly uuid: string;
@@ -25,8 +25,6 @@ export type WhiteboardPageState = {
 };
 
 export default class WhiteboardPage extends React.Component<WhiteboardPageProps, WhiteboardPageState> {
-
-    private static readonly sdk: WhiteWebSdk = new WhiteWebSdk();
 
     public constructor(props: WhiteboardPageProps) {
         super(props);
@@ -85,7 +83,7 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
                 <RealtimeRoomPage uuid={this.props.match.params.uuid}
                                   roomToken={this.state.roomInfo.roomToken}
                                   userPayload={this.state.roomInfo.userPayload}
-                                  sdk={WhiteboardPage.sdk}
+                                  sdk={whiteWebSdk}
                                   ossOptions={ossOptions}
                                   callbacks={{
                                       onGoBack: this.onGoBack,

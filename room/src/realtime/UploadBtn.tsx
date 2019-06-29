@@ -24,10 +24,11 @@ export const FileUploadStatic: string = "application/pdf, " +
 
 export type UploadBtnProps = OSSBucketInformation & {
     readonly oss: OSS;
-    readonly room: Room,
-    readonly roomToken: string,
-    readonly whiteboardRef?: HTMLDivElement,
-    readonly onProgress?: PPTProgressListener,
+    readonly room: Room;
+    readonly roomToken: string;
+    readonly sdk: WhiteWebSdk;
+    readonly whiteboardRef?: HTMLDivElement;
+    readonly onProgress?: PPTProgressListener;
 };
 
 export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUploadBoxState> {
@@ -44,8 +45,7 @@ export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUp
 
     private uploadStatic = (event: any) => {
         const uploadManager = new UploadManager(this.oss, this.props.room);
-        const whiteWebSdk = new WhiteWebSdk();
-        const pptConverter = whiteWebSdk.pptConverter(this.props.roomToken!);
+        const pptConverter = this.props.sdk.pptConverter(this.props.roomToken!);
 
         uploadManager.convertFile(
             event.file,
@@ -62,8 +62,7 @@ export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUp
 
     private uploadDynamic = (event: any) => {
         const uploadManager = new UploadManager(this.oss, this.props.room);
-        const whiteWebSdk = new WhiteWebSdk();
-        const pptConverter = whiteWebSdk.pptConverter(this.props.roomToken!);
+        const pptConverter = this.props.sdk.pptConverter(this.props.roomToken!);
         uploadManager.convertFile(
             event.file,
             pptConverter,

@@ -27,6 +27,7 @@ import {
     RoomPhase,
     MemberState,
     ViewMode,
+    WhiteWebSdk,
 } from "white-react-sdk";
 
 import message from "antd/lib/message";
@@ -44,6 +45,7 @@ function sleep(duration: number): Promise<void> {
 export type RealtimeRoomProps = {
     readonly room: Room;
     readonly roomToken: string;
+    readonly sdk: WhiteWebSdk;
     readonly ossOptions: OSSOptions;
     readonly userPayload: UserPayload;
     readonly phase: RoomPhase;
@@ -313,6 +315,7 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
                          customerComponent={[
                              <UploadBtn room={this.room}
                                         roomToken={this.props.roomToken}
+                                        sdk={this.props.sdk}
                                         bucket={ossOptions.bucket}
                                         folder={ossOptions.folder}
                                         prefix={ossOptions.prefix}
