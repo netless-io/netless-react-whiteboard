@@ -3,10 +3,10 @@ import * as React from "react";
 import {message} from "antd";
 import {LoadingPage, ReplayerPage} from "netless-whiteboard-room";
 import {RouteComponentProps} from "react-router";
-import {WhiteWebSdk} from "white-react-sdk";
 import {Redirect} from "@netless/i18n-react-router";
 import {netlessWhiteboardApi} from "../apiMiddleware";
 import PageError from "./PageError";
+import {whiteWebSdk} from "../SDK";
 
 export type PlayerPageProps = RouteComponentProps<{
    readonly uuid: string;
@@ -20,8 +20,6 @@ export type PlayerPageState = {
 };
 
 export default class PlayerPage extends React.Component<PlayerPageProps, PlayerPageState> {
-
-    private static readonly sdk: WhiteWebSdk = new WhiteWebSdk();
 
     private readonly userId: string;
 
@@ -72,7 +70,7 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
         } else {
             return <ReplayerPage uuid={this.props.match.params.uuid}
                                  roomToken={this.state.roomToken}
-                                 sdk={PlayerPage.sdk}
+                                 sdk={whiteWebSdk}
                                  callbacks={{
                                      onGoBack: this.onGoBack,
                                      onGoToRealtimeRoom: this.onGoToRealtimeRoom,

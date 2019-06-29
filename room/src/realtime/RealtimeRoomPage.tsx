@@ -108,6 +108,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             return <RealtimeRoom ossOptions={this.props.ossOptions}
                                  room={this.state.room}
                                  roomToken={this.props.roomToken}
+                                 sdk={this.props.sdk}
                                  phase={this.state.phase}
                                  roomState={this.state.roomState}
                                  userPayload={this.props.userPayload}
