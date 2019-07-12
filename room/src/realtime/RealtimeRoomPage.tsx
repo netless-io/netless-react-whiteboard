@@ -3,7 +3,7 @@ import * as React from "react";
 import RealtimeRoom from "./RealtimeRoom";
 import message from "antd/lib/message";
 
-import {JoinRoomParams, PptConverter, Room, RoomPhase, RoomState, WhiteWebSdk} from "white-web-sdk";
+import {JoinRoomParams, PptConverter, Room, RoomPhase, RoomState, WhiteWebSdk, AnimationMode} from "white-web-sdk";
 import {UserPayload} from "../common";
 import {UserCursor, LoadingPage} from "../components";
 import {OSSOptions} from "../tools";
@@ -85,6 +85,16 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             onKickedWithReason: reason => this.findError(new Error("kicked with reason: " + reason)),
         });
         userCursor.refreshRoomMembers(room.state.roomMembers);
+
+        // 对准 ppt
+        room.moveCameraToContain({
+            originX: -640,
+            originY: -360,
+            width: 1280,
+            height: 720,
+            animationMode: AnimationMode.Immediately,
+        });
+
         (window as any).room = room;
         this.setState({
             room: room,
