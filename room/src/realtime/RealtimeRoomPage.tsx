@@ -88,10 +88,10 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
 
         // 对准 ppt
         room.moveCameraToContain({
-            originX: -480,
-            originY: -270,
-            width: 960,
-            height: 540,
+            originX: -640,
+            originY: -360,
+            width: 1280,
+            height: 720,
             animationMode: AnimationMode.Immediately,
         });
 
