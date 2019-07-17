@@ -52,6 +52,6 @@
     "react-identicons": "^1.1.7",
     "rimraf": "^2.6.3",
     "uuid": "^3.3.2",
-    "white-react-sdk": "^2.2.5"
+    "white-react-sdk": "^2.2.6"
   }
 }
