@@ -105,7 +105,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
 
     private findError = (error: Error): void => {
         message.error("实时房间出错：" + error.message);
-        console.error(message);
+        console.error(error);
         this.setState({room: undefined, phase: RoomPhase.Disconnected});
     }
 
