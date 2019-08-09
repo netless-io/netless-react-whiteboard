@@ -7,13 +7,15 @@ import LikeIcon from "../assets/image/like.svg";
 import message from "antd/lib/message";
 import Identicon from "react-identicons";
 import TweenOne from "rc-tween-one";
-
+import Draggable from "react-draggable";
 import {Player, PlayerPhase} from "white-web-sdk";
 import {PlayerWhiteboard} from "white-react-sdk";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
 import {MessageType} from "../realtime/RealtimeRoomBottomRight";
 import {ReplayerPageCallbacks} from "./ReplayerPage";
 import {PlayerProgressBar} from "./PlayerProgressBar";
+import {isMobile} from "react-device-detect";
+import VideoPlaceholder from "../../../website/src/pages/VideoPlaceholder";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
@@ -26,6 +28,7 @@ export type ReplayerProps = {
     readonly disableAppFeatures: boolean;
     readonly onChangeCurrentTime: (time: number) => void;
     readonly callbacks: ReplayerPageCallbacks;
+    readonly mediaURL?: string;
 };
 
 export type ReplayerState = {
@@ -84,7 +87,15 @@ export default class Replayer extends React.Component<ReplayerProps, ReplayerSta
                                        onChangeCurrentTime={this.props.onChangeCurrentTime}/>
                 )}
                 {this.state.isHandClap && this.renderHandClap()}
-
+                {this.props.mediaURL &&
+                <Draggable>
+                    <div className={isMobile ? "player-video-out-mb" : "player-video-out"}>
+                        <VideoPlaceholder
+                            controls={false}
+                            className="player-video"
+                        />
+                    </div>
+                </Draggable>}
                 <PlayerWhiteboard className="player-box" player={this.player}/>
             </div>
         );

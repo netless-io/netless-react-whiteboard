@@ -8,7 +8,7 @@ import {RouteComponentProps} from "react-router";
 import {Redirect} from "@netless/i18n-react-router";
 import {netlessWhiteboardApi} from "../apiMiddleware";
 import {ossOptions} from "../AppOptions";
-import {whiteWebSdk} from "../SDK";
+import whiteWebSdk from "../SDK";
 
 export type WhiteboardPageProps = RouteComponentProps<{
     readonly uuid: string;

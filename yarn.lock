@@ -9289,6 +9289,11 @@ react-dev-utils@^5.0.1:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
+react-device-detect@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.npm.taobao.org/react-device-detect/download/react-device-detect-1.7.5.tgz#04c8a6475d67b5ac4f984c8d912ec11134f5b893"
+  integrity sha1-BMimR11ntaxPmEyNkS7BETT1uJM=
+
 react-dom@^16.3.2, react-dom@^16.8.4:
   version "16.8.6"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
@@ -9298,6 +9303,14 @@ react-dom@^16.3.2, react-dom@^16.8.4:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.13.6"
+
+react-draggable@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.npm.taobao.org/react-draggable/download/react-draggable-3.3.0.tgz#2ed7ea3f92e7d742d747f9e6324860606cd4d997"
+  integrity sha1-LtfqP5Ln10LXR/nmMkhgYGzU2Zc=
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
 
 react-dropzone@4.2.10:
   version "4.2.10"
