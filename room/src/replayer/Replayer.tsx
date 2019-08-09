@@ -15,7 +15,7 @@ import {MessageType} from "../realtime/RealtimeRoomBottomRight";
 import {ReplayerPageCallbacks} from "./ReplayerPage";
 import {PlayerProgressBar} from "./PlayerProgressBar";
 import {isMobile} from "react-device-detect";
-import VideoPlaceholder from "../../../website/src/pages/VideoPlaceholder";
+import VideoPlaceholder from "./VideoPlaceholder";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
