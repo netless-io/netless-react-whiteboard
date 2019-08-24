@@ -11892,19 +11892,19 @@ which@1, which@^1.2.12, which@^1.2.14, which@^1.2.9, which@^1.3.0, which@^1.3.1:
   dependencies:
     isexe "^2.0.0"
 
-white-react-sdk@^2.2.12:
-  version "2.2.12"
-  resolved "https://registry.yarnpkg.com/white-react-sdk/-/white-react-sdk-2.2.12.tgz#34ecd0f94d2bd9e78699d616932f362686d1d1b1"
-  integrity sha512-XAEbf1JvwxmLMWykxN38w8KkJw6ZNSYA9cvSroCY8yUABfeAsQfZnggGk4xHTulUI/DgA3Dqt9uxF61NkduFbg==
+white-react-sdk@^2.2.13:
+  version "2.2.13"
+  resolved "https://registry.yarnpkg.com/white-react-sdk/-/white-react-sdk-2.2.13.tgz#bd759ef7695f4775f086a8d2c16d53ae66e1957d"
+  integrity sha512-XpgjJ9fNx64Fnb/fXt7Qi4eSpZWLWHLggilf63J26NvlJnuvRsFw5zMSzPEuRA3IlYaLujOdHJJv42NiTU64Cg==
   dependencies:
     react "^16.8.4"
     react-dom "^16.8.4"
-    white-web-sdk "2.2.12"
+    white-web-sdk "2.2.13"
 
-white-web-sdk@2.2.12:
-  version "2.2.12"
-  resolved "https://registry.yarnpkg.com/white-web-sdk/-/white-web-sdk-2.2.12.tgz#b6bf2d42077389a98781b8251c60619fe1e8adaa"
-  integrity sha512-N8dtn4zdB3RB0wmv0AXX2esNq9lioj7lIs39J3eqElSandsjYBZ3w1JwFWYg+bJcn3bYPHEfC3SGFbYIGsVwJA==
+white-web-sdk@2.2.13:
+  version "2.2.13"
+  resolved "https://registry.yarnpkg.com/white-web-sdk/-/white-web-sdk-2.2.13.tgz#7ca9aa2eba565fb800c83843e21b5691c39ad250"
+  integrity sha512-lLNBa5VGizBYSQTtJs3gHNtMIiI5vwW8d/DGgIhKp6+7Y3BQTI3+gCviboel8M2zUPjZT9m94Qss5FRUXK5ikw==
   dependencies:
     bezier-js "^2.4.0"
     color "^3.1.2"
