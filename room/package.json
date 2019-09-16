@@ -23,7 +23,7 @@
     "react-dropzone": "4.0.0",
     "react-identicons": "^1.0.0",
     "uuid": "^3.0.0",
-    "white-react-sdk": "^2.2.0"
+    "white-react-sdk": "^2.3.2"
   },
   "dependencies": {
     "@netless/oss-upload-manager": "^1.0.6",
@@ -52,6 +52,6 @@
     "react-identicons": "^1.1.7",
     "rimraf": "^2.6.3",
     "uuid": "^3.3.2",
-    "white-react-sdk": "^2.2.14"
+    "white-react-sdk": "^2.3.2"
   }
 }
