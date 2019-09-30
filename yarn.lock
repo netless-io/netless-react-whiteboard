@@ -9530,7 +9530,7 @@ react-dev-utils@^5.0.2:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dom@16.8.6:
+react-dom@16.8.6, react-dom@~16.8.0:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
   integrity sha512-1nL7PIq9LTL3fthPqwkvr2zY7phIPjYrT0jp4HjyEQrEROnw4dG41VVwi/wfoCneoleqrNX7iAD+pXebJZwrwA==
@@ -9540,15 +9540,15 @@ react-dom@16.8.6:
     prop-types "^15.6.2"
     scheduler "^0.13.6"
 
-react-dom@^16.8.4:
-  version "16.9.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.9.0.tgz#5e65527a5e26f22ae3701131bcccaee9fb0d3962"
-  integrity sha512-YFT2rxO9hM70ewk9jq0y6sQk8cL02xm4+IzYBz75CQGlClQQ1Bxq0nhHF6OtSbit+AIahujJgb/CPRibFkMNJQ==
+react-dom@^16.8.0:
+  version "16.10.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.10.1.tgz#479a6511ba34a429273c213cbc2a9ac4d296dac1"
+  integrity sha512-SmM4ZW0uug0rn95U8uqr52I7UdNf6wdGLeXDmNLfg3y5q5H9eAbdjF5ubQc3bjDyRrvdAB2IKG7X0GzSpnn5Mg==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.15.0"
+    scheduler "^0.16.1"
 
 react-dropzone@4.2.10:
   version "4.2.10"
@@ -9703,7 +9703,7 @@ react-transition-group@^4.0.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@16.8.6:
+react@16.8.6, react@~16.8.0:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
@@ -9713,10 +9713,10 @@ react@16.8.6:
     prop-types "^15.6.2"
     scheduler "^0.13.6"
 
-react@^16.8.4:
-  version "16.9.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.9.0.tgz#40ba2f9af13bc1a38d75dbf2f4359a5185c4f7aa"
-  integrity sha512-+7LQnFBwkiw+BobzOF6N//BdoNw0ouwmSJTEm9cglOOmsg/TMiFHZLe2sEoN5M7LgJTj9oHH0gxklfnQe66S1w==
+react@^16.8.0:
+  version "16.10.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.10.1.tgz#967c1e71a2767dfa699e6ba702a00483e3b0573f"
+  integrity sha512-2bisHwMhxQ3XQz4LiJJwG3360pY965pTl/MRrZYxIBKVj4fOHoDs5aZAkYXGxDRO1Li+SyjTAilQEbOmtQJHzA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -10288,10 +10288,10 @@ scheduler@^0.13.6:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-scheduler@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.15.0.tgz#6bfcf80ff850b280fed4aeecc6513bc0b4f17f8e"
-  integrity sha512-xAefmSfN6jqAa7Kuq7LIJY0bwAPG3xlCj0HMEBQk1lxYiDKZscY2xJ5U/61ZTrYbmNQbXa+gc7czPkVo11tnCg==
+scheduler@^0.16.1:
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.16.1.tgz#a6fb6ddec12dc2119176e6eb54ecfe69a9eba8df"
+  integrity sha512-MIuie7SgsqMYOdCXVFZa8SKoNorJZUWHW8dPgto7uEHn1lX3fg2Gu0TzgK8USj76uxV7vB5eRMnZs/cdEHg+cg==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -12159,27 +12159,27 @@ which@1, which@^1.2.12, which@^1.2.14, which@^1.2.9, which@^1.3.0, which@^1.3.1:
   dependencies:
     isexe "^2.0.0"
 
-white-react-sdk@^2.3.5:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/white-react-sdk/-/white-react-sdk-2.3.5.tgz#7517198761a2e5fe0e2ca226faa86d37b6cf4d1e"
-  integrity sha512-DuJIVhJF20UmMN0cGwp9qVKwYuMr+xIsx1m+woZ/fJnPA/4ULEjkz3DJSvKTY3AsI5UcN3/5dhnL++XP+Et9CQ==
+white-react-sdk@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/white-react-sdk/-/white-react-sdk-2.3.6.tgz#f828e494afd22b539d4b9a6093b95c7a2ade1844"
+  integrity sha512-k/XBtvuz/N1bJo50gdbaZ8WOHaQE8/g2NT5jg/adyCyqvCXnlDYofv2slIbp4KceuYRLZeihAnu/6edACK2Oig==
   dependencies:
-    react "^16.8.4"
-    react-dom "^16.8.4"
-    white-web-sdk "2.3.5"
+    react "~16.8.0"
+    react-dom "~16.8.0"
+    white-web-sdk "2.3.6"
 
-white-web-sdk@2.3.5:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/white-web-sdk/-/white-web-sdk-2.3.5.tgz#ad142b7024089d8619113df0f7fb241df6760079"
-  integrity sha512-CSmItufl5z1VWmwBn5xHkpCHoomL7uuEoTxdjECKSNOMiYsWZlHXv6bZ/aR4Id0byk1K2tgagZFF1uFsruoF7g==
+white-web-sdk@2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/white-web-sdk/-/white-web-sdk-2.3.6.tgz#5757438370b562429009256e0bed78b95a5aff91"
+  integrity sha512-0ZY8T4gf8N2LQeXf6HXTD/IltN+rQfMUP8KZ+ketjF2d9OTmfdzmkLaAzsqAU5bEuqzpgjrDmEsuORzlzFjrag==
   dependencies:
     bezier-js "^2.4.0"
     color "^3.1.2"
     mobx "^4.9.3"
     mobx-react "^5.4.3"
     query-string "5"
-    react "^16.8.4"
-    react-dom "^16.8.4"
+    react "^16.8.0"
+    react-dom "^16.8.0"
     spark-md5 "^3.0.0"
     url-parse "^1.4.6"
     uuid "^3.3.2"
