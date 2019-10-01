@@ -4,7 +4,7 @@ set -exo pipefail
 yarn
 
 cd website
-node ./token.js
+# node ./token.js
 
 cd ../
 yarn build
