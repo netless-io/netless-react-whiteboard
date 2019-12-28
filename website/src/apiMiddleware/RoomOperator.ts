@@ -7,7 +7,7 @@ export enum RoomType {
     historied = "historied",
 }
 
-const fetcher = new Fetcher(5000, "https://cloudcapiv4.herewhite.com");
+const fetcher = new Fetcher(5000, "https://console-api.netless.link");
 
 export class RoomOperator {
 
