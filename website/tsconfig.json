@@ -22,7 +22,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
     "paths": {
-      "*" : ["node_modules/white-web-sdk/types/*"]
+      "*" : ["../node_modules/white-web-sdk/types/*"]
     }
   },
   "exclude": [
