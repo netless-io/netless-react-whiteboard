@@ -21,9 +21,6 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
-    "paths": {
-      "*" : ["../node_modules/white-web-sdk/types/*"]
-    }
   },
   "exclude": [
     "node_modules",
@@ -32,6 +29,7 @@
     "scripts"
   ],
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "../node_modules/@types/*"
   ]
 }
