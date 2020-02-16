@@ -84,7 +84,6 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
                 this.setState({currentTime: scheduleTime});
             },
             onStoppedWithError: this.findError,
-            onPPTLoadProgress: (uuid, progress) => console.log(`ppt ${uuid} load ${progress}`),
         });
         (window as any).player = player;
         this.setState({player, phase: player.phase});
