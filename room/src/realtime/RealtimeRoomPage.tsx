@@ -83,7 +83,6 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             },
             onDisconnectWithError: this.findError,
             onKickedWithReason: reason => this.findError(new Error("kicked with reason: " + reason)),
-            onPPTLoadProgress: (uuid, progress) => console.log(`ppt ${uuid} load ${progress}`),
         });
         userCursor.refreshRoomMembers(room.state.roomMembers);
 
