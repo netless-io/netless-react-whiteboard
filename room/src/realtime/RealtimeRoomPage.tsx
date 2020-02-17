@@ -14,6 +14,7 @@ export type RealtimeRoomPageProps = {
     readonly userPayload: UserPayload;
     readonly sdk: WhiteWebSdk;
     readonly ossOptions: OSSOptions;
+    readonly isWritable?: boolean;
     readonly disableAppFeatures?: boolean;
     readonly callbacks?: RealtimeRoomPageCallbacks;
 };
@@ -65,6 +66,8 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             roomToken: this.roomToken,
             cursorAdapter: userCursor,
             userPayload: {...this.props.userPayload},
+            // 等 2.6.0 发布了再加上去
+            // isWritable: this.props.isWritable,
         };
         const room = await whiteWebSdk.joinRoom(roomParams, {
             onPhaseChanged: phase => {
