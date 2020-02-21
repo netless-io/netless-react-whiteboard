@@ -98,6 +98,9 @@ export class UserCursor implements CursorAdapter {
         this.cursors[cursor.memberId] = cursor;
     }
 
+    public onMovingCursor(cursor: Cursor, positionX: number, positionY: number): void {
+    }
+
     public onRemovedCursor(cursor: Cursor): void {
         delete this.cursors[cursor.memberId];
     }
