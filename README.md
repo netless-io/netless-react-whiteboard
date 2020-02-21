@@ -22,7 +22,7 @@
 
     ``` typescript
     export const netlessToken = "xxx";
-    
+
     export const ossConfigObj = {
         accessKeyId: "xxx",
         accessKeySecret: "xxx",
@@ -31,33 +31,34 @@
         folder: "xxx",
         prefix: "https://xxx.oss-cn-xxx.aliyuncs.com/",
     };
-    
+
     ```
 
 ### 2. 白板 Token
 
 1. 用途：用于白板的权限管理。
 2. 获取方式：
-    - 地址：https://console.herewhite.com/zh-CN/
+    - 地址：<https://console.herewhite.com/zh-CN/>
     ![1558157918260](https://ohuuyffq2.qnssl.com/1558157918260.jpg)
 
 3. 填写参数
   
-    ```
+    ``` js
      export const netlessToken = "xxx";
     ```
+
 4. 如果要体验 `ppt、pptx、word、pdf 转图片` 或者 `pptx 转网页`  服务请去管理控制台先开启对应的服务。
 
 ### 3. 云存储 Token
 
 1. 用途：存储互动白板的图片 ppt 等静态资源。
 2. 获取方式：
-    - 地址：https://oss.console.aliyun.com/overview
+    - 地址：<https://oss.console.aliyun.com/overview>
     ![1558158253900](https://ohuuyffq2.qnssl.com/1558158253900.jpg)
 
 3. 填写参数
   
-    ```
+    ``` js
       export const ossConfigObj = {
         accessKeyId: "xxx",
         accessKeySecret: "xxx",
@@ -68,11 +69,10 @@
     };
     ```
 
-    
 ### 4. 注意事项
 
 **以上 token 都是用户的核心资产，本项目只是为了方便演示才直接放在项目当中，客户正式商用的时候请妥善保管。**
-    
+
 ## 三、安装启动
 
 ### 1. 基础工具
@@ -140,26 +140,24 @@ yarn build
 
 1. 文档站
 
-    地址：https://developer.herewhite.com/#/
-    
-    ![develop-netless-io](https://ohuuyffq2.qnssl.com/develop-netless-io.png)
+    地址：<https://developer.herewhite.com/#/>
 
+    ![develop-netless-io](https://ohuuyffq2.qnssl.com/develop-netless-io.png)
 
 2. 管理控制台
 
-    地址：https://console.herewhite.com/zh-CN/
-    
+    地址：<https://console.herewhite.com/zh-CN/>
+
     ![console-netless-io](https://ohuuyffq2.qnssl.com/console-netless-io.png)
 
 3. 官网
 
-    地址：https://www.herewhite.com/
-    
+    地址：<https://www.herewhite.com/>
+
     ![home-netless-io](https://ohuuyffq2.qnssl.com/home-netless-io.png)
 
 4. 开源控件托管
 
-    地址：https://github.com/netless-io
-    
-    ![netless-io-github](https://ohuuyffq2.qnssl.com/netless-io-github.png)
+    地址：<https://github.com/netless-io>
 
+    ![netless-io-github](https://ohuuyffq2.qnssl.com/netless-io-github.png)

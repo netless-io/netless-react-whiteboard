@@ -4,7 +4,7 @@ import CloseIcon from "../assets/image/close.svg";
 import AddIcon from "../assets/image/add_icon.svg";
 
 import TweenOne from "rc-tween-one";
-import {Room, RoomState, Scene} from "white-react-sdk";
+import {Room, RoomState, WhiteScene} from "white-react-sdk";
 import {IAnimObject} from "rc-tween-one/typings/AnimObject";
 
 export type MenuAnnexBoxState = {
@@ -117,7 +117,7 @@ export default class MenuAnnexBox extends React.Component<MenuAnnexBoxProps, Men
 
 type PageProps = {
     readonly room: Room;
-    readonly scene: Scene;
+    readonly scene: WhiteScene;
     readonly sceneDir: string;
     readonly index: number;
     readonly isActive: boolean;
@@ -189,7 +189,7 @@ class Page extends React.Component<PageProps, PageState> {
     }
 }
 
-type PageImageProps = { scene: Scene, path: string, room: Room, isMenuOpen: boolean, isActive: boolean};
+type PageImageProps = { scene: WhiteScene, path: string, room: Room, isMenuOpen: boolean, isActive: boolean};
 
 class PageImage extends React.Component<PageImageProps, {}> {
 

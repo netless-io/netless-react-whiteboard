@@ -16,14 +16,14 @@
     "ali-oss": "^6.0.0",
     "antd": "^3.0.0",
     "rc-tween-one": "^2.4.0",
-    "react": "^16.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-burger-menu": "^2.6.0",
     "react-clipboard.js": "^2.0.0",
-    "react-dom": "^16.0.0",
     "react-dropzone": "4.0.0",
     "react-identicons": "^1.0.0",
     "uuid": "^3.0.0",
-    "white-react-sdk": "^2.2.0"
+    "white-react-sdk": "^2.6.0"
   },
   "dependencies": {
     "@netless/oss-upload-manager": "^1.0.6",
@@ -44,14 +44,14 @@
     "less": "^3.9.0",
     "mkdirp": "^0.5.1",
     "rc-tween-one": "^2.4.1",
-    "react": "^16.3.2",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "react-burger-menu": "^2.6.10",
     "react-clipboard.js": "^2.0.12",
-    "react-dom": "^16.3.2",
     "react-dropzone": "4.2.10",
     "react-identicons": "^1.1.7",
     "rimraf": "^2.6.3",
     "uuid": "^3.3.2",
-    "white-react-sdk": "^2.2.11"
+    "white-react-sdk": "^2.6.0"
   }
 }

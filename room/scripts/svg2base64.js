@@ -21,7 +21,7 @@ function convertToBase64(filePath) {
     switch (filePath.match(/\.[a-zA-Z0-9]+$/i)[0]) {
         case ".svg": {
             const fileContent = fs.readFileSync(filePath, "utf8");
-            const base64 = new Buffer(fileContent).toString("base64");
+            const base64 = Buffer.from(fileContent, "utf-8").toString("base64");
 
             return "exports.default = \"data:image/svg+xml;base64," + base64 + "\";";
         }

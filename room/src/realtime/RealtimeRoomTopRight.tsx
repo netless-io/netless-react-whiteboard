@@ -159,7 +159,6 @@ export default class RealtimeRoomTopRight extends React.Component<RealtimeRoomRi
                     <div onClick={this.handleSetting} className="whiteboard-top-bar-box">
                         <Identicon size={28} string={this.props.userPayload.userUUID}/>
                     </div>
-                    {this.renderBroadController()}
                     {!this.props.disableInvite && (
                         <Tooltip placement="bottomLeft" title={"invite your friend"}>
                             <div className="whiteboard-top-bar-btn"
