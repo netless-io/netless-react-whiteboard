@@ -14,6 +14,7 @@ export type ReplayerPageProps = {
     readonly disableAppFeatures?: boolean;
     readonly sdk: WhiteWebSdk;
     readonly callbacks?: ReplayerPageCallbacks;
+    readonly mediaURL?: string;
 };
 
 export type ReplayerPageCallbacks = {
@@ -63,6 +64,7 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
             beginTimestamp: this.props.beginTimestamp,
             duration: this.props.duration,
             cursorAdapter: userCursor,
+            mediaURL: this.props.mediaURL,
         };
         const player = await this.props.sdk.replayRoom(playerParams, {
             onPhaseChanged: phase => {
@@ -101,8 +103,9 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
                              phase={this.state.phase}
                              currentTime={this.state.currentTime}
                              callbacks={this.props.callbacks || EmptyObject}
+                             mediaURL={this.props.mediaURL}
                              disableAppFeatures={!!this.props.disableAppFeatures}
-                             onChangeCurrentTime={currentTime => this.setState({currentTime})}/>
+                             onChangeCurrentTime={currentTime => this.setState({currentTime})}/>;
         } else {
             return <LoadingPage/>;
         }
