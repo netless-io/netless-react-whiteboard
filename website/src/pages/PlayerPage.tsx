@@ -6,7 +6,7 @@ import {RouteComponentProps} from "react-router";
 import {Redirect} from "@netless/i18n-react-router";
 import {netlessWhiteboardApi} from "../apiMiddleware";
 import PageError from "./PageError";
-import {whiteWebSdk} from "../SDK";
+import whiteWebSdk from "../SDK";
 
 export type PlayerPageProps = RouteComponentProps<{
    readonly uuid: string;
