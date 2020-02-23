@@ -100,6 +100,9 @@ export class UserCursor implements CursorAdapter {
         delete this.cursors[cursor.memberId];
     }
 
+    public onMovingCursor(): void {
+    }
+
     public refreshRoomMembers(roomMembers: ReadonlyArray<RoomMember>): void {
         this.roomMembers = roomMembers;
         for (const roomMember of roomMembers) {
