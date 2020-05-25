@@ -59,17 +59,20 @@ export default class RealtimeRoomTopRight extends React.Component<RealtimeRoomRi
             if (!isBroadcaster) {
                 if (hasBroadcaster) {
                     if (perspectiveState.mode === ViewMode.Follower) {
-                        this.props.room.disableOperations = true;
+                        this.props.room.disableCameraTransform = true;
+                        this.props.room.disableDeviceInputs = true;
                         message.info("当前演讲者为 " + perspectiveState.broadcasterInformation!.nickName + ", 您将跟随其视角");
                     } else {
-                        this.props.room.disableOperations = false;
+                        this.props.room.disableCameraTransform = false;
+                        this.props.room.disableDeviceInputs = false;
                         message.info("自由视角");
                     }
                 } else {
                     if (!isBeforeBroadcaster) {
                         message.info("自由视角");
                     }
-                    this.props.room.disableOperations = false;
+                    this.props.room.disableCameraTransform = false;
+                    this.props.room.disableDeviceInputs = false;
                 }
             }
         }
