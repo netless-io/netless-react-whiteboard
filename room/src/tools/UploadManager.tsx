@@ -178,6 +178,7 @@ export class UploadManager {
                     centerY: y,
                     width: imageFile.width,
                     height: imageFile.height,
+                    locked: false,
                 });
             }
             await Promise.all(tasks.map(task => this.handleUploadTask(task, onProgress)));
