@@ -82,7 +82,7 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
                     userCursor.refreshRoomMembers(modifyState.roomMembers);
                 }
             },
-            onScheduleTimeChanged: scheduleTime => {
+            onProgressTimeChanged: scheduleTime => {
                 this.setState({currentTime: scheduleTime});
             },
             onStoppedWithError: this.findError,
