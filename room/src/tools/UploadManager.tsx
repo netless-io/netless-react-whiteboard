@@ -1,4 +1,4 @@
-import * as uuidv4 from "uuid/v4";
+import {v1} from "uuid";
 
 import {Room, PptConverter, PptKind, Ppt} from "white-react-sdk";
 import {MultipartUploadResult} from "ali-oss";
@@ -39,7 +39,7 @@ export class UploadManager {
     }
 
     private createUUID = (): string => {
-        const uuid = uuidv4();
+        const uuid = v1();
         return uuid.replace(/-/g, "");
     }
 
@@ -165,7 +165,7 @@ export class UploadManager {
 
             const tasks: { uuid: string, imageFile: NetlessImageFile }[] = imageFiles.map(imageFile => {
                 return {
-                    uuid: uuidv4(),
+                    uuid: v1(),
                     imageFile: imageFile,
                 };
             });
