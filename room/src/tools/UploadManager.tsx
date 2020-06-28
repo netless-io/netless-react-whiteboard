@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 
-import {Room, PptConverter, PptKind, Ppt} from "white-react-sdk";
+import {ApplianceNames, Room, LegacyPPTConverter, PPTKind, PPT} from "white-react-sdk";
 import {MultipartUploadResult} from "ali-oss";
 
 export type imageSize = {
@@ -51,8 +51,8 @@ export class UploadManager {
 
     public async convertFile(
         rawFile: File,
-        pptConverter: PptConverter,
-        kind: PptKind,
+        pptConverter: LegacyPPTConverter,
+        kind: PPTKind,
         target: {
             bucket: string,
             folder: string,
@@ -64,8 +64,8 @@ export class UploadManager {
         const fileType = this.getFileType(rawFile.name);
         const path = `/${target.folder}/${filename}${fileType}`;
         const pptURL = await this.addFile(path, rawFile, onProgress);
-        let res: Ppt;
-        if (kind === PptKind.Static) {
+        let res: PPT;
+        if (kind === PPTKind.Static) {
             res = await pptConverter.convert({
                 url: pptURL,
                 kind: kind,
@@ -183,7 +183,7 @@ export class UploadManager {
             }
             await Promise.all(tasks.map(task => this.handleUploadTask(task, onProgress)));
             this.room.setMemberState({
-                currentApplianceName: "selector",
+                currentApplianceName: ApplianceNames.selector,
             });
         }
     }

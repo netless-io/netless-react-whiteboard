@@ -3,7 +3,7 @@ import * as React from "react";
 import RealtimeRoom from "./RealtimeRoom";
 import message from "antd/lib/message";
 
-import {JoinRoomParams, PptConverter, Room, RoomPhase, RoomState, WhiteWebSdk, AnimationMode, ViewMode} from "white-web-sdk";
+import {JoinRoomParams, LegacyPPTConverter, Room, RoomPhase, RoomState, WhiteWebSdk, AnimationMode, ViewMode} from "white-web-sdk";
 import {UserPayload} from "../common";
 import {UserCursor, LoadingPage} from "../components";
 import {OSSOptions} from "../tools";
@@ -36,7 +36,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
 
     private readonly uuid: string;
     private readonly roomToken: string;
-    private readonly pptConverter: PptConverter;
+    private readonly pptConverter: LegacyPPTConverter;
 
     private didLeavePage: boolean = false;
 

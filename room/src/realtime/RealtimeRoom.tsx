@@ -21,6 +21,7 @@ import RealtimeRoomBottomLeft from "./RealtimeRoomBottomLeft";
 import RealtimeRoomBottomRight from "./RealtimeRoomBottomRight";
 
 import {
+    ApplianceNames,
     RoomWhiteboard,
     Room,
     RoomState,
@@ -170,7 +171,7 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
             ]);
         } catch (error) {
             this.room.setMemberState({
-                currentApplianceName: "selector",
+                currentApplianceName: ApplianceNames.selector,
             });
         }
     }
