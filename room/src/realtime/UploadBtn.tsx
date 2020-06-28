@@ -8,7 +8,7 @@ import DocToWebIcon from "../assets/image/doc_to_web.svg";
 import Popover from "antd/lib/popover";
 import Upload from "antd/lib/upload";
 
-import {PptKind, Room, WhiteWebSdk} from "white-react-sdk";
+import {PPTKind, Room, WhiteWebSdk} from "white-react-sdk";
 import {ToolBoxUpload} from "../components";
 import {PPTProgressListener, UploadManager, OSSBucketInformation} from "../tools";
 
@@ -50,7 +50,7 @@ export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUp
         uploadManager.convertFile(
             event.file,
             pptConverter,
-            PptKind.Static,
+            PPTKind.Static,
             {
                 bucket: this.props.bucket,
                 folder: this.props.folder,
@@ -66,7 +66,7 @@ export default class UploadBtn extends React.Component<UploadBtnProps, ToolBoxUp
         uploadManager.convertFile(
             event.file,
             pptConverter,
-            PptKind.Dynamic,
+            PPTKind.Dynamic,
             {
                 bucket: this.props.bucket,
                 folder: this.props.folder,

@@ -1,4 +1,4 @@
-import * as uuidv4 from "uuid/v4";
+import {v1} from "uuid";
 
 export type UserInf = {
     readonly userId: string;
@@ -19,7 +19,7 @@ export class UserOperator {
     public createUser(name: string = "Netless user"): UserInf {
         const user: UserInf = Object.freeze({
             userId: "" + Math.floor(Math.random() * 10000),
-            uuid: uuidv4(),
+            uuid: v1(),
             name: name,
         });
         localStorage.setItem(user.userId, JSON.stringify(user));
