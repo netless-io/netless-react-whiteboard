@@ -44,7 +44,7 @@ function displayWatch(seconds: number): string {
 export class PlayerProgressBar extends React.Component<PlayerProgressBarProps, PlayerProgressBarState> {
 
     private readonly player: Player;
-    private scheduleTime: number = 0;
+    private progressTime: number = 0;
 
     public constructor(props: PlayerProgressBarProps) {
         super(props);
@@ -56,15 +56,15 @@ export class PlayerProgressBar extends React.Component<PlayerProgressBarProps, P
         };
     }
 
-    private getCurrentTime = (scheduleTime: number): number => {
+    private getCurrentTime = (progressTime: number): number => {
         if (this.state.isPlayerSeeking) {
-            this.scheduleTime = scheduleTime;
+            this.progressTime = progressTime;
             return this.props.currentTime;
 
         } else {
-            const isChange = this.scheduleTime !== scheduleTime;
+            const isChange = this.progressTime !== progressTime;
             if (isChange) {
-                return scheduleTime;
+                return progressTime;
             } else {
                 return this.props.currentTime;
             }
@@ -83,7 +83,7 @@ export class PlayerProgressBar extends React.Component<PlayerProgressBarProps, P
                 break;
             }
             case PlayerPhase.Ended: {
-                this.player.seekToScheduleTime(0);
+                this.player.seekToProgressTime(0);
                 break;
             }
         }
@@ -91,7 +91,7 @@ export class PlayerProgressBar extends React.Component<PlayerProgressBarProps, P
 
     private onClickSeekTime = (time: number): void => {
         this.props.onChangeCurrentTime(time);
-        this.player.seekToScheduleTime(time);
+        this.player.seekToProgressTime(time);
     }
 
     private onChatBoxVisibleChanged = (visible: boolean): void => {
@@ -149,11 +149,11 @@ export class PlayerProgressBar extends React.Component<PlayerProgressBarProps, P
     }
 
     private renderTimeDescription(): React.ReactNode {
-        const scheduleTime = displayWatch(Math.floor(this.player.scheduleTime / 1000));
+        const progressTimestamp = displayWatch(Math.floor(this.player.progressTime / 1000));
         const durationTime = displayWatch(Math.floor(this.player.timeDuration / 1000));
         return (
             <div className="player-mid-box-time">
-                {scheduleTime} / {durationTime}
+                {progressTimestamp} / {durationTime}
             </div>
         );
     }
