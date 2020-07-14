@@ -97,18 +97,6 @@ export default class RealtimeRoom extends React.Component<RealtimeRoomProps, Rea
         }
     }
 
-    public componentWillMount(): void {
-        window.addEventListener("resize", this.onWindowResize);
-    }
-
-    public componentWillUnmount(): void {
-        window.removeEventListener("resize", this.onWindowResize);
-    }
-
-    private onWindowResize = (): void => {
-        this.room.refreshViewSize();
-    }
-
     private onHandClap = async (): Promise<void> => {
         this.setState({isHandClap: true});
         await sleep(800);
