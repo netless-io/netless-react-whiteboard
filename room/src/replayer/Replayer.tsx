@@ -62,18 +62,6 @@ export default class Replayer extends React.Component<ReplayerProps, ReplayerSta
         }
     }
 
-    public componentWillMount(): void {
-        window.addEventListener("resize", this.onWindowResize);
-    }
-
-    public componentWillUnmount(): void {
-        window.removeEventListener("resize", this.onWindowResize);
-    }
-
-    private onWindowResize = (): void => {
-        this.props.player.refreshViewSize();
-    }
-
     public render(): React.ReactNode {
         return (
             <div className="player-out-box">
