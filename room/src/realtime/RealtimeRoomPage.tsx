@@ -67,6 +67,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             cursorAdapter: userCursor,
             userPayload: {...this.props.userPayload},
             isWritable: this.props.isWritable,
+            floatBar: true,
         };
         const room = await whiteWebSdk.joinRoom(roomParams, {
             onPhaseChanged: phase => {
