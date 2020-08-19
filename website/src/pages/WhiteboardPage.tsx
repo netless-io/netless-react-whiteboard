@@ -3,7 +3,7 @@ import * as React from "react";
 import PageError from "./PageError";
 
 import {message} from "antd";
-import {LoadingPage, RealtimeRoomPage, UserPayload} from "netless-whiteboard-room";
+import {LoadingPage, RealtimeRoomPage, UserPayload} from "netless-react-whiteboard-room";
 import {RouteComponentProps} from "react-router";
 import {Redirect} from "@netless/i18n-react-router";
 import {netlessWhiteboardApi} from "../apiMiddleware";

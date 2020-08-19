@@ -1,0 +1,13 @@
+name: netless-react-whiteboard-room
+path:
+  dist: ./dist
+  saveTo: ./node_modules
+
+scripts:
+  didSetup: if test -d ./node_modules; then echo "true"; else echo "false"; fi
+  setup: yarn install --frozen-lockfile
+  buildDev: gjs build
+  buildProd:
+    - gjs build
+    - rm -rf ./dist/prod
+    - cp -a ./dist/dev ./dist/prod

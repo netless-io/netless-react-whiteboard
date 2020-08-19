@@ -1,4 +1,4 @@
-import {OSSOptions} from "netless-whiteboard-room";
+import {OSSOptions} from "netless-react-whiteboard-room";
 
 const config = require("./tokenConfig");
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {message} from "antd";
-import {LoadingPage, ReplayerPage} from "netless-whiteboard-room";
+import {LoadingPage, ReplayerPage} from "netless-react-whiteboard-room";
 import {RouteComponentProps} from "react-router";
 import {Redirect} from "@netless/i18n-react-router";
 import {netlessWhiteboardApi} from "../apiMiddleware";

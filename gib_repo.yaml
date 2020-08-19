@@ -1,0 +1,4 @@
+defaultGitRepoPath: git@github.com:netless-io
+scripts:
+  setup: yarn install --frozen-lockfile
+  didSetup: if test -d ./node_modules; then echo "true"; else echo "false"; fi
