@@ -7,10 +7,14 @@ scripts:
   didSetup: if test -d ./node_modules; then echo "true"; else echo "false"; fi
   setup: yarn install --frozen-lockfile
   buildDev:
+    - scripts/prebuild.sh
     - gjs build
     - node_modules/.bin/lessc src/less/index.less dist/dev/style/index.css
+    - cp -a ./dist/assets ./dist/dev/src
   buildProd:
+    - scripts/prebuild.sh
     - gjs build
     - node_modules/.bin/lessc src/less/index.less dist/dev/style/index.css
     - rm -rf ./dist/prod
+    - cp -a ./dist/assets ./dist/dev/src
     - cp -a ./dist/dev ./dist/prod
