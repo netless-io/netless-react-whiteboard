@@ -1,2 +1,3 @@
-/.idea
-/node_modules
+.gib
+.gib_stage
+node_modules
