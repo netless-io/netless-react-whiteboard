@@ -10,4 +10,5 @@ scripts:
   buildProd:
     - gjs build
     - rm -rf ./dist/prod
+    - node_modules/.bin/lessc src/less/index.less dist/dev/style/index.css
     - cp -a ./dist/dev ./dist/prod
