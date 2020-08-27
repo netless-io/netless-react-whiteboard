@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "cd room && yarn build && cd ../website && yarn build"
+    "build": "cd room && gib build && cd ../website && gib build"
   },
   "workspaces": [
     "room",
