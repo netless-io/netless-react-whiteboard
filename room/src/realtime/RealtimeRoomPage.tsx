@@ -3,7 +3,18 @@ import * as React from "react";
 import RealtimeRoom from "./RealtimeRoom";
 import message from "antd/lib/message";
 
-import {JoinRoomParams, LegacyPPTConverter, Room, RoomPhase, RoomState, WhiteWebSdk, AnimationMode, ViewMode} from "white-web-sdk";
+import {
+    Room,
+    RoomPhase,
+    RoomState,
+    DefaultHotKeys,
+    JoinRoomParams,
+    LegacyPPTConverter,
+    WhiteWebSdk,
+    AnimationMode,
+    ViewMode,
+} from "white-web-sdk";
+
 import {UserPayload} from "../common";
 import {UserCursor, LoadingPage} from "../components";
 import {OSSOptions} from "../tools";
@@ -68,6 +79,18 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             userPayload: {...this.props.userPayload},
             isWritable: this.props.isWritable,
             floatBar: true,
+            hotKeys: {
+                ...DefaultHotKeys,
+                changeToSelector: "s",
+                changeToLaserPointer: "l",
+                changeToPencil: 'p',
+                changeToRectangle: "r",
+                changeToEllipse: "c",
+                changeToEraser: "e",
+                changeToStraight: "t",
+                changeToArrow: "a",
+                changeToHand: "h",
+            },
         };
         const room = await whiteWebSdk.joinRoom(roomParams, {
             onPhaseChanged: phase => {
