@@ -6,9 +6,9 @@ path:
 scripts:
   didSetup: if test -d ./node_modules; then echo "true"; else echo "false"; fi
   setup: yarn install --frozen-lockfile
-  buildDev: gjs build
+  buildDev: yarn run build
   buildProd:
-    - gjs build
+    - yarn run build
     - rm -rf ./dist/prod
     - cp -a ./dist/dev ./dist/prod
 
