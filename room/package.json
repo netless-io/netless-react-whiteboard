@@ -8,8 +8,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-    "dev": "scripts/prebuild.sh && tsc -w -p .",
-    "build": "scripts/prebuild.sh && tsc -p ."
+    "build": "gjs build"
   },
   "peerDependencies": {
     "@livechat/ui-kit": "^0.4.0",

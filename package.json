@@ -9,5 +9,9 @@
   "workspaces": [
     "room",
     "website"
-  ]
+  ],
+  "devDependencies": {
+    "typescript": "3.7.5",
+    "tslint": "^6.1.3"
+  }
 }
