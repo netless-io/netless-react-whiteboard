@@ -83,7 +83,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
                 ...DefaultHotKeys,
                 changeToSelector: "s",
                 changeToLaserPointer: "l",
-                changeToPencil: 'p',
+                changeToPencil: "p",
                 changeToRectangle: "r",
                 changeToEllipse: "c",
                 changeToEraser: "e",
