@@ -149,7 +149,7 @@ export default class WhiteboardChat extends React.Component<WhiteboardChatProps,
                                 onSend={(event: any) => {
                                     if (this.props.room && this.props.authorPayload) {
                                         this.props.room.dispatchMagixEvent("message", {
-                                            name: this.props.authorPayload.nickName.substring(0, 6),
+                                            name: this.props.authorPayload.cursorName.substring(0, 6),
                                             avatar: this.state.url,
                                             id: this.props.authorPayload.userId,
                                             messageInner: [event],

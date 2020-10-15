@@ -12,6 +12,7 @@
     "build": "gjs build"
   },
   "dependencies": {
+    "@netless/cursor-tool": "^0.0.5",
     "ali-oss": "^6.1.1",
     "antd": "^3.10.4",
     "is-touch-device": "^1.0.1",

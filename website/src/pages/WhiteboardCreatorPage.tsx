@@ -5,7 +5,7 @@ import PageError from "./PageError";
 import {parse} from "query-string";
 import {Redirect} from "@netless/i18n-react-router";
 import {RouteComponentProps} from "react-router";
-import {netlessWhiteboardApi, RoomType} from "../apiMiddleware";
+import {netlessWhiteboardApi} from "../apiMiddleware";
 
 export type WhiteboardCreatorPageProps = RouteComponentProps<{
     readonly uuid?: string;
@@ -38,12 +38,13 @@ class WhiteboardCreatorPage extends React.Component<WhiteboardCreatorPageProps, 
     public async componentWillMount(): Promise<void> {
         if (this.state.roomUUID === undefined) {
             const limit = 0;
-            const mode = RoomType.historied;
-            const response = await netlessWhiteboardApi.room.createRoomApi("test1", limit, mode);
+            const isRecord = true;
+            try {
+                const response = await netlessWhiteboardApi.room.createRoomApi("test1", limit, isRecord);
+                this.setState({roomUUID: response.uuid});
 
-            if (response.code === 200) {
-                this.setState({roomUUID: response.msg.room.uuid});
-            } else {
+            } catch (error) {
+                console.error(error);
                 this.setState({foundError: true});
             }
         }

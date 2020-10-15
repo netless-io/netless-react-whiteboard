@@ -42,12 +42,7 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
     private async joinRoom(): Promise<void> {
         const uuid = this.props.match.params.uuid;
         const userId = this.props.match.params.userId;
-        const response = await netlessWhiteboardApi.room.joinRoomApi(uuid);
-
-        if (response.code !== 200) {
-            throw new Error("join room failed");
-        }
-        const roomToken = response.msg.roomToken;
+        const roomToken = await netlessWhiteboardApi.room.joinRoomApi(uuid);
         const user = netlessWhiteboardApi.user.getUserAndCreateIfNotExit(userId);
 
         this.setState({roomInfo: {
@@ -55,7 +50,7 @@ export default class WhiteboardPage extends React.Component<WhiteboardPageProps,
             userPayload: Object.freeze({
                 userId: userId,
                 userUUID: user.uuid,
-                nickName: user.name,
+                cursorName: user.name,
             }),
         }});
     }
