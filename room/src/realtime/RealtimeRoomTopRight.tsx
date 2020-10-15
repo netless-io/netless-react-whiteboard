@@ -13,7 +13,7 @@ import Popover from "antd/lib/popover";
 import Tooltip from "antd/lib/tooltip";
 import Modal from "antd/lib/modal";
 
-import WhiteboardPerspectiveSet from '../components/WhiteboardPerspectiveSet';
+import WhiteboardPerspectiveSet from "../components/WhiteboardPerspectiveSet";
 
 import {Room, RoomState} from "white-react-sdk";
 import {ViewMode} from "white-react-sdk";
@@ -220,7 +220,7 @@ export default class RealtimeRoomTopRight extends React.Component<RealtimeRoomRi
                                    string={this.props.userPayload.userUUID}/>
                     </div>
                     <div className="whiteboard-set-box-inner">
-                        <span>name: </span>{this.props.userPayload.nickName}
+                        <span>name: </span>{this.props.userPayload.cursorName}
                     </div>
                     {this.props.session && (
                         <div className="whiteboard-set-box-inner">

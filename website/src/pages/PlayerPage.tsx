@@ -39,13 +39,7 @@ export default class PlayerPage extends React.Component<PlayerPageProps, PlayerP
 
     private async replayRoom(): Promise<void> {
         const uuid = this.props.match.params.uuid;
-        const response = await netlessWhiteboardApi.room.joinRoomApi(uuid);
-
-        if (response.code !== 200) {
-            throw new Error("join room failed");
-        }
-        const roomToken = response.msg.roomToken;
-
+        const roomToken = await netlessWhiteboardApi.room.joinRoomApi(uuid);
         this.setState({roomToken});
     }
 

@@ -15,8 +15,9 @@ import {
     ViewMode,
 } from "white-web-sdk";
 
+import {CursorTool} from "@netless/cursor-tool";
 import {UserPayload} from "../common";
-import {UserCursor, LoadingPage} from "../components";
+import {LoadingPage} from "../components";
 import {OSSOptions} from "../tools";
 
 export type RealtimeRoomPageProps = {
@@ -71,11 +72,11 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
 
     private async joinRoom (): Promise<void> {
         const whiteWebSdk = this.props.sdk;
-        const userCursor = new UserCursor();
+        const cursorAdapter = new CursorTool();
         const roomParams: JoinRoomParams = {
             uuid: this.uuid,
             roomToken: this.roomToken,
-            cursorAdapter: userCursor,
+            cursorAdapter: cursorAdapter,
             userPayload: {...this.props.userPayload},
             isWritable: this.props.isWritable,
             floatBar: true,
@@ -100,9 +101,6 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
                 console.log(`room ${this.uuid} changed: ${phase}`);
             },
             onRoomStateChanged: modifyState => {
-                if (modifyState.roomMembers) {
-                    userCursor.refreshRoomMembers(modifyState.roomMembers);
-                }
                 this.setState({
                     roomState: {...this.state.roomState, ...modifyState} as RoomState,
                 });
@@ -110,7 +108,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             onDisconnectWithError: this.findError,
             onKickedWithReason: reason => this.findError(new Error("kicked with reason: " + reason)),
         });
-        userCursor.refreshRoomMembers(room.state.roomMembers);
+        cursorAdapter.setRoom(room);
 
         if (room.state.broadcastState.mode !== ViewMode.Follower) {
             // 对准 ppt
@@ -142,15 +140,17 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
 
     public render(): React.ReactNode {
         if (this.state.room && this.state.roomState && this.isPhaseVisible()) {
-            return <RealtimeRoom ossOptions={this.props.ossOptions}
-                                 room={this.state.room}
-                                 roomToken={this.props.roomToken}
-                                 sdk={this.props.sdk}
-                                 phase={this.state.phase}
-                                 roomState={this.state.roomState}
-                                 userPayload={this.props.userPayload}
-                                 disableAppFeatures={!!this.props.disableAppFeatures}
-                                 callbacks={this.props.callbacks || EmptyObject}/>
+            return (
+                <RealtimeRoom ossOptions={this.props.ossOptions}
+                              room={this.state.room}
+                              roomToken={this.props.roomToken}
+                              sdk={this.props.sdk}
+                              phase={this.state.phase}
+                              roomState={this.state.roomState}
+                              userPayload={this.props.userPayload}
+                              disableAppFeatures={!!this.props.disableAppFeatures}
+                              callbacks={this.props.callbacks || EmptyObject}/>
+            );
         } else {
             return <LoadingPage/>;
         }
