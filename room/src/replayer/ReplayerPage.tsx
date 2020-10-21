@@ -3,7 +3,6 @@ import * as React from "react";
 import Replayer from "./Replayer";
 import {message} from "antd";
 import {Player, PlayerPhase, ReplayRoomParams, WhiteWebSdk} from "white-react-sdk";
-import {CursorTool} from "@netless/cursor-tool";
 import {LoadingPage} from "../components";
 
 export type ReplayerPageProps = {
@@ -57,14 +56,12 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
     }
 
     private async startReplay(): Promise<void> {
-        const cursorAdapter = new CursorTool();
         const playerParams: ReplayRoomParams = {
             room: this.uuid,
             roomToken: this.roomToken,
             slice: this.props.slice,
             beginTimestamp: this.props.beginTimestamp,
             duration: this.props.duration,
-            cursorAdapter: cursorAdapter,
             mediaURL: this.props.mediaURL,
         };
         const player = await this.props.sdk.replayRoom(playerParams, {
@@ -79,7 +76,6 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
             onStoppedWithError: this.findError,
         });
         (window as any).player = player;
-        cursorAdapter.setPlayer(player);
         this.setState({player, phase: player.phase});
     }
 

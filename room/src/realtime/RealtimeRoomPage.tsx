@@ -15,7 +15,6 @@ import {
     ViewMode,
 } from "white-web-sdk";
 
-import {CursorTool} from "@netless/cursor-tool";
 import {UserPayload} from "../common";
 import {LoadingPage} from "../components";
 import {OSSOptions} from "../tools";
@@ -72,11 +71,9 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
 
     private async joinRoom (): Promise<void> {
         const whiteWebSdk = this.props.sdk;
-        const cursorAdapter = new CursorTool();
         const roomParams: JoinRoomParams = {
             uuid: this.uuid,
             roomToken: this.roomToken,
-            cursorAdapter: cursorAdapter,
             userPayload: {...this.props.userPayload},
             isWritable: this.props.isWritable,
             floatBar: true,
@@ -108,8 +105,6 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
             onDisconnectWithError: this.findError,
             onKickedWithReason: reason => this.findError(new Error("kicked with reason: " + reason)),
         });
-        cursorAdapter.setRoom(room);
-
         if (room.state.broadcastState.mode !== ViewMode.Follower) {
             // 对准 ppt
             room.moveCameraToContain({

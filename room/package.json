@@ -22,7 +22,6 @@
     "react-dropzone": "4.0.0",
     "react-identicons": "^1.0.0",
     "uuid": "^3.0.0",
-    "@netless/cursor-tool": "^0.0.5",
     "white-react-sdk": "^2.10.3"
   },
   "dependencies": {
