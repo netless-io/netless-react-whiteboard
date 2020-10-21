@@ -115,11 +115,6 @@
   resolved "https://registry.yarnpkg.com/@netless/canvas-polyfill/-/canvas-polyfill-0.0.4.tgz#b5f28eefeb9c1e8ff8253fa1b044ccb1dc1b7c9c"
   integrity sha512-7NzsJrba0R/mq/l10SkIZQwbrNVJyPxZYrjK6xL3Ts732iWAVuS2UB0u3s6iGeUVcqV39A679yva8APWRl4M0A==
 
-"@netless/cursor-tool@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@netless/cursor-tool/-/cursor-tool-0.0.5.tgz#7ca47501cb656b3e623ade37462bf2d38450f6f2"
-  integrity sha512-Nmf9ksGzFbrkuG9dlod8V7ODbQgfM8LYrkT7azM3Jiid/X/GuWQSBO/tI6b44hJXTFH1tQCJ487jcYC1myvCaQ==
-
 "@netless/fetch-middleware@^1.0.0":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@netless/fetch-middleware/-/fetch-middleware-1.0.4.tgz#6106002c7b39fef7b3efd02bae16496a5c555963"
