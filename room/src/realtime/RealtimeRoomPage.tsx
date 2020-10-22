@@ -48,7 +48,6 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
 
     private readonly uuid: string;
     private readonly roomToken: string;
-    private readonly pptConverter: LegacyPPTConverter;
 
     private didLeavePage: boolean = false;
 
@@ -56,7 +55,6 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
         super(props);
         this.uuid = this.props.uuid;
         this.roomToken = this.props.roomToken;
-        this.pptConverter = props.sdk.pptConverter(this.roomToken);
         this.state = {
             phase: RoomPhase.Connecting,
         };
