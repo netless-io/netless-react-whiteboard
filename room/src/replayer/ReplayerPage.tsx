@@ -7,6 +7,7 @@ import {LoadingPage} from "../components";
 
 export type ReplayerPageProps = {
     readonly uuid: string;
+    readonly region?: string;
     readonly roomToken: string;
     readonly beginTimestamp?: number;
     readonly duration?: number;
@@ -58,12 +59,13 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
     private async startReplay(): Promise<void> {
         const playerParams: ReplayRoomParams = {
             room: this.uuid,
+            region: this.props.region,
             roomToken: this.roomToken,
             slice: this.props.slice,
             beginTimestamp: this.props.beginTimestamp,
             duration: this.props.duration,
             mediaURL: this.props.mediaURL,
-        };
+        } as any; // TODO 等到升级到 2.11.0 应该将这个 as any 删掉
         const player = await this.props.sdk.replayRoom(playerParams, {
             onPhaseChanged: phase => {
                 if (!this.didLeavePage) {
