@@ -69,22 +69,24 @@ export class UploadManager {
             res = await pptConverter.convert({
                 url: pptURL,
                 kind: kind,
+                region: (this.room as any).region, // TODO 等到升级到 2.11.0 应该将这个 as any 删掉
                 onProgressUpdated: progress => {
                     if (onProgress) {
                         onProgress(PPTProgressPhase.Converting, progress);
                     }
                 },
-            });
+            } as any) // TODO 等到升级到 2.11.0 应该将这个 as any 删掉;
         } else {
             res = await pptConverter.convert({
                 url: pptURL,
                 kind: kind,
+                region: (this.room as any).region, // TODO 等到升级到 2.11.0 应该将这个 as any 删掉
                 onProgressUpdated: progress => {
                     if (onProgress) {
                         onProgress(PPTProgressPhase.Converting, progress);
                     }
                 },
-            });
+            } as any) // TODO 等到升级到 2.11.0 应该将这个 as any 删掉;
         }
 
         if (onProgress) {
