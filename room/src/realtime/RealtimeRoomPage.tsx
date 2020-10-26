@@ -89,7 +89,7 @@ export default class RealtimeRoomPage extends React.Component<RealtimeRoomPagePr
                 changeToArrow: "a",
                 changeToHand: "h",
             },
-        } as any; // TODO 等到升级到 2.11.0 应该将这个 as any 删掉
+        };
         const room = await whiteWebSdk.joinRoom(roomParams, {
             onPhaseChanged: phase => {
                 if (!this.didLeavePage) {

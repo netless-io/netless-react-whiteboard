@@ -65,7 +65,7 @@ export default class ReplayerPage extends React.Component<ReplayerPageProps, Rep
             beginTimestamp: this.props.beginTimestamp,
             duration: this.props.duration,
             mediaURL: this.props.mediaURL,
-        } as any; // TODO 等到升级到 2.11.0 应该将这个 as any 删掉
+        };
         const player = await this.props.sdk.replayRoom(playerParams, {
             onPhaseChanged: phase => {
                 if (!this.didLeavePage) {
