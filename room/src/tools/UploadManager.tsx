@@ -69,7 +69,6 @@ export class UploadManager {
             res = await pptConverter.convert({
                 url: pptURL,
                 kind: kind,
-                region: this.room.region,
                 onProgressUpdated: progress => {
                     if (onProgress) {
                         onProgress(PPTProgressPhase.Converting, progress);
@@ -80,7 +79,6 @@ export class UploadManager {
             res = await pptConverter.convert({
                 url: pptURL,
                 kind: kind,
-                region: this.room.region,
                 onProgressUpdated: progress => {
                     if (onProgress) {
                         onProgress(PPTProgressPhase.Converting, progress);
