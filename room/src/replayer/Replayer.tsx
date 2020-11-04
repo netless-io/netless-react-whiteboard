@@ -15,7 +15,6 @@ import {MessageType} from "../realtime/RealtimeRoomBottomRight";
 import {ReplayerPageCallbacks} from "./ReplayerPage";
 import {PlayerProgressBar} from "./PlayerProgressBar";
 import {isMobile} from "react-device-detect";
-import VideoPlaceholder from "./VideoPlaceholder";
 
 function sleep(duration: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, duration));
@@ -78,10 +77,6 @@ export default class Replayer extends React.Component<ReplayerProps, ReplayerSta
                 {this.props.mediaURL &&
                 <Draggable>
                     <div className={isMobile ? "player-video-out-mb" : "player-video-out"}>
-                        <VideoPlaceholder
-                            controls={false}
-                            className="player-video"
-                        />
                     </div>
                 </Draggable>}
                 <PlayerWhiteboard className="player-box" player={this.player}/>
